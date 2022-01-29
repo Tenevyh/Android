@@ -30,6 +30,10 @@ class MainActivity : AppCompatActivity() {
 
     private var currentIndex = 0
     private var questionIndex = 0
+    var correctIndex = 0
+    var inCorrectIndex = 0
+    var result ="True: $correctIndex, False: $inCorrectIndex"
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +52,7 @@ class MainActivity : AppCompatActivity() {
                 trueButton.setEnabled(false)
                 falseButton.setEnabled(false)
                 questionIndex++
+                showResult()
             }
 
             questionTextView.setOnClickListener { view: View ->
@@ -63,6 +68,7 @@ class MainActivity : AppCompatActivity() {
                 falseButton.setEnabled(false)
                 trueButton.setEnabled(false)
                 questionIndex++
+                showResult()
             }
 
             prevButton.setOnClickListener {
@@ -127,9 +133,19 @@ class MainActivity : AppCompatActivity() {
         val correctAnswer = questionBank[currentIndex].answer
 
         val messageResId = if (userAnswer == correctAnswer) {
+            correctIndex++
             R.string.correct_toast
-        } else R.string.incorrect_toast
+        } else {
+            inCorrectIndex++
+            R.string.incorrect_toast
+        }
 
         Toast.makeText(this,messageResId, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showResult(){
+        if(questionIndex==questionBank.size){
+            Toast.makeText(this,result, Toast.LENGTH_SHORT).show()
+        }
     }
 }
