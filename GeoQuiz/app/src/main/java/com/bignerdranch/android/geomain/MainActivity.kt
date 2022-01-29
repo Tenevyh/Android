@@ -11,6 +11,7 @@ import android.widget.Toast
 
 private const val TAG = "MainActivity"
 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var trueButton: Button
@@ -30,10 +31,8 @@ class MainActivity : AppCompatActivity() {
 
     private var currentIndex = 0
     private var questionIndex = 0
-    var correctIndex = 0
-    var inCorrectIndex = 0
-    var result ="True: $correctIndex, False: $inCorrectIndex"
-
+    private var correctIndex = 0
+    private var inCorrectIndex = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -131,12 +130,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkAnswer(userAnswer: Boolean) {
         val correctAnswer = questionBank[currentIndex].answer
-
-        val messageResId = if (userAnswer == correctAnswer) {
+        if (userAnswer == correctAnswer){
             correctIndex++
-            R.string.correct_toast
         } else {
             inCorrectIndex++
+        }
+        val messageResId = if (userAnswer == correctAnswer) {
+            R.string.correct_toast
+        } else {
             R.string.incorrect_toast
         }
 
@@ -144,6 +145,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showResult(){
+        var result ="True: $correctIndex, False: $inCorrectIndex"
         if(questionIndex==questionBank.size){
             Toast.makeText(this,result, Toast.LENGTH_SHORT).show()
         }
