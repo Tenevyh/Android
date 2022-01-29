@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity() {
     )
 
     private var currentIndex = 0
+    private var questionIndex = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,38 +43,54 @@ class MainActivity : AppCompatActivity() {
         prevButton = findViewById(R.id.prev_button)
         questionTextView = findViewById(R.id.question_text_view)
 
-        trueButton.setOnClickListener { view: View ->
-            checkAnswer(true)
-
-        }
-
-        questionTextView.setOnClickListener{view: View ->
-            if(currentIndex==questionBank.size-1){} else {
-                currentIndex = (currentIndex + 1) % questionBank.size
-                updateQuestion()
+            trueButton.setOnClickListener { view: View ->
+                checkAnswer(true)
+                trueButton.setEnabled(false)
+                falseButton.setEnabled(false)
+                questionIndex++
             }
-        }
 
-        falseButton.setOnClickListener { view: View ->
-            checkAnswer(false)
-        }
-
-        prevButton.setOnClickListener {
-            if(currentIndex==0){} else {
-                currentIndex = (currentIndex - 1) % questionBank.size
-                updateQuestion()
+            questionTextView.setOnClickListener { view: View ->
+                if (currentIndex == questionBank.size - 1) {
+                } else {
+                    currentIndex = (currentIndex + 1) % questionBank.size
+                    updateQuestion()
+                }
             }
-        }
 
-        nextButton.setOnClickListener {
-            if(currentIndex==questionBank.size-1){} else {
-                currentIndex = (currentIndex + 1) % questionBank.size
-                updateQuestion()
+            falseButton.setOnClickListener { view: View ->
+                checkAnswer(false)
+                falseButton.setEnabled(false)
+                trueButton.setEnabled(false)
+                questionIndex++
             }
+
+            prevButton.setOnClickListener {
+                if (currentIndex == 0) {
+                } else {
+                    currentIndex = (currentIndex - 1) % questionBank.size
+                    updateQuestion()
+                }
+                if (questionIndex>currentIndex) {
+                    falseButton.setEnabled(false)
+                    trueButton.setEnabled(false)
+                }
+            }
+
+            nextButton.setOnClickListener {
+                if (currentIndex == questionBank.size - 1) {
+                } else {
+                    currentIndex = (currentIndex + 1) % questionBank.size
+                    updateQuestion()
+                }
+                if (questionIndex<=currentIndex) {
+                    trueButton.setEnabled(true)
+                    falseButton.setEnabled(true)
+                }
         }
 
-        val questionTextResId = questionBank[currentIndex].textResId
-        questionTextView.setText(questionTextResId)
+            val questionTextResId = questionBank[currentIndex].textResId
+            questionTextView.setText(questionTextResId)
     }
 
     override fun onStart() {
