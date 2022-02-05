@@ -35,4 +35,12 @@ class QuizViewModel : ViewModel(){
     fun getQuestionBank() : List<Question>{
         return questionBank
     }
+
+    fun completed(){
+        questionBank[currentIndex].completed=true;
+    }
+
+    fun isCompleted(): Boolean{
+        return questionBank[currentIndex].completed
+    }
 }

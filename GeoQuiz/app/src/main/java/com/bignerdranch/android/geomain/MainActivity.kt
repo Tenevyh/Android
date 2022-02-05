@@ -44,13 +44,14 @@ class MainActivity : AppCompatActivity() {
         prevButton = findViewById(R.id.prev_button)
         questionTextView = findViewById(R.id.question_text_view)
 
-        offButton()
-        onButton()
+        if(quizViewModel.isCompleted()){
+            offButton()
+        } else onButton()
 
             trueButton.setOnClickListener { view: View ->
                 checkAnswer(true)
-                trueButton.setEnabled(false)
-                falseButton.setEnabled(false)
+                quizViewModel.completed()
+                offButton()
                 quizViewModel.questionIndex++
                 showResult()
             }
@@ -65,8 +66,8 @@ class MainActivity : AppCompatActivity() {
 
             falseButton.setOnClickListener { view: View ->
                 checkAnswer(false)
-                falseButton.setEnabled(false)
-                trueButton.setEnabled(false)
+                quizViewModel.completed()
+                offButton()
                 quizViewModel.questionIndex++
                 showResult()
             }
@@ -77,7 +78,9 @@ class MainActivity : AppCompatActivity() {
                     quizViewModel.moveToPrev()
                     updateQuestion()
                 }
-                offButton()
+                if(quizViewModel.isCompleted()){
+                    offButton()
+                } else onButton()
             }
 
             nextButton.setOnClickListener {
@@ -86,7 +89,9 @@ class MainActivity : AppCompatActivity() {
                     quizViewModel.moveToNext()
                     updateQuestion()
                 }
-                onButton()
+                if(quizViewModel.isCompleted()){
+                    offButton()
+                } else onButton()
         }
 
             val questionTextResId = quizViewModel.getQuestionBank()[quizViewModel.currentIndex].textResId
@@ -154,16 +159,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onButton(){
-        if (quizViewModel.questionIndex<=quizViewModel.currentIndex) {
             trueButton.setEnabled(true)
             falseButton.setEnabled(true)
-        }
     }
 
     private fun offButton(){
-        if (quizViewModel.questionIndex>quizViewModel.currentIndex) {
             falseButton.setEnabled(false)
             trueButton.setEnabled(false)
-        }
     }
 }
