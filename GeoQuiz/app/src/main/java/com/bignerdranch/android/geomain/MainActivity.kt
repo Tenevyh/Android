@@ -1,5 +1,6 @@
 package com.bignerdranch.android.geomain
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -12,9 +13,10 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 
-const val TAG = "MainActivity"
-const val KEY_INDEX = "index"
-const val Q_INDEX = "index"
+private const val TAG = "MainActivity"
+private const val KEY_INDEX = "index"
+private const val Q_INDEX = "index"
+private const val REQUEST_CODE_CHEAT= 0
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var nextButton: ImageButton
     private lateinit var prevButton: ImageButton
     private lateinit var questionTextView: TextView
+    private lateinit var cheatButton: Button
 
     private val quizViewModel: QuizViewModel by lazy {
         ViewModelProviders.of(this).get(QuizViewModel::class.java)
@@ -33,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onCreate(Bundle?) called")
         setContentView(R.layout.activity_main)
 
-        val currentIndex =savedInstanceState?.getInt(KEY_INDEX, 0) ?: 0
+        val currentIndex = savedInstanceState?.getInt(KEY_INDEX, 0) ?: 0
         quizViewModel.currentIndex = currentIndex
         val questionIndex = savedInstanceState?.getInt(Q_INDEX, 0) ?: 0
         quizViewModel.questionIndex = questionIndex
@@ -43,59 +46,68 @@ class MainActivity : AppCompatActivity() {
         nextButton = findViewById(R.id.next_button)
         prevButton = findViewById(R.id.prev_button)
         questionTextView = findViewById(R.id.question_text_view)
+        cheatButton = findViewById(R.id.cheat_button)
 
-        if(quizViewModel.isCompleted()){
+        if (quizViewModel.isCompleted()) {
             offButton()
         } else onButton()
 
-            trueButton.setOnClickListener { view: View ->
-                checkAnswer(true)
-                quizViewModel.completed()
-                offButton()
-                quizViewModel.questionIndex++
-                showResult()
+        questionTextView.setOnClickListener { view: View ->
+            if (quizViewModel.currentIndex == quizViewModel.getQuestionBank().size - 1) {
+            } else {
+                quizViewModel.currentIndex =
+                    (quizViewModel.currentIndex + 1) % quizViewModel.getQuestionBank().size
+                updateQuestion()
             }
-
-            questionTextView.setOnClickListener { view: View ->
-                if (quizViewModel.currentIndex == quizViewModel.getQuestionBank().size - 1) {
-                } else {
-                    quizViewModel.currentIndex = (quizViewModel.currentIndex + 1) % quizViewModel.getQuestionBank().size
-                    updateQuestion()
-                }
-            }
-
-            falseButton.setOnClickListener { view: View ->
-                checkAnswer(false)
-                quizViewModel.completed()
-                offButton()
-                quizViewModel.questionIndex++
-                showResult()
-            }
-
-            prevButton.setOnClickListener {
-                if (quizViewModel.currentIndex == 0) {
-                } else {
-                    quizViewModel.moveToPrev()
-                    updateQuestion()
-                }
-                if(quizViewModel.isCompleted()){
-                    offButton()
-                } else onButton()
-            }
-
-            nextButton.setOnClickListener {
-                if (quizViewModel.currentIndex == quizViewModel.getQuestionBank().size - 1) {
-                } else {
-                    quizViewModel.moveToNext()
-                    updateQuestion()
-                }
-                if(quizViewModel.isCompleted()){
-                    offButton()
-                } else onButton()
         }
 
-            val questionTextResId = quizViewModel.getQuestionBank()[quizViewModel.currentIndex].textResId
-            questionTextView.setText(questionTextResId)
+        trueButton.setOnClickListener { view: View ->
+            checkAnswer(true)
+            quizViewModel.completed()
+            offButton()
+            quizViewModel.questionIndex++
+            showResult()
+        }
+
+        falseButton.setOnClickListener { view: View ->
+            checkAnswer(false)
+            quizViewModel.completed()
+            offButton()
+            quizViewModel.questionIndex++
+            showResult()
+        }
+
+        prevButton.setOnClickListener {
+            if (quizViewModel.currentIndex == 0) {
+            } else {
+                quizViewModel.moveToPrev()
+                updateQuestion()
+            }
+            if (quizViewModel.isCompleted()) {
+                offButton()
+            } else onButton()
+        }
+
+        nextButton.setOnClickListener {
+            if (quizViewModel.currentIndex == quizViewModel.getQuestionBank().size - 1) {
+            } else {
+                quizViewModel.moveToNext()
+                updateQuestion()
+            }
+            if (quizViewModel.isCompleted()) {
+                offButton()
+            } else onButton()
+        }
+
+        cheatButton.setOnClickListener{
+            val answerIsTrue=quizViewModel.currentQuestionAnswer
+            val intent= CheatActivity.newIntent(this,answerIsTrue)
+            startActivityForResult(intent,REQUEST_CODE_CHEAT)
+        }
+
+        val questionTextResId =
+            quizViewModel.getQuestionBank()[quizViewModel.currentIndex].textResId
+        questionTextView.setText(questionTextResId)
     }
 
     override fun onStart() {
