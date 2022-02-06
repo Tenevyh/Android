@@ -7,14 +7,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProviders
 
 const val EXTRA_ANSWER_SHOWN="com.bignerdranch.android.geomain.answer_shown"
 private const val EXTRA_ANSWER_IS_TRUE="com.bignerdranch.android.geomain.answer_is_true"
 
 class CheatActivity : AppCompatActivity() {
 
+
     private lateinit var answerTextView: TextView
     private lateinit var showAnswerButton: Button
+
+    private val quizViewModel: QuizViewModel by lazy {
+        ViewModelProviders.of(this).get(QuizViewModel::class.java)
+    }
 
     private var answerIsTrue = false
 
@@ -26,6 +32,16 @@ class CheatActivity : AppCompatActivity() {
         answerTextView=findViewById(R.id.answer_text_view)
         showAnswerButton=findViewById(R.id.show_answer_button)
 
+        if(quizViewModel.showAnswer==true){
+            val answerText = when{
+                answerIsTrue -> R.string.true_button
+                else -> R.string.false_button
+            }
+            answerTextView.setText(answerText)
+            setAnswerShownResult(true)
+            showAnswerButton.setEnabled(false)
+        }
+
         showAnswerButton.setOnClickListener{
             val answerText = when{
                 answerIsTrue -> R.string.true_button
@@ -33,6 +49,8 @@ class CheatActivity : AppCompatActivity() {
             }
             answerTextView.setText(answerText)
             setAnswerShownResult(true)
+            showAnswerButton.setEnabled(false)
+            quizViewModel.showAnswer=true
         }
     }
 

@@ -18,6 +18,7 @@ class QuizViewModel : ViewModel(){
     var correctIndex = 0
     var inCorrectIndex = 0
     var cheatIndex = 0
+    var showAnswer = false
 
     val currentQuestionAnswer: Boolean
         get() = questionBank[currentIndex].answer
