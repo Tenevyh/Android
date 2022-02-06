@@ -1,5 +1,6 @@
 package com.bignerdranch.android.geomain
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -110,6 +111,16 @@ class MainActivity : AppCompatActivity() {
         questionTextView.setText(questionTextResId)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode != Activity.RESULT_OK) {
+            return
+        }
+        if (requestCode == REQUEST_CODE_CHEAT){
+            quizViewModel.cheatQuestion()
+        }
+    }
+
     override fun onStart() {
         super.onStart()
         Log.d(TAG, "onStart() called")
@@ -149,22 +160,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkAnswer(userAnswer: Boolean) {
         val correctAnswer = quizViewModel.currentQuestionAnswer
-        if (userAnswer == correctAnswer){
-            quizViewModel.correctIndex++
-        } else {
-            quizViewModel.inCorrectIndex++
-        }
-        val messageResId = if (userAnswer == correctAnswer) {
-            R.string.correct_toast
-        } else {
-            R.string.incorrect_toast
+        if (quizViewModel.isCheatQuestion()==false) {
+            if (userAnswer == correctAnswer) {
+                quizViewModel.correctIndex++
+            } else {
+                quizViewModel.inCorrectIndex++
+            }
+        } else quizViewModel.cheatIndex++
+        val messageResId = when {
+            quizViewModel.isCheatQuestion() -> R.string.judgment_toast
+            userAnswer == correctAnswer -> R.string.correct_toast
+            else -> R.string.incorrect_toast
         }
 
         Toast.makeText(this,messageResId, Toast.LENGTH_SHORT).show()
     }
 
     private fun showResult(){
-        var result ="True: ${quizViewModel.correctIndex}, False: ${quizViewModel.inCorrectIndex}"
+        var result ="True: ${quizViewModel.correctIndex}, False: ${quizViewModel.inCorrectIndex}," +
+                " Cheat: ${quizViewModel.cheatIndex}"
         if(quizViewModel.questionIndex== quizViewModel.getQuestionBank().size){
             Toast.makeText(this,result, Toast.LENGTH_SHORT).show()
         }
