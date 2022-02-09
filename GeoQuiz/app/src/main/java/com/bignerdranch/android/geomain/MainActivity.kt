@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         val questionIndex = savedInstanceState?.getInt(Q_INDEX, 0) ?: 0
         quizViewModel.questionIndex = questionIndex
 
+
         trueButton = findViewById(R.id.true_button)
         falseButton = findViewById(R.id.false_button)
         nextButton = findViewById(R.id.next_button)
@@ -50,9 +51,15 @@ class MainActivity : AppCompatActivity() {
         questionTextView = findViewById(R.id.question_text_view)
         cheatButton = findViewById(R.id.cheat_button)
 
+        if(quizViewModel.cheatIndex==3){
+            cheatButton.setEnabled(false)
+        }
+
         if (quizViewModel.isCompleted()) {
             offButton()
         } else onButton()
+
+
 
         questionTextView.setOnClickListener { view: View ->
             if (quizViewModel.currentIndex == quizViewModel.getQuestionBank().size - 1) {
@@ -157,6 +164,9 @@ class MainActivity : AppCompatActivity() {
     private fun updateQuestion(){
         val questionTextResId = quizViewModel.currentQuestionText
         questionTextView.setText(questionTextResId)
+        if(quizViewModel.cheatIndex==3){
+            cheatButton.setEnabled(false)
+        }
     }
 
     private fun checkAnswer(userAnswer: Boolean) {
