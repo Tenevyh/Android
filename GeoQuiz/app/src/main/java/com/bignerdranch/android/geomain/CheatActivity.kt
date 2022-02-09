@@ -3,6 +3,7 @@ package com.bignerdranch.android.geomain
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -17,6 +18,7 @@ class CheatActivity : AppCompatActivity() {
 
     private lateinit var answerTextView: TextView
     private lateinit var showAnswerButton: Button
+    private lateinit var textView : TextView
 
     private val quizViewModel: QuizViewModel by lazy {
         ViewModelProviders.of(this).get(QuizViewModel::class.java)
@@ -31,6 +33,12 @@ class CheatActivity : AppCompatActivity() {
         answerIsTrue=intent.getBooleanExtra(EXTRA_ANSWER_IS_TRUE,false)
         answerTextView=findViewById(R.id.answer_text_view)
         showAnswerButton=findViewById(R.id.show_answer_button)
+
+        var level = Build.VERSION.SDK_INT
+        var levelApi = "API Level $level"
+
+        textView = findViewById(R.id.levelText)
+        textView.setText(levelApi)
 
         if(quizViewModel.showAnswer==true){
             val answerText = when{

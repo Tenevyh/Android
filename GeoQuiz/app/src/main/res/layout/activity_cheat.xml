@@ -29,4 +29,12 @@
         android:text="@string/show_answer_button">
     </Button>
 
+    <TextView
+        android:id="@+id/levelText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:text="">
+    </TextView>
+
 </LinearLayout>
