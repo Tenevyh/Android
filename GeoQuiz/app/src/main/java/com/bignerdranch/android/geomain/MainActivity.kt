@@ -45,7 +45,6 @@ class MainActivity : AppCompatActivity() {
         val questionIndex = savedInstanceState?.getInt(Q_INDEX, 0) ?: 0
         quizViewModel.questionIndex = questionIndex
 
-
         trueButton = findViewById(R.id.true_button)
         falseButton = findViewById(R.id.false_button)
         nextButton = findViewById(R.id.next_button)
@@ -119,11 +118,6 @@ class MainActivity : AppCompatActivity() {
         val questionTextResId =
             quizViewModel.getQuestionBank()[quizViewModel.currentIndex].textResId
         questionTextView.setText(questionTextResId)
-
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Результат!")
-            .setMessage("Верно: ${quizViewModel.correctIndex}, Неверно: ${quizViewModel.inCorrectIndex}," +
-                    " Считирил: ${quizViewModel.cheatIndex}")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
@@ -176,6 +170,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun showResult(){
+        var builder = AlertDialog.Builder(this)
+        builder.setTitle("Результат!")
+            .setMessage(" Верно: ${quizViewModel.correctIndex}\n Неверно: ${quizViewModel.inCorrectIndex}\n" +
+                    " Считирил: ${quizViewModel.cheatIndex}")
+        if(quizViewModel.questionIndex== quizViewModel.getQuestionBank().size){
+            builder.show()
+        }
+    }
+
     private fun checkAnswer(userAnswer: Boolean) {
         val correctAnswer = quizViewModel.currentQuestionAnswer
         if (quizViewModel.isCheatQuestion()==false) {
@@ -192,14 +196,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         Toast.makeText(this,messageResId, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun showResult(){
-        var result ="Верно: ${quizViewModel.correctIndex}, Неверно: ${quizViewModel.inCorrectIndex}," +
-                " Считирил: ${quizViewModel.cheatIndex}"
-        if(quizViewModel.questionIndex== quizViewModel.getQuestionBank().size){
-            Toast.makeText(this,result, Toast.LENGTH_SHORT).show()
-        }
     }
 
     private fun onButton(){
