@@ -1,6 +1,8 @@
 package com.bignerdranch.android.geomain
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -117,6 +119,11 @@ class MainActivity : AppCompatActivity() {
         val questionTextResId =
             quizViewModel.getQuestionBank()[quizViewModel.currentIndex].textResId
         questionTextView.setText(questionTextResId)
+
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Результат!")
+            .setMessage("Верно: ${quizViewModel.correctIndex}, Неверно: ${quizViewModel.inCorrectIndex}," +
+                    " Считирил: ${quizViewModel.cheatIndex}")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
@@ -188,8 +195,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showResult(){
-        var result ="True: ${quizViewModel.correctIndex}, False: ${quizViewModel.inCorrectIndex}," +
-                " Cheat: ${quizViewModel.cheatIndex}"
+        var result ="Верно: ${quizViewModel.correctIndex}, Неверно: ${quizViewModel.inCorrectIndex}," +
+                " Считирил: ${quizViewModel.cheatIndex}"
         if(quizViewModel.questionIndex== quizViewModel.getQuestionBank().size){
             Toast.makeText(this,result, Toast.LENGTH_SHORT).show()
         }

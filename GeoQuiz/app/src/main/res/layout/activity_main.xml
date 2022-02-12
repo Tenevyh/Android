@@ -19,6 +19,7 @@
             android:layout_height="100dp"
             android:layout_gravity="center_vertical"
             android:padding="24dp"
+            android:textColor="#FFFFFF"
             android:background="#B3000000"
             tools:text="@string/question_australia" />
 
