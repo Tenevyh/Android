@@ -2,19 +2,15 @@ package com.bignerdranch.android.geomain
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Intent
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
+import android.view.Gravity
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
+import android.view.animation.AnimationUtils
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 
 private const val TAG = "MainActivity"
@@ -24,11 +20,10 @@ private const val REQUEST_CODE_CHEAT= 0
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var textSwitcher: TextSwitcher
     private lateinit var trueButton: Button
     private lateinit var falseButton: Button
-    private lateinit var nextButton: ImageButton
     private lateinit var prevButton: ImageButton
-    private lateinit var questionTextView: TextView
     private lateinit var cheatButton: Button
 
     private val quizViewModel: QuizViewModel by lazy {
@@ -48,8 +43,10 @@ class MainActivity : AppCompatActivity() {
         trueButton = findViewById(R.id.true_button)
         falseButton = findViewById(R.id.false_button)
         prevButton = findViewById(R.id.prev_button)
-        questionTextView = findViewById(R.id.question_text_view)
+        textSwitcher = findViewById(R.id.textSwitcher)
         cheatButton = findViewById(R.id.cheat_button)
+
+        showResult()
 
         if(quizViewModel.cheatIndex==3){
             cheatButton.setEnabled(false)
@@ -61,7 +58,38 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        questionTextView.setOnClickListener { view: View ->
+        ////////////////////////////////////////////////////
+
+        textSwitcher.setFactory {
+
+            val textView = TextView(this@MainActivity)
+            textView.gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
+            textView.setTextColor(Color.WHITE)
+            textView
+
+        }
+
+        textSwitcher.setText(quizViewModel.getQuestionBank()[quizViewModel.currentIndex].textResId)
+
+        val textIn = AnimationUtils.loadAnimation(
+            this, R.anim.slide_in_right)
+
+        textSwitcher.inAnimation = textIn
+
+        val textOut = AnimationUtils.loadAnimation(
+            this, R.anim.slide_out_left)
+
+        textSwitcher.outAnimation = textOut
+
+        val prevTextIn = AnimationUtils.loadAnimation(
+            this, android.R.anim.slide_in_left)
+
+        val prevTextOut = AnimationUtils.loadAnimation(
+            this, android.R.anim.slide_out_right)
+
+
+        ////////////////////////////////////////////////////
+        textSwitcher.setOnClickListener { view: View ->
             if (quizViewModel.currentIndex == quizViewModel.getQuestionBank().size - 1) {
             } else {
                 quizViewModel.currentIndex =
@@ -76,7 +104,7 @@ class MainActivity : AppCompatActivity() {
             offButton()
             quizViewModel.questionIndex++
             showResult()
-            Thread.sleep(1000)
+            Thread.sleep(250)
             quizViewModel.moveToNext()
             updateQuestion()
         }
@@ -93,6 +121,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         prevButton.setOnClickListener {
+            textSwitcher.inAnimation = prevTextIn
+            textSwitcher.outAnimation = prevTextOut
             if (quizViewModel.currentIndex == 0) {
             } else {
                 quizViewModel.moveToPrev()
@@ -100,7 +130,9 @@ class MainActivity : AppCompatActivity() {
             }
             if (quizViewModel.isCompleted()) {
                 offButton()
-            } else onButton()
+            } else {onButton()}
+            textSwitcher.inAnimation = textIn
+            textSwitcher.outAnimation = textOut
         }
 
         cheatButton.setOnClickListener{
@@ -108,10 +140,6 @@ class MainActivity : AppCompatActivity() {
             val intent= CheatActivity.newIntent(this,answerIsTrue)
             startActivityForResult(intent,REQUEST_CODE_CHEAT)
         }
-
-        val questionTextResId =
-            quizViewModel.getQuestionBank()[quizViewModel.currentIndex].textResId
-        questionTextView.setText(questionTextResId)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
@@ -143,7 +171,7 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(savedInstanceState)
         Log.i(TAG, "onSaveInstanceState")
         savedInstanceState.putInt(KEY_INDEX, quizViewModel.currentIndex)
-        savedInstanceState.putInt(Q_INDEX, quizViewModel.questionIndex)
+        savedInstanceState.putInt(Q_INDEX, quizViewModel.questionIndex-1)
     }
 
     override fun onStop(){
@@ -158,7 +186,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateQuestion(){
         val questionTextResId = quizViewModel.currentQuestionText
-        questionTextView.setText(questionTextResId)
+        textSwitcher.setText(questionTextResId)
         if(quizViewModel.cheatIndex==3){
             cheatButton.setEnabled(false)
         }
@@ -174,6 +202,7 @@ class MainActivity : AppCompatActivity() {
                     " Чит: ${quizViewModel.cheatIndex}")
         if(quizViewModel.questionIndex== quizViewModel.getQuestionBank().size){
             builder.show()
+
         }
     }
 

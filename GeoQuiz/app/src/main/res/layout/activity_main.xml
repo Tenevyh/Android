@@ -13,9 +13,10 @@
         android:layout_height="250dp"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/question_text_view"
-            android:layout_width="wrap_content"
+        <TextSwitcher
+
+            android:id="@+id/textSwitcher"
+            android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_gravity="center_vertical"
             android:padding="24dp"
@@ -34,21 +35,24 @@
             android:id="@+id/false_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#3F51B5"
             android:text="@string/false_button"/>
 
         <Button
             android:id="@+id/true_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#3F51B5"
             android:text="@string/true_button" />
 
     </LinearLayout>
 
     <ImageButton
         android:id="@+id/prev_button"
-        android:layout_width="55dp"
-        android:layout_height="52dp"
+        android:layout_width="72dp"
+        android:layout_height="40dp"
         android:layout_gravity="bottom|left"
+        android:backgroundTint="#3F51B5"
         android:src="@drawable/left_arrow" />
 
     <LinearLayout
@@ -58,8 +62,7 @@
 
     </LinearLayout>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="200dp">
 
@@ -68,6 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
+            android:backgroundTint="#3F51B5"
             android:text="@string/cheat_button" />
 
     </FrameLayout>

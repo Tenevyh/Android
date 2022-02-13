@@ -5,12 +5,12 @@ import androidx.lifecycle.ViewModel
 
 class QuizViewModel : ViewModel(){
     private val questionBank = listOf(
-        Question(R.string.question_australia,true),
-        Question(R.string.question_oceans,true),
-        Question(R.string.question_mideast,false),
-        Question(R.string.question_africa,false),
-        Question(R.string.question_americas,true),
-        Question(R.string.question_asia,true)
+        Question("Первыми врагами Лейлы в Монийской Империи стали учёные из лабы 1718.",true),
+        Question("Отец Лейлы один из членов ученых лабы 1718.",true),
+        Question("Губительную пушку Лейле подарил её дед.",false),
+        Question("Лейлу схватили учёные из лабы 1718, потому что она меткий стрелок.",false),
+        Question("В похищении Лейлы виновата Губительная Пушка.",true),
+        Question("Истинные причины поступка отца, Лейле рассказал дед.",true)
     )
 
     var currentIndex = 0
@@ -23,7 +23,7 @@ class QuizViewModel : ViewModel(){
     val currentQuestionAnswer: Boolean
         get() = questionBank[currentIndex].answer
 
-    val currentQuestionText : Int
+    val currentQuestionText : String
         get() = questionBank[currentIndex].textResId
 
     fun moveToNext(){
