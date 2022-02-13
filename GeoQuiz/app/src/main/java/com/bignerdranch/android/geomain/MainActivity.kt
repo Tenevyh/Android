@@ -47,7 +47,6 @@ class MainActivity : AppCompatActivity() {
 
         trueButton = findViewById(R.id.true_button)
         falseButton = findViewById(R.id.false_button)
-        nextButton = findViewById(R.id.next_button)
         prevButton = findViewById(R.id.prev_button)
         questionTextView = findViewById(R.id.question_text_view)
         cheatButton = findViewById(R.id.cheat_button)
@@ -77,6 +76,9 @@ class MainActivity : AppCompatActivity() {
             offButton()
             quizViewModel.questionIndex++
             showResult()
+            Thread.sleep(1000)
+            quizViewModel.moveToNext()
+            updateQuestion()
         }
 
         falseButton.setOnClickListener { view: View ->
@@ -85,23 +87,15 @@ class MainActivity : AppCompatActivity() {
             offButton()
             quizViewModel.questionIndex++
             showResult()
+            Thread.sleep(1000)
+            quizViewModel.moveToNext()
+            updateQuestion()
         }
 
         prevButton.setOnClickListener {
             if (quizViewModel.currentIndex == 0) {
             } else {
                 quizViewModel.moveToPrev()
-                updateQuestion()
-            }
-            if (quizViewModel.isCompleted()) {
-                offButton()
-            } else onButton()
-        }
-
-        nextButton.setOnClickListener {
-            if (quizViewModel.currentIndex == quizViewModel.getQuestionBank().size - 1) {
-            } else {
-                quizViewModel.moveToNext()
                 updateQuestion()
             }
             if (quizViewModel.isCompleted()) {
@@ -168,13 +162,16 @@ class MainActivity : AppCompatActivity() {
         if(quizViewModel.cheatIndex==3){
             cheatButton.setEnabled(false)
         }
+        if (quizViewModel.isCompleted()) {
+            offButton()
+        } else onButton()
     }
 
     private fun showResult(){
         var builder = AlertDialog.Builder(this)
         builder.setTitle("Результат!")
             .setMessage(" Верно: ${quizViewModel.correctIndex}\n Неверно: ${quizViewModel.inCorrectIndex}\n" +
-                    " Считирил: ${quizViewModel.cheatIndex}")
+                    " Чит: ${quizViewModel.cheatIndex}")
         if(quizViewModel.questionIndex== quizViewModel.getQuestionBank().size){
             builder.show()
         }
