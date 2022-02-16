@@ -102,7 +102,8 @@ class MainActivity : AppCompatActivity() {
             checkAnswer(true)
             quizViewModel.completed()
             offButton()
-            quizViewModel.questionIndex++
+            if(quizViewModel.questionIndex==quizViewModel.getQuestionBank().size-1){}
+            else{quizViewModel.questionIndex++}
             showResult()
             Thread.sleep(250)
             quizViewModel.moveToNext()
@@ -113,7 +114,8 @@ class MainActivity : AppCompatActivity() {
             checkAnswer(false)
             quizViewModel.completed()
             offButton()
-            quizViewModel.questionIndex++
+            if(quizViewModel.questionIndex==quizViewModel.getQuestionBank().size-1){}
+            else{quizViewModel.questionIndex++}
             showResult()
             Thread.sleep(1000)
             quizViewModel.moveToNext()
@@ -171,7 +173,7 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(savedInstanceState)
         Log.i(TAG, "onSaveInstanceState")
         savedInstanceState.putInt(KEY_INDEX, quizViewModel.currentIndex)
-        savedInstanceState.putInt(Q_INDEX, quizViewModel.questionIndex-1)
+        savedInstanceState.putInt(Q_INDEX, quizViewModel.questionIndex)
     }
 
     override fun onStop(){
@@ -200,7 +202,7 @@ class MainActivity : AppCompatActivity() {
         builder.setTitle("Результат!")
             .setMessage(" Верно: ${quizViewModel.correctIndex}\n Неверно: ${quizViewModel.inCorrectIndex}\n" +
                     " Чит: ${quizViewModel.cheatIndex}")
-        if(quizViewModel.questionIndex== quizViewModel.getQuestionBank().size){
+        if(quizViewModel.questionIndex== quizViewModel.getQuestionBank().size-1){
             builder.show()
 
         }
