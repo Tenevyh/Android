@@ -3,7 +3,7 @@ package com.bignerdranch.android.criminalintent
 import androidx.lifecycle.ViewModel
 
 class CrimeListViewModel : ViewModel() {
-    var crimes = mutableListOf<Crime>()
+    val crimes = mutableListOf<Crime>()
 
     init{
         for (i in 0 until 100) {

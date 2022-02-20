@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/Users/Kir/Documents/GitHub/Android/CriminalIntent/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
         <entry key="..\:/Users/Kir/Documents/GitHub/Android/CriminalIntent/app/src/main/res/layout/fragment_crime.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Kir/Documents/GitHub/Android/CriminalIntent/app/src/main/res/layout/fragment_crime_list.xml" value="0.2015625" />
+        <entry key="..\:/Users/Kir/Documents/GitHub/Android/CriminalIntent/app/src/main/res/layout/list_item_crime.xml" value="0.2015625" />
       </map>
     </option>
   </component>
