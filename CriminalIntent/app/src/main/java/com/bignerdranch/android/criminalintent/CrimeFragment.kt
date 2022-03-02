@@ -11,6 +11,8 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextSwitcher
 import androidx.fragment.app.Fragment
+import android.text.format.DateFormat
+import java.text.SimpleDateFormat
 
 
 class CrimeFragment: Fragment() {
@@ -19,6 +21,7 @@ class CrimeFragment: Fragment() {
     private lateinit var titleField: EditText
     private lateinit var dateButton: Button
     private lateinit var solvedCheckBox: CheckBox
+    private lateinit var format1: SimpleDateFormat
 
     override fun onCreate(savedInstanceState: Bundle?) {
 

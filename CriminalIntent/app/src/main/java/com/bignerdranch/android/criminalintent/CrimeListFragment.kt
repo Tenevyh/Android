@@ -1,5 +1,7 @@
 package com.bignerdranch.android.criminalintent
 
+
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,11 +13,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 private const val TAG = "CrimeListFragment"
 private const val requiresPolice = 2
 private const val noRequiresPolice = 1
+@SuppressLint("SimpleDateFormat")
+private val format1 = SimpleDateFormat("EEEE dd.MM.yyyy k:mm")
+
+
 
 class CrimeListFragment: Fragment(){
 
@@ -73,7 +81,7 @@ class CrimeListFragment: Fragment(){
         fun bind(crime: Crime){
             this.crime = crime
             titleTextView.text = this.crime.title
-            dateTextView.text = this.crime.date.toString()
+            dateTextView.text = format1.format(this.crime.date).replaceFirstChar { it.uppercase() }
         }
 
         override fun onClick(v: View){
