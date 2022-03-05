@@ -28,17 +28,12 @@ private val format1 = SimpleDateFormat("EEEE dd.MM.yyyy k:mm")
 class CrimeListFragment: Fragment(){
 
     private lateinit var crimeRecyclerView: RecyclerView
-    private var adapter: CrimeAdapter?=null
+    private var adapter: CrimeAdapter?= CrimeAdapter(emptyList())
 
     private val crimeListViewModel: CrimeListViewModel by lazy {
         ViewModelProvider(this).get(CrimeListViewModel::class.java)
     }
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d(TAG, "Total crimes: ${crimeListViewModel.crimes.size}")
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,14 +44,26 @@ class CrimeListFragment: Fragment(){
 
         crimeRecyclerView = view.findViewById(R.id.crime_recycler_view) as RecyclerView
         crimeRecyclerView.layoutManager = LinearLayoutManager(context)
-
-        upDateUI()
-
+        crimeRecyclerView.adapter = adapter
         return view
     }
 
-    private fun upDateUI(){
-        val crimes = crimeListViewModel.crimes
+  /*  override fun onViewCreated(view: View, savedInstanceState: Bundle?){
+        super.onViewCreated(view, savedInstanceState)
+        crimeListViewModel.crimeListLiveData.observe(
+            viewLifecycleOwner,
+            androidx.lifecycle.Observer{ crimes ->
+                crimes?.let{
+                    Log.i(TAG, "Got crimes ${crimes.size}")
+                    upDateUI(crimes)
+                }
+            }
+        )
+    }
+
+   */
+
+    private fun upDateUI(crimes: List<Crime>){
         adapter = CrimeAdapter(crimes)
         crimeRecyclerView.adapter = adapter
     }
