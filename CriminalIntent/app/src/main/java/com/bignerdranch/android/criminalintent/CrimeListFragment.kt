@@ -2,6 +2,7 @@ package com.bignerdranch.android.criminalintent
 
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -29,11 +30,21 @@ private val format1 = SimpleDateFormat("EEEE dd.MM.yyyy k:mm")
 
 class CrimeListFragment: Fragment(){
 
+    interface Callbacks {
+        fun onCrimeSelected(crimeId: UUID)
+    }
+
+    private var callbacks: Callbacks? = null
     private lateinit var crimeRecyclerView: RecyclerView
     private var adapter: CrimeAdapter?= CrimeAdapter(emptyList())
 
     private val crimeListViewModel: CrimeListViewModel by lazy {
         ViewModelProvider(this).get(CrimeListViewModel::class.java)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callbacks = context as Callbacks?
     }
 
 
@@ -60,6 +71,11 @@ class CrimeListFragment: Fragment(){
                 updateUI(crimes)
             }
         })
+    }
+
+    override fun onDetach(){
+        super.onDetach()
+        callbacks = null
     }
 
 
