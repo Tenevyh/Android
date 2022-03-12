@@ -12,8 +12,12 @@ import android.widget.EditText
 import android.widget.TextSwitcher
 import androidx.fragment.app.Fragment
 import android.text.format.DateFormat
+import android.util.Log
 import java.text.SimpleDateFormat
+import java.util.*
 
+private const val TAG = "CrimeFragment"
+private const val ARG_CRIME_ID = "crime_id"
 
 class CrimeFragment: Fragment() {
 
@@ -27,6 +31,9 @@ class CrimeFragment: Fragment() {
 
         super.onCreate(savedInstanceState)
         crime = Crime()
+        val crimeId: UUID = arguments?.getSerializable(ARG_CRIME_ID) as UUID
+        Log.d(TAG, "args bundle crime ID: $crimeId")
+        //Загрузка преступленя из базы данных
 
     }
 
@@ -65,6 +72,18 @@ class CrimeFragment: Fragment() {
 
         solvedCheckBox.apply{
             setOnCheckedChangeListener{_, isCheked -> crime.isSolved = isCheked}
+        }
+    }
+
+    companion object {
+
+        fun newInstance(crimeID: UUID): CrimeFragment {
+            val args = Bundle().apply {
+                putSerializable(ARG_CRIME_ID, crimeID)
+            }
+            return CrimeFragment().apply {
+                arguments = args
+            }
         }
     }
 }
