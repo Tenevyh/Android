@@ -13,6 +13,9 @@ import android.widget.TextSwitcher
 import androidx.fragment.app.Fragment
 import android.text.format.DateFormat
 import android.util.Log
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -26,15 +29,16 @@ class CrimeFragment: Fragment() {
     private lateinit var dateButton: Button
     private lateinit var solvedCheckBox: CheckBox
     private lateinit var format1: SimpleDateFormat
+    private val crimeDetailViewModel : CrimeDetailViewModel by lazy {
+        ViewModelProvider(this).get(CrimeDetailViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         crime = Crime()
         val crimeId: UUID = arguments?.getSerializable(ARG_CRIME_ID) as UUID
-        Log.d(TAG, "args bundle crime ID: $crimeId")
-        //Загрузка преступленя из базы данных
-
+        crimeDetailViewModel.loadCrime(crimeId)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +53,19 @@ class CrimeFragment: Fragment() {
             isEnabled = false
         }
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        crimeDetailViewModel.crimeLiveData.observe(
+            viewLifecycleOwner,
+            Observer{
+                crime ->
+                crime?.let {
+                    this.crime = crime
+                    updateUI()
+                }
+            })
     }
 
     override fun onStart(){
@@ -72,6 +89,20 @@ class CrimeFragment: Fragment() {
 
         solvedCheckBox.apply{
             setOnCheckedChangeListener{_, isCheked -> crime.isSolved = isCheked}
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        crimeDetailViewModel.saveCrime(crime)
+    }
+
+    private fun updateUI(){
+        titleField.setText(crime.title)
+        dateButton.text = crime.date.toString()
+        solvedCheckBox.apply{
+            isChecked = crime.isSolved
+            jumpDrawablesToCurrentState()
         }
     }
 
