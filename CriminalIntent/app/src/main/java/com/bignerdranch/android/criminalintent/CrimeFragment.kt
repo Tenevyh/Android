@@ -21,6 +21,7 @@ import java.util.*
 
 private const val TAG = "CrimeFragment"
 private const val ARG_CRIME_ID = "crime_id"
+private const val DIALOG_DATE = "DialogDate"
 
 class CrimeFragment: Fragment() {
 
@@ -48,10 +49,6 @@ class CrimeFragment: Fragment() {
         dateButton = view.findViewById(R.id.crime_date) as Button
         solvedCheckBox = view.findViewById(R.id.crime_solved) as CheckBox
 
-        dateButton.apply{
-            text = crime.date.toString()
-            isEnabled = false
-        }
         return view
     }
 
@@ -89,6 +86,12 @@ class CrimeFragment: Fragment() {
 
         solvedCheckBox.apply{
             setOnCheckedChangeListener{_, isCheked -> crime.isSolved = isCheked}
+        }
+
+        dateButton.setOnClickListener{
+            DatePickerFragment().apply {
+                show(this@CrimeFragment.requireFragmentManager(), DIALOG_DATE)
+            }
         }
     }
 
