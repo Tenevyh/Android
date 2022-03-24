@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import java.util.*
 
+private const val ARG_DATE = "date"
+
 class DatePickerFragment: DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -19,4 +21,14 @@ class DatePickerFragment: DialogFragment() {
         )
     }
 
+    companion object{
+        fun newInstance(date: Date): DatePickerFragment{
+            val args = Bundle().apply {
+                putSerializable(ARG_DATE, date)
+            }
+            return DatePickerFragment().apply {
+                arguments = args
+            }
+        }
+    }
 }
