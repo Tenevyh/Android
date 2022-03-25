@@ -10,8 +10,14 @@ private const val ARG_DATE = "date"
 
 class DatePickerFragment: DialogFragment() {
 
+    interface Callbacks {
+        fun onDateSelected(date: Date)
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val date = arguments?.getSerializable(ARG_DATE) as Date
         val calendar = Calendar.getInstance()
+        calendar.time = date
         return DatePickerDialog(
             requireContext(),
             null,
