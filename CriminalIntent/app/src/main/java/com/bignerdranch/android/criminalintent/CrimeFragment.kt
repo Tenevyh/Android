@@ -34,6 +34,7 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks, TimePickerFragmen
     private lateinit var timeButton: Button
     private lateinit var solvedCheckBox: CheckBox
     private lateinit var format1: SimpleDateFormat
+    private lateinit var format2: SimpleDateFormat
     private val crimeDetailViewModel : CrimeDetailViewModel by lazy {
         ViewModelProvider(this).get(CrimeDetailViewModel::class.java)
     }
@@ -115,7 +116,10 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks, TimePickerFragmen
 
     private fun updateUI(){
         titleField.setText(crime.title)
-        dateButton.text = crime.date.toString()
+        format1 = SimpleDateFormat("dd.MM.y")
+        dateButton.text = format1.format(crime.date)
+        format2 = SimpleDateFormat("HH:mm")
+        timeButton.text = format2.format(crime.date)
         solvedCheckBox.apply{
             isChecked = crime.isSolved
             jumpDrawablesToCurrentState()

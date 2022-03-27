@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import java.util.*
+import java.util.Calendar.HOUR
+import java.util.Calendar.MINUTE
 
 private const val ARG_DATE = "date"
 
@@ -16,17 +18,21 @@ class DatePickerFragment: DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
+        val date = arguments?.getSerializable(ARG_DATE) as Date
+        val calendar = Calendar.getInstance()
+        val calendarHour = calendar.get(HOUR)
+        val calendarMinute = calendar.get(MINUTE)
+        calendar.time = date
+
         val dateListener = DatePickerDialog.OnDateSetListener{
                 _: DatePicker, year: Int, month: Int, day: Int ->
-            val resultDate : Date = GregorianCalendar(year, month, day).time
+            val resultDate : Date = GregorianCalendar(year, month, day, calendarHour, calendarMinute).time
             targetFragment?.let { fragment ->
                 (fragment as Callbacks).onDateSelected(resultDate)
             }
         }
 
-        val date = arguments?.getSerializable(ARG_DATE) as Date
-        val calendar = Calendar.getInstance()
-        calendar.time = date
         return DatePickerDialog(
             requireContext(),
             dateListener,
