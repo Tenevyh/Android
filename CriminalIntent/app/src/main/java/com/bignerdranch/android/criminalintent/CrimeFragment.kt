@@ -1,5 +1,6 @@
 package com.bignerdranch.android.criminalintent
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -32,6 +33,8 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
     private lateinit var dateButton: Button
     private lateinit var solvedCheckBox: CheckBox
     private lateinit var format1: SimpleDateFormat
+    private lateinit var reportButton: Button
+
     private val crimeDetailViewModel : CrimeDetailViewModel by lazy {
         ViewModelProvider(this).get(CrimeDetailViewModel::class.java)
     }
@@ -50,6 +53,7 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
         titleField = view.findViewById(R.id.crime_title) as EditText
         dateButton = view.findViewById(R.id.crime_date) as Button
         solvedCheckBox = view.findViewById(R.id.crime_solved) as CheckBox
+        reportButton = view.findViewById(R.id.crime_report) as Button
 
         return view
     }
@@ -94,6 +98,16 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
             DatePickerFragment.newInstance(crime.date).apply {
                 setTargetFragment(this@CrimeFragment, REQUEST_DATE)
                 show(this@CrimeFragment.parentFragmentManager, DIALOG_DATE)
+            }
+        }
+
+        reportButton.setOnClickListener{
+            Intent(Intent.ACTION_SEND).apply {
+                type = "text/plan"
+                putExtra(Intent.EXTRA_TEXT, getCrimeReport())
+                putExtra(Intent.EXTRA_SUBJECT, getString(R.string.crime_report_subject))
+            }.also {
+                intent -> startActivity(intent)
             }
         }
     }
