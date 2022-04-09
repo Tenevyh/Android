@@ -1,6 +1,8 @@
 package com.bignerdranch.android.criminalintent
 
+import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.text.Editable
@@ -18,6 +20,7 @@ import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import java.net.URI
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -140,6 +143,32 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
         }
         if(crime.suspect.isNotEmpty()){
             suspectButton.text = crime.suspect
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when {
+            resultCode != Activity.RESULT_OK -> return
+
+            requestCode == REQUEST_CONTACT && data !=null -> {
+                val contactUri: Uri? = data.data
+                // Указать, для каких полей запрос должен возвращать значения.
+                val queryFields = arrayOf(ContactsContract.Contacts.DISPLAY_NAME)
+                // Выполняемый здесь запрос - contractUri похож на предложение "where"
+                val cursor = contactUri?.let { requireActivity().contentResolver.query(it, queryFields, null, null, null) }
+                cursor?.use {
+                    //Verify cursor contains at least one result
+                    if (it.count == 0) {
+                        return
+                    }
+                        //Первый столбец первой строки данных - имя подозреваемого
+                    it.moveToFirst()
+                    val suspect = it.getString(0)
+                    crime.suspect = suspect
+                    crimeDetailViewModel.saveCrime(crime)
+                    suspectButton.text = suspect
+                }
+            }
         }
     }
 
