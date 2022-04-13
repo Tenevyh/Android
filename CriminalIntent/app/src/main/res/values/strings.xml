@@ -1,20 +1,20 @@
 <resources>
-    <string name="app_name">CriminalIntent</string>
-    <string name="crime_title_hint">Enter a title for the crime.</string>
-    <string name="crime_title_label">Title</string>
-    <string name="crime_details_label">Details</string>
-    <string name="crime_solved_label">Solved</string>
-    <string name="call_police">To call the police!</string>
-    <string name="list_empty">List is empty!</string>
-    <string name="new_crime">New Crime</string>
-    <string name="crime_suspect_text">Choose suspect</string>
-    <string name="crime_report_text">Send Crime Report</string>
+    <string name="app_name">Преступления</string>
+    <string name="crime_title_hint">Описание.</string>
+    <string name="crime_title_label">Описание</string>
+    <string name="crime_details_label">Время и дата</string>
+    <string name="crime_solved_label">Решено</string>
+    <string name="call_police">Позвонить в полицию!</string>
+    <string name="list_empty">Список пуст</string>
+    <string name="new_crime">Новое преступление</string>
+    <string name="crime_suspect_text">Подозреваемый</string>
+    <string name="crime_report_text">Поделиться</string>
     <string name="crime_report">%1$s!
     The crime was discovered on %2$s. %3$s, and %4$s</string>
-    <string name="crime_report_solved">The case is solved</string>
-    <string name="crime_report_unsolved">The case is not solved</string>
-    <string name="crime_report_no_suspect">there suspect is no suspect.</string>
-    <string name="crime_report_suspect">the suspect is %s</string>
-    <string name="crime_report_subject">CriminalIntent Crime Report</string>
-    <string name="send_report">Send crime report via</string>
+    <string name="crime_report_solved">Дело раскрыто</string>
+    <string name="crime_report_unsolved">Дело не раскрыто</string>
+    <string name="crime_report_no_suspect">Нет подозреваемого</string>
+    <string name="crime_report_suspect">Подозреваемый %s</string>
+    <string name="crime_report_subject">CriminalIntent Отчёт о преступлении</string>
+    <string name="send_report">Отправить отчёт</string>
 </resources>

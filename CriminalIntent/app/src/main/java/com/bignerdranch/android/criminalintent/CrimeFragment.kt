@@ -95,6 +95,8 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
 
             }
         }
+        format1 = SimpleDateFormat("d.MM.yy hh:mm", Locale.ROOT)
+
         titleField.addTextChangedListener(titleWatcher)
 
         solvedCheckBox.apply{
@@ -136,7 +138,7 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
 
     private fun updateUI(){
         titleField.setText(crime.title)
-        dateButton.text = crime.date.toString()
+        dateButton.text = format1.format(crime.date).toString()
         solvedCheckBox.apply{
             isChecked = crime.isSolved
             jumpDrawablesToCurrentState()
