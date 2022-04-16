@@ -42,6 +42,7 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
     private lateinit var format1: SimpleDateFormat
     private lateinit var reportButton: Button
     private lateinit var suspectButton: Button
+    private lateinit var callSuspect: Button
 
     private val crimeDetailViewModel : CrimeDetailViewModel by lazy {
         ViewModelProvider(this).get(CrimeDetailViewModel::class.java)
@@ -63,7 +64,7 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
         solvedCheckBox = view.findViewById(R.id.crime_solved) as CheckBox
         reportButton = view.findViewById(R.id.crime_report) as Button
         suspectButton = view.findViewById(R.id.crime_suspect) as Button
-
+        callSuspect = view.findViewById(R.id.call_suspect) as Button
         return view
     }
 
