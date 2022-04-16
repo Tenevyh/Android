@@ -1,6 +1,8 @@
 package com.bignerdranch.android.criminalintent
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
@@ -131,12 +133,25 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
             setOnClickListener{
                 startActivityForResult(pickContactIntent, REQUEST_CONTACT)
             }
-            val packageManager: PackageManager = requireActivity().packageManager
+                /* val packageManager: PackageManager = requireActivity().packageManager
             val resolvedActivity: ResolveInfo? = packageManager.resolveActivity(pickContactIntent,
             PackageManager.MATCH_DEFAULT_ONLY)
             if (resolvedActivity == null){
                 isEnabled = false
             }
+                 */
+        }
+
+        callSuspect.setOnClickListener {
+            val callContactIntent =
+                Intent(Intent.ACTION_DIAL).apply {
+
+                    val phone = crime.phone
+                    data = Uri.parse("tel:$phone")
+
+                }
+            // это намерение вызовет номер телефона, указанный в Uri.parse("tel:$phone")
+            startActivity(callContactIntent)
         }
     }
 
@@ -158,28 +173,97 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
         when {
             resultCode != Activity.RESULT_OK -> return
 
-            requestCode == REQUEST_CONTACT && data !=null -> {
+            requestCode == REQUEST_CONTACT && data != null -> {
                 val contactUri: Uri? = data.data
-                // Указать, для каких полей запрос должен возвращать значения.
-                val queryFields = arrayOf(ContactsContract.Contacts.DISPLAY_NAME)
-                // Выполняемый здесь запрос - contractUri похож на предложение "where"
+
+                var contactId: String? = null
+
+
+                val queryFields = arrayOf(ContactsContract.Contacts.DISPLAY_NAME, ContactsContract.Contacts._ID)
                 val cursor = contactUri?.let { requireActivity().contentResolver.query(it, queryFields, null, null, null) }
                 cursor?.use {
-                    //Verify cursor contains at least one result
-                    if (it.count == 0) {
-                        return
-                    }
-                        //Первый столбец первой строки данных - имя подозреваемого
+                    if(it.count == 0) return
+
                     it.moveToFirst()
+
                     val suspect = it.getString(0)
+                    //получить идентификатор контакта
+                    contactId = it.getString(1)
+
                     crime.suspect = suspect
-                    crimeDetailViewModel.saveCrime(crime)
                     suspectButton.text = suspect
                 }
+
+                // Это Uri, чтобы получить номер телефона
+                val phoneURI = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
+
+                // phoneNumberQueryFields: список для возврата только столбца PhoneNumber
+                val phoneNumberQueryFields = arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER)
+
+                //phoneWhereClause: фильтр, объявляющий, какие строки возвращать, отформатированный как предложение SQL WHERE (за исключением самого WHERE)
+                val phoneWhereClause = "${ContactsContract.CommonDataKinds.Phone.CONTACT_ID} = ?"
+
+                // Этот val заменяет вопросительный знак в phoneWhereClause val
+                val phoneQueryParameters = arrayOf(contactId)
+
+                val phoneCursor = requireActivity().contentResolver
+                    .query(phoneURI, phoneNumberQueryFields, phoneWhereClause, phoneQueryParameters, null )
+
+                //строка номера телефона
+                var phoneNumber: String = ""
+
+                val allNumbers: ArrayList<String> = arrayListOf<String>()
+                allNumbers.clear()
+
+                phoneCursor?.use {cursorPhone ->
+
+                    cursorPhone.moveToFirst()
+                    while (cursorPhone.isAfterLast == false)
+                    {
+                        phoneNumber = cursorPhone.getString(0)
+                        allNumbers.add(phoneNumber)
+                        cursorPhone.moveToNext()
+                    }
+                }
+
+
+                val items = allNumbers.toTypedArray()
+
+                var selectedNumber: String = ""
+
+
+                val builder = AlertDialog.Builder(context)
+                builder.setTitle("Choose a Number:")
+                builder.setItems(items, DialogInterface.OnClickListener { dialog, which ->  selectedNumber = allNumbers[which].toString().replace("_","")
+                    crime.phone = selectedNumber
+                    callSuspect.text = crime.phone
+                })
+
+                val alert = builder.create()
+                if(allNumbers.size > 1) {
+                    alert.show()
+                }
+                else if (allNumbers.size == 1 && allNumbers[0].length != 0) {
+                    selectedNumber = allNumbers[0].toString().replace("_","")
+                    crime.phone = selectedNumber
+                    callSuspect.text = crime.phone
+
+                }
+
+                else
+                {
+                    callSuspect.text = "no phone number found!"
+                    crime.phone = ""
+                }
+
+                crimeDetailViewModel.saveCrime(crime)
             }
+
         }
     }
 

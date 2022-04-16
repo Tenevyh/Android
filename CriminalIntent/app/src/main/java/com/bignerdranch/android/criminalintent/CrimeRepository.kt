@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.Room
 import com.bignerdranch.android.criminalintent.database.CrimeDataBase
-import com.bignerdranch.android.criminalintent.database.migration_1_2
+import com.bignerdranch.android.criminalintent.database.migration_2_3
 import java.util.*
 import java.util.concurrent.Executors
 
@@ -16,7 +16,7 @@ class CrimeRepository private constructor(context: Context) {
         context.applicationContext,
         CrimeDataBase::class.java,
         DATABASE_NAME
-    ).addMigrations(migration_1_2).build()
+    ).addMigrations(migration_2_3).build()
 
     private val crimeDao = database.crimeDao()
     private val executor = Executors.newSingleThreadExecutor()
