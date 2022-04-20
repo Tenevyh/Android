@@ -19,6 +19,7 @@ import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import java.io.File
 import java.net.URI
 import java.text.SimpleDateFormat
 import java.util.*
@@ -41,6 +42,7 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
     private lateinit var suspectButton: Button
     private lateinit var photoButton: ImageButton
     private lateinit var photoView: ImageView
+    private lateinit var photoFile: File
 
     private val crimeDetailViewModel : CrimeDetailViewModel by lazy {
         ViewModelProvider(this).get(CrimeDetailViewModel::class.java)
@@ -76,6 +78,7 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
                 crime ->
                 crime?.let {
                     this.crime = crime
+                    photoFile = crimeDetailViewModel.getPhotoFile(crime)
                     updateUI()
                 }
             })
