@@ -144,9 +144,10 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
             val packageManager: PackageManager = requireActivity().packageManager
             val resolvedActivity: ResolveInfo? = packageManager.resolveActivity(pickContactIntent,
             PackageManager.MATCH_DEFAULT_ONLY)
-            if (resolvedActivity == null){
-                isEnabled = false
-            }
+            /*if (resolvedActivity == null){
+              //  isEnabled = false
+              }
+            */
         }
 
         photoButton.apply {
@@ -155,10 +156,10 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
             val captureImage = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             val resolvedActivity: ResolveInfo? = packageManager.resolveActivity(captureImage,
                 PackageManager.MATCH_DEFAULT_ONLY)
-            if(resolvedActivity == null) {
+           /* if(resolvedActivity == null) {
                 isEnabled = false
             }
-
+           */
             setOnClickListener {
                 captureImage.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
 
