@@ -7,6 +7,7 @@ import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment
 import android.text.format.DateFormat
 import android.util.Log
 import android.widget.*
+import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -30,6 +32,7 @@ private const val DIALOG_DATE = "DialogDate"
 private const val REQUEST_DATE = 0
 private const val DATE_FORMAT = "EEE, MMM, dd"
 private const val REQUEST_CONTACT = 1
+private const val REQUEST_PHOTO = 2
 
 class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
 
@@ -43,6 +46,7 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
     private lateinit var photoButton: ImageButton
     private lateinit var photoView: ImageView
     private lateinit var photoFile: File
+    private lateinit var photoUri: Uri
 
     private val crimeDetailViewModel : CrimeDetailViewModel by lazy {
         ViewModelProvider(this).get(CrimeDetailViewModel::class.java)
@@ -79,6 +83,9 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
                 crime?.let {
                     this.crime = crime
                     photoFile = crimeDetailViewModel.getPhotoFile(crime)
+                    photoUri = FileProvider.getUriForFile(requireActivity(),
+                        "com.bignerdranch.android.criminalintent.fileprovider",
+                        photoFile)
                     updateUI()
                 }
             })
@@ -139,6 +146,32 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
             PackageManager.MATCH_DEFAULT_ONLY)
             if (resolvedActivity == null){
                 isEnabled = false
+            }
+        }
+
+        photoButton.apply {
+            val packageManager: PackageManager = requireActivity().packageManager
+
+            val captureImage = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            val resolvedActivity: ResolveInfo? = packageManager.resolveActivity(captureImage,
+                PackageManager.MATCH_DEFAULT_ONLY)
+            if(resolvedActivity == null) {
+                isEnabled = false
+            }
+
+            setOnClickListener {
+                captureImage.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
+
+                val cameraActivities: List<ResolveInfo> =
+                    packageManager.queryIntentActivities(captureImage,
+                        PackageManager.MATCH_DEFAULT_ONLY)
+
+                for (cameraActivity in cameraActivities) {
+                    requireActivity().grantUriPermission(cameraActivity.activityInfo.packageName,
+                        photoUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                }
+
+                startActivityForResult(captureImage, REQUEST_PHOTO)
             }
         }
     }
