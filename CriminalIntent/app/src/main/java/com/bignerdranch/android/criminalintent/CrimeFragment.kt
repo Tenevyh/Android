@@ -144,7 +144,7 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
             val packageManager: PackageManager = requireActivity().packageManager
             val resolvedActivity: ResolveInfo? = packageManager.resolveActivity(pickContactIntent,
             PackageManager.MATCH_DEFAULT_ONLY)
-            /*if (resolvedActivity == null){
+            /*if (resolvedActivity == null){   // не работает должным образом, кнопка постоянно выключена, даже при наличии необходимых приложений
               //  isEnabled = false
               }
             */
@@ -156,7 +156,7 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
             val captureImage = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             val resolvedActivity: ResolveInfo? = packageManager.resolveActivity(captureImage,
                 PackageManager.MATCH_DEFAULT_ONLY)
-           /* if(resolvedActivity == null) {
+           /* if(resolvedActivity == null) {  // не работает должным образом, кнопка постоянно выключена, даже при наличии необходимых приложений
                 isEnabled = false
             }
            */
