@@ -17,6 +17,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import android.text.format.DateFormat
 import android.util.Log
+import android.view.ViewTreeObserver
 import android.widget.*
 import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
@@ -36,6 +37,10 @@ private const val REQUEST_CONTACT = 1
 private const val REQUEST_PHOTO = 2
 
 class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
+
+    private lateinit var treeObserver: ViewTreeObserver
+    private var viewWidth = 0
+    private var viewHeight = 0
 
     private lateinit var crime: Crime
     private lateinit var titleField: EditText
@@ -72,6 +77,11 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
         photoButton = view.findViewById(R.id.crime_camera) as ImageButton
         photoView = view.findViewById(R.id.crime_photo) as ImageView
 
+        treeObserver = photoView.viewTreeObserver
+        treeObserver.addOnGlobalLayoutListener {
+            viewWidth = photoView.width
+            viewHeight = photoView.height
+        }
         return view
     }
 
@@ -198,12 +208,12 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
         if(crime.suspect.isNotEmpty()){
             suspectButton.text = crime.suspect
         }
-        updatePhotoView()
+        updatePhotoView(viewWidth, viewHeight)
     }
 
-    private fun updatePhotoView() {
+    private fun updatePhotoView(width: Int, height: Int) {
         if (photoFile.exists()) {
-            val bitmap = getScaledBitmap(photoFile.path, requireActivity())
+            val bitmap = getScaledBitmap(photoFile.path, width, height)
             photoView.setImageBitmap(bitmap)
         } else {
             photoView.setImageDrawable(null)
@@ -241,7 +251,7 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
             requestCode == REQUEST_PHOTO -> {
                 requireActivity().revokeUriPermission(photoUri,
                     Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-                updatePhotoView()
+                updatePhotoView(viewWidth, viewHeight)
             }
         }
     }
