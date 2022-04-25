@@ -4,8 +4,45 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 
 class QuizViewModel : ViewModel(){
-    private val questionBank = listOf(
-        Question("Первыми врагами Лейлы в Монийской Империи стали учёные из лабы 1718.",true),
+
+    private var questionBank = listOf(
+        Question("000000000 ные из лабы 1718.",true),
+        Question("Отец Лейлы один из членов ученых лабы 1718.",true),
+        Question("Губительную пушку Лейле подарил её дед.",false),
+        Question("Лейлу схватили учёные из лабы 1718, потому что она меткий стрелок.",false),
+        Question("В похищении Лейлы виновата Губительная Пушка.",true),
+        Question("Истинные причины поступка отца, Лейле рассказал дед.",true)
+    )
+
+    val questionBankLayla = listOf(
+        Question("000000000 ные из лабы 1718.",true),
+        Question("Отец Лейлы один из членов ученых лабы 1718.",true),
+        Question("Губительную пушку Лейле подарил её дед.",false),
+        Question("Лейлу схватили учёные из лабы 1718, потому что она меткий стрелок.",false),
+        Question("В похищении Лейлы виновата Губительная Пушка.",true),
+        Question("Истинные причины поступка отца, Лейле рассказал дед.",true)
+    )
+
+    val questionBankZask = listOf(
+        Question("1111111111111.",true),
+        Question("Отец Лейлы один из членов ученых лабы 1718.",true),
+        Question("Губительную пушку Лейле подарил её дед.",false),
+        Question("Лейлу схватили учёные из лабы 1718, потому что она меткий стрелок.",false),
+        Question("В похищении Лейлы виновата Губительная Пушка.",true),
+        Question("Истинные причины поступка отца, Лейле рассказал дед.",true)
+    )
+
+    val questionBankVanVan = listOf(
+        Question("222222222222учёные из лабы 1718.",true),
+        Question("Отец Лейлы один из членов ученых лабы 1718.",true),
+        Question("Губительную пушку Лейле подарил её дед.",false),
+        Question("Лейлу схватили учёные из лабы 1718, потому что она меткий стрелок.",false),
+        Question("В похищении Лейлы виновата Губительная Пушка.",true),
+        Question("Истинные причины поступка отца, Лейле рассказал дед.",true)
+    )
+
+    val questionBankValir = listOf(
+        Question("333333333333 стали учёные из лабы 1718.",true),
         Question("Отец Лейлы один из членов ученых лабы 1718.",true),
         Question("Губительную пушку Лейле подарил её дед.",false),
         Question("Лейлу схватили учёные из лабы 1718, потому что она меткий стрелок.",false),
@@ -36,6 +73,10 @@ class QuizViewModel : ViewModel(){
 
     fun getQuestionBank() : List<Question>{
         return questionBank
+    }
+
+    fun setQuestionBank(list: List<Question>){
+        questionBank = list
     }
 
     fun completed(){

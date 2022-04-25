@@ -6,10 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.View
+import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -34,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         Log.d(TAG, "onCreate(Bundle?) called")
         setContentView(R.layout.activity_main)
 
@@ -241,6 +239,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.hero_list, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val fragment = ChooseHero().show(supportFragmentManager, "ChooseHero")
+
         return true
     }
 }

@@ -16,5 +16,10 @@
     <string name="show_answer_button">Покажи ответ!</string>
     <string name="cheat_button">Чит!</string>
     <string name="judgment_toast">Читерство это плохо!</string>
-    <string name="choose_hero">Выбрать героя></string>
+    <string name="choose_hero">Выбрать героя</string>
+    <string name="layla">Лейла</string>
+    <string name="zask">Заск</string>
+    <string name="vanvan">Ван Ван</string>
+    <string name="valir">Валир</string>
+    <string name="back">Назад</string>
 </resources>
