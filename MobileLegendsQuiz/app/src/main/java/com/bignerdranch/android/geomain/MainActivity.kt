@@ -7,6 +7,8 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.*
@@ -234,5 +236,11 @@ class MainActivity : AppCompatActivity() {
     private fun offButton(){
             falseButton.setEnabled(false)
             trueButton.setEnabled(false)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.hero_list, menu)
+        return true
     }
 }
