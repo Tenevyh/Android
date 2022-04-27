@@ -11,9 +11,6 @@ import androidx.lifecycle.ViewModelProviders
 
 class ChooseHero: DialogFragment () {
 
-    private val quizViewModel: QuizViewModel by lazy {
-        ViewModelProviders.of(this).get(QuizViewModel::class.java)
-    }
 
     private lateinit var layla : Button
     private lateinit var zask : Button

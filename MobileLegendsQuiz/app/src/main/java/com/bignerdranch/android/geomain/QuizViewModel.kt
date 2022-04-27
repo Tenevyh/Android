@@ -25,7 +25,7 @@ class QuizViewModel : ViewModel(){
 
     val questionBankZask = listOf(
         Question("1111111111111.",true),
-        Question("Отец Лейлы один из членов ученых лабы 1718.",true),
+        Question("1111111111111111111 членов ученых лабы 1718.",true),
         Question("Губительную пушку Лейле подарил её дед.",false),
         Question("Лейлу схватили учёные из лабы 1718, потому что она меткий стрелок.",false),
         Question("В похищении Лейлы виновата Губительная Пушка.",true),
@@ -34,7 +34,7 @@ class QuizViewModel : ViewModel(){
 
     val questionBankVanVan = listOf(
         Question("222222222222учёные из лабы 1718.",true),
-        Question("Отец Лейлы один из членов ученых лабы 1718.",true),
+        Question("22222222222222222222ленов ученых лабы 1718.",true),
         Question("Губительную пушку Лейле подарил её дед.",false),
         Question("Лейлу схватили учёные из лабы 1718, потому что она меткий стрелок.",false),
         Question("В похищении Лейлы виновата Губительная Пушка.",true),
@@ -43,7 +43,7 @@ class QuizViewModel : ViewModel(){
 
     val questionBankValir = listOf(
         Question("333333333333 стали учёные из лабы 1718.",true),
-        Question("Отец Лейлы один из членов ученых лабы 1718.",true),
+        Question("3333333333333333333нов ученых лабы 1718.",true),
         Question("Губительную пушку Лейле подарил её дед.",false),
         Question("Лейлу схватили учёные из лабы 1718, потому что она меткий стрелок.",false),
         Question("В похищении Лейлы виновата Губительная Пушка.",true),

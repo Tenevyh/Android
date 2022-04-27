@@ -244,7 +244,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val fragment = ChooseHero().show(supportFragmentManager, "ChooseHero")
-
         return true
     }
 }
