@@ -10,6 +10,7 @@ import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 
 private const val TAG = "MainActivity"
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cheatButton: Button
 
     private val quizViewModel: QuizViewModel by lazy {
-        ViewModelProviders.of(this).get(QuizViewModel::class.java)
+        ViewModelProvider(this).get(QuizViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -244,6 +245,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val fragment = ChooseHero().show(supportFragmentManager, "ChooseHero")
+        textSwitcher.setText(quizViewModel.getQuestionBank()[quizViewModel.currentIndex].textResId)
         return true
     }
 }

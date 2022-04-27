@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders.of
 
 class ChooseHero: DialogFragment () {
 
@@ -37,22 +39,22 @@ class ChooseHero: DialogFragment () {
 
 
         layla.setOnClickListener{
-            quizViewModel.setQuestionBank(quizViewModel.questionBankLayla)
+
             onDestroyView()
         }
 
         zask.setOnClickListener{
-            quizViewModel.setQuestionBank(quizViewModel.questionBankZask)
+
             onDestroyView()
         }
 
         vanvan.setOnClickListener{
-            quizViewModel.setQuestionBank(quizViewModel.questionBankVanVan)
+
             onDestroyView()
         }
 
         valir.setOnClickListener{
-            quizViewModel.setQuestionBank(quizViewModel.questionBankValir)
+
             onDestroyView()
         }
 
