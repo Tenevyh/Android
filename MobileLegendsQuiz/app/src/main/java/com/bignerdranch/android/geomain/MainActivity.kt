@@ -18,7 +18,7 @@ private const val KEY_INDEX = "index"
 private const val Q_INDEX = "index"
 private const val REQUEST_CODE_CHEAT= 0
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SelectedHero {
 
     private lateinit var textSwitcher: TextSwitcher
     private lateinit var trueButton: Button
@@ -245,7 +245,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val fragment = ChooseHero().show(supportFragmentManager, "ChooseHero")
-        textSwitcher.setText(quizViewModel.getQuestionBank()[quizViewModel.currentIndex].textResId)
         return true
+    }
+
+    override fun clickHero(hero: Int) {
+        when (hero){
+            0 -> quizViewModel.setQuestionBank(quizViewModel.questionBankLayla)
+            1 -> quizViewModel.setQuestionBank(quizViewModel.questionBankZask)
+            2 -> quizViewModel.setQuestionBank(quizViewModel.questionBankVanVan)
+            3 -> quizViewModel.setQuestionBank(quizViewModel.questionBankValir)
+        }
+        updateQuestion()
     }
 }

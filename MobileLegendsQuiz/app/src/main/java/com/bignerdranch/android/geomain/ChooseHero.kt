@@ -1,5 +1,7 @@
 package com.bignerdranch.android.geomain
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +21,12 @@ class ChooseHero: DialogFragment () {
     private lateinit var vanvan : Button
     private lateinit var valir : Button
     private lateinit var back : Button
+    private lateinit var mCallBack : SelectedHero
+
+    override fun onAttach(activity: Activity) {
+        super.onAttach(activity)
+        mCallBack = activity as SelectedHero
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,22 +47,22 @@ class ChooseHero: DialogFragment () {
 
 
         layla.setOnClickListener{
-
+            mCallBack.clickHero(0)
             onDestroyView()
         }
 
         zask.setOnClickListener{
-
+            mCallBack.clickHero(1)
             onDestroyView()
         }
 
         vanvan.setOnClickListener{
-
+            mCallBack.clickHero(2)
             onDestroyView()
         }
 
         valir.setOnClickListener{
-
+            mCallBack.clickHero(3)
             onDestroyView()
         }
 
