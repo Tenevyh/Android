@@ -156,6 +156,7 @@ class MainActivity : AppCompatActivity(), SelectedHero {
     }
 
     override fun onStart() {
+        val fragment = ChooseHero().show(supportFragmentManager, "ChooseHero")
         super.onStart()
         Log.d(TAG, "onStart() called")
     }
