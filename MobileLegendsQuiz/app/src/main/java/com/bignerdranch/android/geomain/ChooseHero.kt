@@ -70,4 +70,8 @@ class ChooseHero: DialogFragment () {
             onDestroyView()
         }
     }
+
+    override fun getTheme(): Int {
+        return R.style.Theme_GeoQuiz_Fullscreen
+    }
 }
