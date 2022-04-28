@@ -204,7 +204,7 @@ class MainActivity : AppCompatActivity(), SelectedHero {
         builder.setTitle("Результат!")
             .setMessage(" Верно: ${quizViewModel.correctIndex}\n Неверно: ${quizViewModel.inCorrectIndex}\n" +
                     " Чит: ${quizViewModel.cheatIndex}")
-        if(quizViewModel.questionIndex== quizViewModel.getQuestionBank().size-1){
+        if(quizViewModel.questionIndex == quizViewModel.getQuestionBank().size-1){
             builder.show()
 
         }
@@ -256,6 +256,7 @@ class MainActivity : AppCompatActivity(), SelectedHero {
             2 -> quizViewModel.setQuestionBank(quizViewModel.questionBankVanVan)
             3 -> quizViewModel.setQuestionBank(quizViewModel.questionBankValir)
         }
+        quizViewModel.cleareResult()
         updateQuestion()
     }
 }

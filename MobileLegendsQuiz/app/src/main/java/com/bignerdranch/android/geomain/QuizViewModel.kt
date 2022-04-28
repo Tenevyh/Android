@@ -94,4 +94,13 @@ class QuizViewModel : ViewModel(){
     fun isCheatQuestion(): Boolean{
         return questionBank[currentIndex].cheat
     }
+
+    fun cleareResult(){
+         currentIndex = 0
+         questionIndex = 0
+         correctIndex = 0
+         inCorrectIndex = 0
+         cheatIndex = 0
+         showAnswer = false
+    }
 }
