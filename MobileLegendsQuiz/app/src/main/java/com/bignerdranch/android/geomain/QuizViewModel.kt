@@ -51,7 +51,7 @@ class QuizViewModel : ViewModel(){
     )
 
     var currentIndex = 0
-    var questionIndex = 0
+    var questionIndex = -1
     var correctIndex = 0
     var inCorrectIndex = 0
     var cheatIndex = 0
@@ -97,7 +97,7 @@ class QuizViewModel : ViewModel(){
 
     fun cleareResult(){
          currentIndex = 0
-         questionIndex = 0
+         questionIndex = -1
          correctIndex = 0
          inCorrectIndex = 0
          cheatIndex = 0
