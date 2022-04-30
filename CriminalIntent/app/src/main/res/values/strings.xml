@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Преступления</string>
+    <string name="app_name">Доносы</string>
     <string name="crime_title_hint">Описание.</string>
     <string name="crime_title_label">Описание</string>
     <string name="crime_details_label">Время и дата</string>
@@ -17,8 +17,8 @@
     <string name="crime_report_suspect">Подозреваемый %1$s</string>
     <string name="crime_report_subject">Отчёт о преступлении</string>
     <string name="send_report">Отправить отчёт</string>
-    <string name="crime_photo_button_description">Сфотографировать место преступления</string>
-    <string name="crime_photo_no_image_description">
+    <string name="crime_photo_button_description" translatable="false">Сфотографировать место преступления</string>
+    <string name="crime_photo_no_image_description" translatable="false">
 Фото с места преступления (не установлено).</string>
-    <string name="crime_photo_image_description">Фото с места преступления (установлено)</string>
+    <string name="crime_photo_image_description" translatable="false">Фото с места преступления (установлено)</string>
 </resources>
