@@ -10,6 +10,7 @@ import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 
@@ -250,11 +251,16 @@ class MainActivity : AppCompatActivity(), SelectedHero {
     }
 
     override fun clickHero(hero: Int) {
+        val rootLayout: LinearLayout = findViewById(R.id.heroPic)
         when (hero){
-            0 -> quizViewModel.setQuestionBank(quizViewModel.questionBankLayla)
-            1 -> quizViewModel.setQuestionBank(quizViewModel.questionBankZask)
-            2 -> quizViewModel.setQuestionBank(quizViewModel.questionBankVanVan)
-            3 -> quizViewModel.setQuestionBank(quizViewModel.questionBankValir)
+            0 -> {quizViewModel.setQuestionBank(quizViewModel.questionBankLayla)
+                rootLayout.setBackgroundResource(R.drawable.lela)}
+            1 -> {quizViewModel.setQuestionBank(quizViewModel.questionBankZask)
+                rootLayout.setBackgroundResource(R.drawable.zhask)}
+            2 -> {quizViewModel.setQuestionBank(quizViewModel.questionBankVanVan)
+                rootLayout.setBackgroundResource(R.drawable.vanvan)}
+            3 -> {quizViewModel.setQuestionBank(quizViewModel.questionBankValir)
+                rootLayout.setBackgroundResource(R.drawable.valir)}
         }
         quizViewModel.cleareResult()
         updateQuestion()
