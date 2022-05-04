@@ -102,5 +102,8 @@ class QuizViewModel : ViewModel(){
          inCorrectIndex = 0
          cheatIndex = 0
          showAnswer = false
+        for (question in questionBank){
+            question.completed=false
+        }
     }
 }
