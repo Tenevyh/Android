@@ -6,7 +6,13 @@ import java.util.*
 @Entity
 data class Crime (@PrimaryKey val id: UUID = UUID.randomUUID(),
                   var title: String ="",
-                  var date: Date = Date(),
+                  val date: Date = Date(),
                   var isSolved: Boolean = false,
                   var suspect: String ="",
                   var phone: String = "")
+                  var police: Boolean = false, var suspect: String ="") {
+
+    val photoFileName
+        get() = "IMG_$id.jpg"
+}
+
