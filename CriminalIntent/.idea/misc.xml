@@ -5,11 +5,13 @@
       <map>
         <entry key="..\:/Users/Kir/Documents/GitHub/Android/CriminalIntent/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
         <entry key="..\:/Users/Kir/Documents/GitHub/Android/CriminalIntent/app/src/main/res/layout/fragment_crime.xml" value="0.358695652173913" />
-        <entry key="..\:/Users/Kir/Documents/GitHub/Android/CriminalIntent/app/src/main/res/layout/fragment_crime_list.xml" value="0.33" />
+        <entry key="..\:/Users/Kir/Documents/GitHub/Android/CriminalIntent/app/src/main/res/layout/fragment_crime_list.xml" value="0.2015625" />
+        <entry key="..\:/Users/Kir/Documents/GitHub/Android/CriminalIntent/app/src/main/res/layout/full_screen.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/Kir/Documents/GitHub/Android/CriminalIntent/app/src/main/res/layout/list_item_crime.xml" value="0.5" />
         <entry key="..\:/Users/Kir/Documents/GitHub/Android/CriminalIntent/app/src/main/res/layout/list_item_crime_police.xml" value="0.33" />
         <entry key="..\:/Users/Kir/Documents/GitHub/Android/CriminalIntent/app/src/main/res/layout/list_non_item_crime.xml" value="0.38333333333333336" />
         <entry key="..\:/Users/Kir/Documents/GitHub/Android/CriminalIntent/app/src/main/res/menu/fragment_crime_list.xml" value="0.38333333333333336" />
+        <entry key="..\:/Users/Kir/Documents/GitHub/Android/CriminalIntent/app/src/main/res/xml/files.xml" value="0.38697916666666665" />
       </map>
     </option>
   </component>

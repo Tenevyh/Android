@@ -1,9 +1,24 @@
 <resources>
-    <string name="app_name">CriminalIntent</string>
-    <string name="crime_title_hint">Enter a title for the crime.</string>
-    <string name="crime_title_label">Title</string>
-    <string name="crime_details_label">Details</string>
-    <string name="crime_solved_label">Solved</string>
-    <string name="call_police">To call the police!</string>
-    <string name="new_crime">New Crime</string>
+    <string name="app_name">Доносы</string>
+    <string name="crime_title_hint">Описание.</string>
+    <string name="crime_title_label">Описание</string>
+    <string name="crime_details_label">Время и дата</string>
+    <string name="crime_solved_label">Решено</string>
+    <string name="call_police">Позвонить в полицию!</string>
+    <string name="list_empty">Список пуст</string>
+    <string name="new_crime">Новое преступление</string>
+    <string name="crime_suspect_text">Подозреваемый</string>
+    <string name="crime_report_text">Поделиться</string>
+    <string name="crime_report">%1$s!
+    Преступление было раскрыто на %2$s. %3$s, и %4$s</string>
+    <string name="crime_report_solved">Дело раскрыто</string>
+    <string name="crime_report_unsolved">Дело не раскрыто</string>
+    <string name="crime_report_no_suspect">Нет подозреваемого</string>
+    <string name="crime_report_suspect">Подозреваемый %1$s</string>
+    <string name="crime_report_subject">Отчёт о преступлении</string>
+    <string name="send_report">Отправить отчёт</string>
+    <string name="crime_photo_button_description" translatable="false">Сфотографировать место преступления</string>
+    <string name="crime_photo_no_image_description" translatable="false">
+Фото с места преступления (не установлено).</string>
+    <string name="crime_photo_image_description" translatable="false">Фото с места преступления (установлено)</string>
 </resources>
