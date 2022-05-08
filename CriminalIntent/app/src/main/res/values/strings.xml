@@ -17,6 +17,7 @@
     <string name="crime_report_suspect">Подозреваемый %1$s</string>
     <string name="crime_report_subject">Отчёт о преступлении</string>
     <string name="send_report">Отправить отчёт</string>
+    <string name="call_suspect">Позвонить подозреваемому</string>
     <string name="crime_photo_button_description" translatable="false">Сфотографировать место преступления</string>
     <string name="crime_photo_no_image_description" translatable="false">
 Фото с места преступления (не установлено).</string>

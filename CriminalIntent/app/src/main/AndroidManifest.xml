@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bignerdranch.android.criminalintent">
-
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-feature android:name="android.hardware.camera"
         android:required="false"/>
-
     <application
+
         android:name=".CriminalIntentApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -33,5 +33,4 @@
 
         </provider>
     </application>
-
 </manifest>
