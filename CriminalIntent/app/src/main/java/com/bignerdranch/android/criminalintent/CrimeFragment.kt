@@ -32,11 +32,13 @@ private const val TAG = "CrimeFragment"
 private const val ARG_CRIME_ID = "crime_id"
 private const val DIALOG_DATE = "DialogDate"
 private const val REQUEST_DATE = 0
+private const val DIALOG_TIME = "DialogTime"
+private const val REQUEST_TIME = 1
 private const val DATE_FORMAT = "EEE, MMM, dd"
 private const val REQUEST_CONTACT = 1
 private const val REQUEST_PHOTO = 2
 
-class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
+class CrimeFragment: Fragment(), DatePickerFragment.Callbacks, TimePickerFragment.Callbacks {
 
     private lateinit var treeObserver: ViewTreeObserver
     private var viewWidth = 0
@@ -45,8 +47,11 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
     private lateinit var crime: Crime
     private lateinit var titleField: EditText
     private lateinit var dateButton: Button
+    private lateinit var timeButton: Button
     private lateinit var solvedCheckBox: CheckBox
     private lateinit var format1: SimpleDateFormat
+
+    private lateinit var format2: SimpleDateFormat
     private lateinit var reportButton: Button
     private lateinit var suspectButton: Button
     private lateinit var photoButton: ImageButton
@@ -70,6 +75,7 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
                              savedInstanceState: Bundle?): View {
         val view = inflater.inflate(R.layout.fragment_crime, container, false)
         titleField = view.findViewById(R.id.crime_title) as EditText
+        timeButton = view.findViewById(R.id.crime_time)
         dateButton = view.findViewById(R.id.crime_date) as Button
         solvedCheckBox = view.findViewById(R.id.crime_solved) as CheckBox
         reportButton = view.findViewById(R.id.crime_report) as Button
@@ -127,10 +133,17 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
             setOnCheckedChangeListener{_, isCheked -> crime.isSolved = isCheked}
         }
 
-        dateButton.setOnClickListener{
-            DatePickerFragment.newInstance(crime.date).apply {
-                setTargetFragment(this@CrimeFragment, REQUEST_DATE)
-                show(this@CrimeFragment.parentFragmentManager, DIALOG_DATE)
+        dateButton.setOnClickListener {
+                DatePickerFragment.newInstance(crime.date).apply {
+                    setTargetFragment(this@CrimeFragment, REQUEST_DATE)
+                    show(this@CrimeFragment.parentFragmentManager, DIALOG_DATE)
+                }
+        }
+
+        timeButton.setOnClickListener {
+            TimePickerFragment.newInstance(crime.date).apply {
+                setTargetFragment(this@CrimeFragment, REQUEST_TIME)
+                show(this@CrimeFragment.parentFragmentManager, DIALOG_TIME)
             }
         }
 
@@ -200,7 +213,10 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
 
     private fun updateUI(){
         titleField.setText(crime.title)
-        dateButton.text = format1.format(crime.date).toString()
+        format1 = SimpleDateFormat("dd.MM.y")
+        dateButton.text = format1.format(crime.date)
+        format2 = SimpleDateFormat("HH:mm")
+        timeButton.text = format2.format(crime.date)
         solvedCheckBox.apply{
             isChecked = crime.isSolved
             jumpDrawablesToCurrentState()
@@ -275,6 +291,11 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks {
     }
 
     override fun onDateSelected(date: Date){
+        crime.date = date
+        updateUI()
+    }
+
+    override fun onTimeSelected(date: Date){
         crime.date = date
         updateUI()
     }

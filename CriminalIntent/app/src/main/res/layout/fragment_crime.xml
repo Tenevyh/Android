@@ -78,7 +78,13 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="109dp"
-        tools:text="Wed Nov 13 11:56 EST 2018" />
+        tools:text="Date" />
+
+    <Button
+        android:id="@+id/crime_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Time" />
 
     <CheckBox
         android:id="@+id/crime_solved"
