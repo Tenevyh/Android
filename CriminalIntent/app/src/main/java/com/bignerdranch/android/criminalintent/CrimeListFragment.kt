@@ -5,9 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -50,6 +48,11 @@ class CrimeListFragment: Fragment(){
         callbacks = context as Callbacks?
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -81,6 +84,22 @@ class CrimeListFragment: Fragment(){
         callbacks = null
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.fragment_crime_list, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.new_crime -> {
+                val crime = Crime()
+                crimeListViewModel.addCrime(crime)
+                callbacks?.onCrimeSelected(crime.id)
+                true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
 
     private fun updateUI(crimes: List<Crime>){
         adapter = CrimeAdapter(crimes)
@@ -119,13 +138,21 @@ class CrimeListFragment: Fragment(){
         ListAdapter<Crime, CrimeHolder>(DiffCallback) {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CrimeHolder {
-            val view: View = layoutInflater.inflate(R.layout.list_item_crime, parent, false)
+            lateinit var view: View
+            when (viewType) {
+                 noRequiresPolice -> view = layoutInflater.inflate(R.layout.list_item_crime, parent, false)
+                 requiresPolice -> view = layoutInflater.inflate(R.layout.list_item_crime_police, parent, false)
+            }
             return CrimeHolder(view)
         }
 
         override fun onBindViewHolder(holder: CrimeHolder, position: Int) {
             val crime = crimes[position]
             holder.bind(crime)
+        }
+
+        override fun getItemViewType(position: Int): Int {
+            return if (!crimes[position].police) 1 else 2
         }
 
         override fun getItemCount() = crimes.size
