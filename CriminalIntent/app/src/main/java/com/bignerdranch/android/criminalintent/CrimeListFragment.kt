@@ -157,7 +157,6 @@ class CrimeListFragment: Fragment(){
             lateinit var view: View
             when (viewType) {
                  noRequiresPolice -> view = layoutInflater.inflate(R.layout.list_item_crime, parent, false)
-                 requiresPolice -> view = layoutInflater.inflate(R.layout.list_item_crime_police, parent, false)
             }
             return CrimeHolder(view)
         }
@@ -165,10 +164,6 @@ class CrimeListFragment: Fragment(){
         override fun onBindViewHolder(holder: CrimeHolder, position: Int) {
             val crime = crimes[position]
             holder.bind(crime)
-        }
-
-        override fun getItemViewType(position: Int): Int {
-            return if (!crimes[position].police) 1 else 2
         }
 
         override fun getItemCount() = crimes.size

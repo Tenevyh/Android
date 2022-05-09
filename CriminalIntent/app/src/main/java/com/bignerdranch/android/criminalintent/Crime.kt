@@ -9,7 +9,6 @@ data class Crime (@PrimaryKey val id: UUID = UUID.randomUUID(),
                   var date: Date = Date(),
                   var isSolved: Boolean = false,
                   var suspect: String ="",
-                  var police: Boolean = false,
                   var phone: String = "") {
 
     val photoFileName
