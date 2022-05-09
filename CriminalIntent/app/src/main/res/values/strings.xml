@@ -10,7 +10,7 @@
     <string name="crime_suspect_text">Подозреваемый</string>
     <string name="crime_report_text">Поделиться</string>
     <string name="crime_report">%1$s!
-    Преступление было раскрыто на %2$s. %3$s, и %4$s</string>
+    Преступление было создано %2$s. %3$s, и %4$s</string>
     <string name="crime_report_solved">Дело раскрыто</string>
     <string name="crime_report_unsolved">Дело не раскрыто</string>
     <string name="crime_report_no_suspect">Нет подозреваемого</string>

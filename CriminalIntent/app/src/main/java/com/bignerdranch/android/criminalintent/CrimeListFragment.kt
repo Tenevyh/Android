@@ -154,10 +154,7 @@ class CrimeListFragment: Fragment(){
         ListAdapter<Crime, CrimeHolder>(DiffCallback) {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CrimeHolder {
-            lateinit var view: View
-            when (viewType) {
-                 noRequiresPolice -> view = layoutInflater.inflate(R.layout.list_item_crime, parent, false)
-            }
+            var view = layoutInflater.inflate(R.layout.list_item_crime, parent, false)
             return CrimeHolder(view)
         }
 
