@@ -170,11 +170,11 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks, TimePickerFragmen
             setOnClickListener{
                 startActivityForResult(pickContactIntent, REQUEST_CONTACT)
             }
-                /* val packageManager: PackageManager = requireActivity().packageManager
+            val packageManager: PackageManager = requireActivity().packageManager
             val resolvedActivity: ResolveInfo? = packageManager.resolveActivity(pickContactIntent,
             PackageManager.MATCH_DEFAULT_ONLY)
-            /*if (resolvedActivity == null){   // не работает должным образом, кнопка постоянно выключена, даже при наличии необходимых приложений
-              //  isEnabled = false
+           /*if (resolvedActivity == null){   // не работает должным образом, кнопка постоянно выключена, даже при наличии необходимых приложений
+            isEnabled = false
               }
             */
         }
@@ -188,18 +188,7 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks, TimePickerFragmen
            /* if(resolvedActivity == null) {  // не работает должным образом, кнопка постоянно выключена, даже при наличии необходимых приложений
                 isEnabled = false
             }
-        }
-
-        callSuspect.setOnClickListener {
-            val callContactIntent =
-                Intent(Intent.ACTION_DIAL).apply {
-
-                    val phone = crime.phone
-                    data = Uri.parse("tel:$phone")
-
-                }
-            // это намерение вызовет номер телефона, указанный в Uri.parse("tel:$phone")
-            startActivity(callContactIntent)
+            */
 
             setOnClickListener {
                 captureImage.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
@@ -212,14 +201,28 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks, TimePickerFragmen
                     requireActivity().grantUriPermission(cameraActivity.activityInfo.packageName,
                         photoUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
                 }
-
                 startActivityForResult(captureImage, REQUEST_PHOTO)
             }
         }
 
+        callSuspect.setOnClickListener {
+            val callContactIntent =
+                Intent(Intent.ACTION_DIAL).apply {
+
+                    val phone = crime.phone
+                    data = Uri.parse("tel:$phone")
+
+                }
+            // это намерение вызовет номер телефона, указанный в Uri.parse("tel:$phone")
+            startActivity(callContactIntent)
+        }
+
         photoView.setOnClickListener {
+            if (photoFile.length()<1) {
+            } else{
             val fragment = FullScreen(photoFile)
             fragment.show(childFragmentManager, "PhotoFragmentDialog")
+        }
         }
     }
 
