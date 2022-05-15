@@ -2,6 +2,9 @@ package com.bignerdranch.android.beatbox
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
@@ -64,5 +67,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun getItemCount() = sounds.size
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.sound_level, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val fragment = SoundLevel().show(supportFragmentManager, "SoundLevel")
+        return true
     }
 }

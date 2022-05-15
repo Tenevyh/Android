@@ -52,7 +52,6 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks, TimePickerFragmen
     private lateinit var timeButton: Button
     private lateinit var solvedCheckBox: CheckBox
     private lateinit var format1: SimpleDateFormat
-
     private lateinit var format2: SimpleDateFormat
     private lateinit var reportButton: Button
     private lateinit var suspectButton: Button

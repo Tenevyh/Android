@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BeatBox</string>
+    <string name="sound_level">Sound level</string>
 </resources>
