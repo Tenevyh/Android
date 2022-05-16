@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val fragment = SoundLevel().show(supportFragmentManager, "SoundLevel")
+        val fragment = SoundSpeed().show(supportFragmentManager, "SoundSpeed")
         return true
     }
 }

@@ -8,7 +8,7 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 
-class SoundLevel: DialogFragment(), SeekBar.OnSeekBarChangeListener{
+class SoundSpeed: DialogFragment(), SeekBar.OnSeekBarChangeListener{
 
     private lateinit var level: SeekBar
     private lateinit var levelText: TextView
@@ -26,7 +26,6 @@ class SoundLevel: DialogFragment(), SeekBar.OnSeekBarChangeListener{
         level = view.findViewById(R.id.seek)
         level.setOnSeekBarChangeListener(this)
         levelText = view.findViewById(R.id.value)
-        levelText.setText(0)
         return view
     }
 
@@ -39,14 +38,16 @@ class SoundLevel: DialogFragment(), SeekBar.OnSeekBarChangeListener{
     }
 
     override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onStartTrackingTouch(p0: SeekBar?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onStopTrackingTouch(p0: SeekBar?) {
-        levelText.setText(level.progress)
+
     }
+
+
 }

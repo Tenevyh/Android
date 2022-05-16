@@ -213,7 +213,7 @@ class MainActivity : AppCompatActivity(), SelectedHero {
 
     private fun checkAnswer(userAnswer: Boolean) {
         val correctAnswer = quizViewModel.currentQuestionAnswer
-        if (quizViewModel.isCheatQuestion()==false) {
+        if (!quizViewModel.isCheatQuestion()) {
             if (userAnswer == correctAnswer) {
                 quizViewModel.correctIndex++
             } else {
@@ -230,13 +230,13 @@ class MainActivity : AppCompatActivity(), SelectedHero {
     }
 
     private fun onButton(){
-            trueButton.setEnabled(true)
-            falseButton.setEnabled(true)
+        trueButton.isEnabled = true
+        falseButton.isEnabled = true
     }
 
     private fun offButton(){
-            falseButton.setEnabled(false)
-            trueButton.setEnabled(false)
+        falseButton.isEnabled = false
+        trueButton.isEnabled = false
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
