@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.beatbox.databinding.ActivityMainBinding
 import com.bignerdranch.android.beatbox.databinding.ListItemSoundBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), EditSound {
 
     private lateinit var beatBox: BeatBox
 
@@ -76,7 +76,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        beatBox.speed = 1.0f
         val fragment = SoundSpeed().show(supportFragmentManager, "SoundSpeed")
         return true
+    }
+
+    override fun editSpeed(speed: Float) {
+        beatBox.speed = speed
     }
 }

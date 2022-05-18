@@ -1,5 +1,6 @@
 package com.bignerdranch.android.beatbox
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,12 @@ class SoundSpeed: DialogFragment(), SeekBar.OnSeekBarChangeListener{
 
     private lateinit var level: SeekBar
     private lateinit var levelText: TextView
+    private lateinit var editSound: EditSound
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        editSound = activity as EditSound
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +45,10 @@ class SoundSpeed: DialogFragment(), SeekBar.OnSeekBarChangeListener{
     }
 
     override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-
+        levelText.text = "Speed : $p1"
+        editSound.editSpeed(p1.toFloat())
     }
+
 
     override fun onStartTrackingTouch(p0: SeekBar?) {
 
@@ -48,6 +57,4 @@ class SoundSpeed: DialogFragment(), SeekBar.OnSeekBarChangeListener{
     override fun onStopTrackingTouch(p0: SeekBar?) {
 
     }
-
-
 }
