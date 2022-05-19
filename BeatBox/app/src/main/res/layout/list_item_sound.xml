@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.bignerdranch.android.beatbox.SoundViewModel" />
+            type="com.project.android.beatbox.SoundViewModel" />
     </data>
 
     <Button

@@ -6,7 +6,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:background="@drawable/lelach"
-    tools:context="com.bignerdranch.android.geomain.CheatActivity">
+    tools:context="com.bignerdranch.android.geomain.com.project.android.geomain.CheatActivity">
 
     <TextView
         android:layout_width="wrap_content"
