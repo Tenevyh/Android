@@ -7,26 +7,29 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.project.android.beatbox.R
 import com.project.android.beatbox.databinding.ActivityMainBinding
 import com.project.android.beatbox.databinding.ListItemSoundBinding
 
+
 class MainActivity : AppCompatActivity(), EditSound {
 
-    private lateinit var beatBox: BeatBox
+    private lateinit var beatBoxViewModel: BeatBoxViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        beatBox = BeatBox(assets)
+        val beatBoxFactoryModel = BeatBoxFactoryModel(assets)
+        beatBoxViewModel = ViewModelProvider(this, beatBoxFactoryModel).get(BeatBoxViewModel::class.java)
 
         val binding : ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.recyclerView.apply {
             layoutManager = GridLayoutManager(context, 3)
-            adapter = SoundAdapter(beatBox.sounds)
+            adapter = SoundAdapter(beatBoxViewModel.beatBox.sounds)
         }
     }
 
@@ -34,7 +37,7 @@ class MainActivity : AppCompatActivity(), EditSound {
         RecyclerView.ViewHolder(binding.root) {
 
             init {
-                binding.viewModel = SoundViewModel(beatBox)
+                binding.viewModel = SoundViewModel(beatBoxViewModel.beatBox)
             }
 
         fun bind(sound: Sound) {
@@ -47,7 +50,6 @@ class MainActivity : AppCompatActivity(), EditSound {
 
     override fun onDestroy() {
         super.onDestroy()
-        beatBox.release()
     }
 
     private inner class SoundAdapter(private val sounds: List<Sound>): RecyclerView.Adapter<SoundHolder>() {
@@ -77,12 +79,12 @@ class MainActivity : AppCompatActivity(), EditSound {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        beatBox.speed = 1.0f
+        beatBoxViewModel.beatBox.speed = 1.0f
         val fragment = SoundSpeed().show(supportFragmentManager, "SoundSpeed")
         return true
     }
 
     override fun editSpeed(speed: Float) {
-        beatBox.speed = speed
+        beatBoxViewModel.beatBox.speed = speed
     }
 }

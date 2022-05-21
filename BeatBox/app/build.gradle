@@ -8,7 +8,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.bignerdranch.android.beatbox"
+        applicationId "com.project.android.beatbox"
         minSdk 22
         targetSdk 32
         versionCode 1
