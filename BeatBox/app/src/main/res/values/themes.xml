@@ -12,11 +12,9 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="buttonStyle">@style/BeatBoxButton</item>
     </style>
-    <style name="BeatBoxButton">
-        <item name="android:background">@color/gray</item>
-    </style>
-    <style name="BeatBoxButton.Strong">
-        <item name="android:textStyle">bold</item>
+    <style name="BeatBoxButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_beat_box_normal</item>
     </style>
 </resources>
