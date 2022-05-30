@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Kir/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_gallery_item.xml" value="0.16802536231884058" />
         <entry key="..\:/Users/Kir/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.18819655521783182" />
-        <entry key="..\:/Users/Kir/Documents/GitHub/Android/NerdLauncher/app/src/main/res/layout/activity_nerd_launcher.xml" value="0.17958459979736577" />
+        <entry key="..\:/Users/Kir/Documents/GitHub/Android/NerdLauncher/app/src/main/res/layout/activity_nerd_launcher.xml" value="0.5" />
+        <entry key="..\:/Users/Kir/Documents/GitHub/Android/NerdLauncher/app/src/main/res/layout/launch_item.xml" value="0.1" />
       </map>
     </option>
   </component>

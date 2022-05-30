@@ -8,9 +8,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.project.android.nerdlauncher.databinding.LaunchItemBinding
 
 private const val TAG = "NerdLauncherActivity"
 
@@ -44,20 +46,21 @@ class NerdLauncherActivity : AppCompatActivity() {
         recyclerView.adapter = ActivityAdapter(activities)
     }
 
-    private class ActivityHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+    private class ActivityHolder(val binding: LaunchItemBinding ) : RecyclerView.ViewHolder(binding.root),
         View.OnClickListener {
-        private val nameTextView = itemView as TextView
         private lateinit var resolveInfo: ResolveInfo
 
         init{
-            nameTextView.setOnClickListener(this)
+            itemView.setOnClickListener(this)
         }
 
         fun bindActivity(resolveInfo: ResolveInfo) {
             this.resolveInfo = resolveInfo
             val packageManager = itemView.context.packageManager
             val appName = resolveInfo.loadLabel(packageManager).toString()
-            nameTextView.text = appName
+            val appIcon = resolveInfo.loadIcon(packageManager)
+            binding.text1.text = appName
+            binding.imageView.setImageDrawable(appIcon)
         }
 
         override fun onClick(view: View) {
@@ -74,12 +77,9 @@ class NerdLauncherActivity : AppCompatActivity() {
 
     private class ActivityAdapter(val activities: List<ResolveInfo>) :
         RecyclerView.Adapter<ActivityHolder>() {
-
         override fun onCreateViewHolder(container: ViewGroup, viewType: Int): ActivityHolder{
-            val layoutInflater = LayoutInflater.from(container.context)
-            val view = layoutInflater.inflate(android.R.layout.simple_list_item_1,
-                container, false)
-            return ActivityHolder(view)
+            val binding = LaunchItemBinding.inflate(LayoutInflater.from(container.context), container, false)
+            return ActivityHolder(binding)
         }
 
         override fun onBindViewHolder(holder: ActivityHolder, position: Int) {
