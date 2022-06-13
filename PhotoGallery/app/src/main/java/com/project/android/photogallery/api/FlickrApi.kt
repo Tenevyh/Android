@@ -1,5 +1,6 @@
 package com.project.android.photogallery.api
 
+import com.project.android.photogallery.PhotoDeserializer
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -19,6 +20,6 @@ interface FlickrApi {
 
     )
 
-   fun fetchPhotos(): Call<FlickrResponse>
+   fun fetchPhotos(): Call<PhotoDeserializer>
 
 }

@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.project.android.photogallery.api.FlickrApi
 import com.project.android.photogallery.api.FlickrResponse
 import com.project.android.photogallery.api.PhotoResponse
@@ -18,24 +19,30 @@ class FlickrFetchr {
     private val flickrApi: FlickrApi
 
     init {
+        val gsonPhotoDeserializer = GsonBuilder()
+            .registerTypeAdapter(PhotoResponse::class.java, PhotoDeserializer())
+            .create()
+
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("https://api.flickr.com/")
-            .addConverterFactory(GsonConverterFactory.create()).build()
+            .addConverterFactory(GsonConverterFactory.create(gsonPhotoDeserializer)).build()
 
         flickrApi = retrofit.create(FlickrApi::class.java)
     }
 
-    fun fetchPhotos(): MutableLiveData<List<GalleryItem>> {
+    fun fetchPhotos(): LiveData<List<GalleryItem>>{
         val responseLiveData: MutableLiveData<List<GalleryItem>> = MutableLiveData()
-        val flickrHomePageRequest: Call<FlickrResponse> = flickrApi.fetchPhotos()
-        flickrHomePageRequest.enqueue(object : Callback<FlickrResponse>{
-            override fun onFailure(call: Call<FlickrResponse>, t: Throwable) {
+        val flickrRequest: Call<PhotoDeserializer> = flickrApi.fetchPhotos()
+
+
+        flickrRequest.enqueue(object : Callback<PhotoDeserializer> {
+            override fun onFailure(call: Call<PhotoDeserializer>, t: Throwable){
                 Log.e(TAG, "Failed to fetch photos", t)
             }
 
-            override fun onResponse(call: Call<FlickrResponse>, response: Response<FlickrResponse>) {
+            override fun onResponse(call: Call<PhotoDeserializer>, response: Response<PhotoDeserializer>) {
                 Log.d(TAG, "Response received: ${response.body()}")
-                val flickrResponse: FlickrResponse? = response.body()
+                val flickrResponse: PhotoDeserializer? = response.body()
                 val photoResponse: PhotoResponse? = flickrResponse?.photos
                 var galleryItems: List<GalleryItem> = photoResponse?.galleryItems?: mutableListOf()
                 galleryItems = galleryItems.filterNot{
