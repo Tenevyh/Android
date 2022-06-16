@@ -1,6 +1,9 @@
 package com.project.android.photogallery
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.util.Log
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
@@ -8,6 +11,7 @@ import com.google.gson.GsonBuilder
 import com.project.android.photogallery.api.FlickrApi
 import com.project.android.photogallery.api.FlickrResponse
 import com.project.android.photogallery.api.PhotoResponse
+import okhttp3.ResponseBody
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -53,4 +57,12 @@ class FlickrFetchr {
         })
         return responseLiveData
         }
+
+    @WorkerThread
+    fun fetchPhoto(url: String): Bitmap? {
+        val response: Response<ResponseBody> = flickrApi.fetchUrlBytes(url).execute()
+        val bitmap = response.body()?.byteStream()?.use(BitmapFactory::decodeStream)
+        Log.i(TAG, "Decoded bitmap=$bitmap from Response=$response")
+        return bitmap
+    }
 }
