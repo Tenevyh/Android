@@ -1,6 +1,7 @@
 package com.project.android.photogallery
 
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
 import android.os.Handler
 import android.os.HandlerThread
 import android.os.Message
@@ -14,7 +15,10 @@ import java.util.concurrent.ConcurrentHashMap
 private const val TAG = "ThumbnailDownloader"
 private const val MESSAGE_DOWNLOAD = 0
 
-class ThumbnailDownloader<in T>: HandlerThread(TAG), LifecycleObserver {
+class ThumbnailDownloader<in T>(private val responseHandler: Handler,
+                                private val onThumbnailDownloader: (T, Bitmap) -> Unit
+): HandlerThread(TAG), LifecycleObserver {
+
     private var hasQuit = false
     private lateinit var requestHandler: Handler
     private val requestMap = ConcurrentHashMap<T, String>()
@@ -39,16 +43,28 @@ class ThumbnailDownloader<in T>: HandlerThread(TAG), LifecycleObserver {
         return super.quit()
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun setup(){
-        Log.i(TAG, "Starting background thread")
+    val fragmentLifecycleObserver: LifecycleObserver = object : LifecycleObserver {
+        @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+        fun setup() {
+            Log.i(TAG, "Starting background thread")
+            start()
+            looper
+        }
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        fun tearDown() {
+            Log.i(TAG, "Destroying background thread")
+            quit()
+        }
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    fun tearDown() {
-        Log.i(TAG, "Destroying background thread")
-        start()
-        looper
+    val viewLifecycleObserver: LifecycleObserver = object : LifecycleObserver {
+        @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        fun clearQueue(){
+            Log.i(TAG, "Clearing all request from queue")
+            requestHandler.removeMessages(MESSAGE_DOWNLOAD)
+            requestMap.clear()
+        }
     }
 
     fun queueThumbnail(target: T, url: String) {
@@ -60,5 +76,14 @@ class ThumbnailDownloader<in T>: HandlerThread(TAG), LifecycleObserver {
     private fun handleRequest(target: T) {
         val url = requestMap[target]?: return
         val bitmap = flickFetcher.fetchPhoto(url)?: return
+
+        responseHandler.post(Runnable {
+            if (requestMap[target] != url || hasQuit) {
+                return@Runnable
+            }
+
+            requestMap.remove(target)
+            onThumbnailDownloader(target, bitmap)
+        })
     }
 }
