@@ -10,8 +10,10 @@ class PhotoGalleryActivity : AppCompatActivity() {
 
         val isFragmentContainerEmpty = savedInstanceState == null
         if (isFragmentContainerEmpty){
-            supportFragmentManager.beginTransaction().add(R.id.fragmentContainer,
-                PhotoGalleryFragment.newInstance()).commit()
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.fragmentContainer, PhotoGalleryFragment.newInstance())
+                .commit()
         }
     }
 }
