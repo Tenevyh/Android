@@ -3,7 +3,7 @@ package com.project.android.photogallery
 import com.google.gson.annotations.SerializedName
 
 data class GalleryItem(
-    val title: String = "",
-    val id: String = "",
-    @SerializedName("url_s")val url: String = ""
+    var title: String = "",
+    var id: String = "",
+    @SerializedName("url_s") var url: String = ""
 )
