@@ -1,14 +1,19 @@
 package com.tenevyh.android.photogallery
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.tenevyh.android.photogallery.FlickrApi.FlickrApi
 import com.tenevyh.android.photogallery.databinding.FragmentPhotoGalleryBinding
+import kotlinx.coroutines.launch
 import retrofit2.Retrofit
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.create
 
 class PhotoGalleryFragment: Fragment() {
@@ -33,9 +38,15 @@ class PhotoGalleryFragment: Fragment() {
 
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("http://www.flickr.com/")
+            .addConverterFactory(ScalarsConverterFactory.create())
             .build()
 
         val flickrApi: FlickrApi = retrofit.create<FlickrApi>()
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            val response = flickrApi.fetchContents()
+            Log.d(TAG, "Response received: $response")
+        }
     }
 
     override fun onDestroyView() {
