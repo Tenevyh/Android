@@ -17,7 +17,7 @@ class PhotoGalleryViewModel: ViewModel() {
 
     private val _galleryItems: MutableStateFlow<List<GalleryItem>> =
         MutableStateFlow(emptyList())
-    private val galleryItem: StateFlow<List<GalleryItem>>
+    val galleryItems: StateFlow<List<GalleryItem>>
     get() = _galleryItems.asStateFlow()
 
     init {
