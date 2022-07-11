@@ -14,7 +14,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.tenevyh.android.photogallery.databinding.FragmentPhotoGalleryBinding
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 
 class PhotoGalleryFragment: Fragment() {
