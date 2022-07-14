@@ -10,7 +10,9 @@ import com.tenevyh.android.photogallery.databinding.ListItemGalleryBinding
 class PhotoViewHolder(private val binding: ListItemGalleryBinding)
     : RecyclerView.ViewHolder(binding.root){
     fun bind(galleryItem: GalleryItem) = with(binding){
-        itemImageView.load(galleryItem.url)
+        itemImageView.load(galleryItem.url){
+            placeholder(R.drawable.mikki)
+        }
     }
 }
 
