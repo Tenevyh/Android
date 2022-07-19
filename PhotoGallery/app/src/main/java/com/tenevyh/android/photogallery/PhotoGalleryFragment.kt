@@ -4,7 +4,7 @@ import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -64,8 +64,8 @@ class PhotoGalleryFragment: Fragment() {
 
         searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                Log.d(TAG, "QueryTextSumbit: $query")
-                photoGalleryViewModel.setQuery(query?:"")
+                Log.d(TAG, "QueryTextSubmit: $query")
+                photoGalleryViewModel.setQuery(query ?: "")
                 return true
             }
 
@@ -74,5 +74,15 @@ class PhotoGalleryFragment: Fragment() {
                 return false
             }
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_item_search -> {
+                photoGalleryViewModel.setQuery("")
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
