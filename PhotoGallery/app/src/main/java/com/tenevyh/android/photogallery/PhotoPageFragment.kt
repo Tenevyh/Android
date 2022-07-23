@@ -20,8 +20,9 @@ class PhotoPageFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentPhotoPageBinding.inflate(inflater,
-            container, 
+        val binding = FragmentPhotoPageBinding.inflate(
+            inflater,
+            container,
             false
         )
 
