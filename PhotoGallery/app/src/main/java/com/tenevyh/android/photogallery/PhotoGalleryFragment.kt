@@ -97,7 +97,7 @@ class PhotoGalleryFragment: Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.menu_item_search -> {
+            R.id.menu_item_clear -> {
                 photoGalleryViewModel.setQuery("")
                 true
             }

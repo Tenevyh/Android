@@ -39,6 +39,7 @@ class PollWorker(
                 } else {
                     Log.i(TAG, "Got a new result: $newResultId")
                     preferencesRepository.setLastResultId(newResultId)
+                    notifyUser()
                 }
             }
             Result.success()
