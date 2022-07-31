@@ -7,20 +7,19 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import com.tenevyh.android.codapizza.model.Topping
+import com.tenevyh.android.codapizza.model.ToppingPlacement
+import com.tenevyh.android.codapizza.ui.ToppingCell
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Row {
-                Checkbox(checked = true,
-                    onCheckedChange = {/*TODO */ })
-                Column {
-                    Text(text = "Pineapple")
-                    Text(text = "Whole pizza")
-                }
-            }
+            ToppingCell(topping = Topping.Pepperoni,
+            placement = ToppingPlacement.Left,
+            onClickListener = {})
         }
     }
 }
