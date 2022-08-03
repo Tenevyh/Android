@@ -9,7 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.intl.Locale
@@ -20,9 +20,6 @@ import com.tenevyh.android.codapizza.R
 import com.tenevyh.android.codapizza.model.Pizza
 import com.tenevyh.android.codapizza.model.Topping
 import com.tenevyh.android.codapizza.model.ToppingPlacement
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 
 @Preview
 @Composable
@@ -37,10 +34,9 @@ fun PizzaBuilderScreen(modifier: Modifier = Modifier){
     }
 }
 
-private var pizza by mutableStateOf(Pizza())
-
 @Composable
 private fun ToppingsList(modifier: Modifier = Modifier){
+    var pizza by remember { mutableStateOf(Pizza())}
     LazyColumn(modifier = modifier){
         items(Topping.values()) { topping ->
             ToppingCell(topping = topping,
