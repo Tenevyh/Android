@@ -1,5 +1,6 @@
 package com.tenevyh.android.codapizza.ui
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,8 +17,12 @@ import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tenevyh.android.codapizza.R
+import com.tenevyh.android.codapizza.model.Pizza
 import com.tenevyh.android.codapizza.model.Topping
 import com.tenevyh.android.codapizza.model.ToppingPlacement
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 
 @Preview
 @Composable
@@ -32,13 +37,23 @@ fun PizzaBuilderScreen(modifier: Modifier = Modifier){
     }
 }
 
+private var pizza by mutableStateOf(Pizza())
+
 @Composable
 private fun ToppingsList(modifier: Modifier = Modifier){
     LazyColumn(modifier = modifier){
         items(Topping.values()) { topping ->
             ToppingCell(topping = topping,
-                placement = ToppingPlacement.Left,
-                onClickTopping = {//TODO
+                placement = pizza.toppings[topping],
+                onClickTopping = {val isOnPizza = pizza.toppings[topping] != null
+                    pizza = pizza.withTopping(
+                        topping = topping,
+                        placement = if (isOnPizza) {
+                            null
+                        } else {
+                            ToppingPlacement.All
+                        }
+                    )
                 }
             )
         }

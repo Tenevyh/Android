@@ -40,7 +40,7 @@ fun ToppingCell(topping: Topping, placement: ToppingPlacement?, modifier: Modifi
     Row(verticalAlignment = Alignment.CenterVertically,
         modifier = modifier.clickable { onClickTopping() }.padding(vertical = 4.dp, horizontal = 16.dp)) {
         Checkbox(checked = (placement != null),
-            onCheckedChange = {/*TODO */ })
+            onCheckedChange = {onClickTopping()})
         Column(modifier = Modifier.weight(1f, fill = true).padding(start = 4.dp)) {
             Text(text = stringResource(topping.toppingName),
             style = MaterialTheme.typography.body1)
