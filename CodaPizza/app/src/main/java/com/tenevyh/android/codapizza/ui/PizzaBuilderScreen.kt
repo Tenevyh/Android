@@ -46,20 +46,21 @@ fun PizzaBuilderScreen(modifier: Modifier = Modifier){
 @Composable
 private fun ToppingsList(pizza: Pizza, onEditPizza: (Pizza) -> Unit,
                          modifier: Modifier = Modifier){
+    var showToppingPlacementDialog by rememberSaveable { mutableStateOf(false) }
 
+    if (showToppingPlacementDialog) {
+        ToppingPlacementDialog(
+            onDismissRequest = {
+                showToppingPlacementDialog = false
+            }
+        )
+    }
     LazyColumn(modifier = modifier){
         items(Topping.values()) { topping ->
             ToppingCell(topping = topping,
                 placement = pizza.toppings[topping],
-                onClickTopping = {val isOnPizza = pizza.toppings[topping] != null
-                    onEditPizza(pizza.withTopping(
-                        topping = topping,
-                        placement = if (isOnPizza) {
-                            null
-                        } else {
-                            ToppingPlacement.All
-                        }
-                    ))
+                onClickTopping = {
+                    showToppingPlacementDialog = true
                 }
             )
         }
