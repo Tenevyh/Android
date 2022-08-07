@@ -46,12 +46,14 @@ fun PizzaBuilderScreen(modifier: Modifier = Modifier){
 @Composable
 private fun ToppingsList(pizza: Pizza, onEditPizza: (Pizza) -> Unit,
                          modifier: Modifier = Modifier){
-    var showToppingPlacementDialog by rememberSaveable { mutableStateOf(false) }
+    var toppingBeingAdded by rememberSaveable { mutableStateOf<Topping?>(null)
+    }
 
-    if (showToppingPlacementDialog) {
+    toppingBeingAdded?.let { topping ->
         ToppingPlacementDialog(
+            topping = topping,
             onDismissRequest = {
-                showToppingPlacementDialog = false
+                toppingBeingAdded = null
             }
         )
     }
@@ -60,7 +62,7 @@ private fun ToppingsList(pizza: Pizza, onEditPizza: (Pizza) -> Unit,
             ToppingCell(topping = topping,
                 placement = pizza.toppings[topping],
                 onClickTopping = {
-                    showToppingPlacementDialog = true
+                    toppingBeingAdded = topping
                 }
             )
         }
