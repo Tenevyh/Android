@@ -21,6 +21,7 @@ import com.tenevyh.android.codapizza.model.ToppingPlacement
 
 @Composable
 fun ToppingPlacementDialog(topping: Topping,
+                           onSetToppingPlacement: (placement: ToppingPlacement?) -> Unit,
                            onDismissRequest: () -> Unit){
     Dialog(onDismissRequest = onDismissRequest) {
         Card{
@@ -30,6 +31,20 @@ fun ToppingPlacementDialog(topping: Topping,
                 style = MaterialTheme.typography.subtitle1,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(24.dp))
+
+                ToppingPlacement.values().forEach { placement ->
+                    ToppingPlacementOption(placementName = placement.label,
+                        onClick = {
+                            onSetToppingPlacement(placement)
+                            onDismissRequest()
+                        })
+                }
+
+                ToppingPlacementOption(placementName = R.string.placement_none,
+                    onClick = {
+                        onSetToppingPlacement(null)
+                        onDismissRequest()
+                    })
             }
         }
     }

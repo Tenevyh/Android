@@ -52,6 +52,9 @@ private fun ToppingsList(pizza: Pizza, onEditPizza: (Pizza) -> Unit,
     toppingBeingAdded?.let { topping ->
         ToppingPlacementDialog(
             topping = topping,
+            onSetToppingPlacement = { placement ->
+                onEditPizza(pizza.withTopping(topping, placement))
+            },
             onDismissRequest = {
                 toppingBeingAdded = null
             }
