@@ -1,7 +1,7 @@
 package com.tenevyh.android.codapizza
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,7 +14,7 @@ import com.tenevyh.android.codapizza.ui.AppTheme
 import com.tenevyh.android.codapizza.ui.PizzaBuilderScreen
 import com.tenevyh.android.codapizza.ui.ToppingCell
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

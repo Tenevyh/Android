@@ -2,6 +2,7 @@ package com.tenevyh.android.codapizza.ui
 
 import android.annotation.SuppressLint
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,11 +16,13 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.tenevyh.android.codapizza.MainActivity
 import com.tenevyh.android.codapizza.R
 import com.tenevyh.android.codapizza.model.Pizza
 import com.tenevyh.android.codapizza.model.Topping
@@ -98,8 +101,10 @@ private fun ToppingsList(pizza: Pizza, onEditPizza: (Pizza) -> Unit,
 private fun OrderButton(
     pizza: Pizza,
     modifier: Modifier = Modifier){
+    val context = LocalContext.current
     Button(modifier = modifier,
-        onClick = { /*TODO*/ }) {
+        onClick = { Toast.makeText(context, R.string.order_placed_toast, Toast.LENGTH_LONG)
+            .show()}) {
         val currencyFormatter = remember{NumberFormat.getCurrencyInstance()}
         val price = currencyFormatter.format(pizza.price)
         Text(
