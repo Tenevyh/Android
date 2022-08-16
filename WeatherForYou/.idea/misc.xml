@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Kir/Documents/GitHub/Android/WeatherForYou/app/src/main/res/drawable/cloud_sync.xml" value="0.1" />
+        <entry key="..\:/Users/Kir/Documents/GitHub/Android/WeatherForYou/app/src/main/res/drawable/search.xml" value="0.175" />
         <entry key="..\:/Users/Kir/Documents/GitHub/Android/WeatherForYou/app/src/main/res/layout/activity_main.xml" value="0.1890625" />
         <entry key="..\:/Users/Kir/Documents/GitHub/Android/WeatherForYou/app/src/main/res/layout/fragment_main.xml" value="0.33" />
       </map>
