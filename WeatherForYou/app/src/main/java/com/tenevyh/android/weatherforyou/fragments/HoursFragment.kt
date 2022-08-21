@@ -1,20 +1,26 @@
 package com.tenevyh.android.weatherforyou.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tenevyh.android.weatherforyou.R
+import com.tenevyh.android.weatherforyou.WeatherApi.MainViewModel
 import com.tenevyh.android.weatherforyou.adapters.WeatherAdapter
 import com.tenevyh.android.weatherforyou.adapters.WeatherModel
 import com.tenevyh.android.weatherforyou.databinding.FragmentHoursBinding
+import org.json.JSONArray
+import org.json.JSONObject
 
 class HoursFragment : Fragment() {
 
     private lateinit var binding: FragmentHoursBinding
     private lateinit var adapter: WeatherAdapter
+    private val model: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,21 +33,36 @@ class HoursFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRcView()
+        model.liveDataCurrent.observe(viewLifecycleOwner){
+            adapter.submitList(getHoursList(it))
+        }
     }
 
     private fun initRcView() = with(binding){
         rcView.layoutManager = LinearLayoutManager(activity)
         adapter = WeatherAdapter()
         rcView.adapter = adapter
-        val list = listOf(
-            WeatherModel("","12:00", "Sunny",
-                "25 c","","","", ""),
-            WeatherModel("","14:00", "Sunny",
-                "27 c","","","", ""),
-            WeatherModel("","16:00", "Sunny",
-                "23 c","","","", "")
-        )
-        adapter.submitList(list)
+    }
+
+    private fun getHoursList(wItem: WeatherModel) : List<WeatherModel>{
+        val hoursArray = JSONArray(wItem.hours)
+        val list = ArrayList<WeatherModel>()
+        for (i in 0 until hoursArray.length()){
+            val item = WeatherModel(
+                wItem.city,
+                (hoursArray[i] as JSONObject).getString("time"),
+                (hoursArray[i] as JSONObject)
+                    .getJSONObject("condition").getString("text"),
+                (hoursArray[i] as JSONObject).getString("temp_c"),
+                "",
+                "",
+                (hoursArray[i] as JSONObject)
+                    .getJSONObject("condition").getString("icon"),
+                ""
+            )
+            list.add(item)
+        }
+        return list
     }
 
     companion object {
