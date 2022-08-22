@@ -1,4 +1,4 @@
-package com.project.android.Quiz
+package com.project.android.legend
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -10,9 +10,7 @@ import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.bignerdranch.android.geomain.R
 
 private const val TAG = "MainActivity"

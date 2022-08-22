@@ -1,9 +1,11 @@
-package com.project.android.Quiz
+package com.project.android.legend
 
-import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class QuizViewModel : ViewModel(){
+
+    val liveHero = MutableLiveData<List<Hero>>()
 
     private var questionBank = listOf(
         Question("Противниками Лейлы стали ученые из лабы 1718.",true),

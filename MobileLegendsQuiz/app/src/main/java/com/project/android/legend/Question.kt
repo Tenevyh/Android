@@ -1,4 +1,4 @@
-package com.project.android.Quiz
+package com.project.android.legend
 
 import androidx.annotation.StringRes
 

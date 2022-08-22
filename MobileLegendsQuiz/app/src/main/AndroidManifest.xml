@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GeoQuiz.Fullscreen">
         <activity
-            android:name="com.project.android.Quiz.CheatActivity"
+            android:name="com.project.android.legend.CheatActivity"
             android:exported="false" />
         <activity
-            android:name="com.project.android.Quiz.MainActivity"
+            android:name="com.project.android.legend.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

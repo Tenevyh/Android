@@ -1,20 +1,21 @@
-package com.project.android.Quiz
+package com.project.android.legend
 
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.ViewModelProviders.of
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bignerdranch.android.geomain.R
+import com.bignerdranch.android.geomain.databinding.ChooseHeroFragmentBinding
 
 class ChooseHero: DialogFragment () {
+
+    private lateinit var binding: ChooseHeroFragmentBinding
+    private lateinit var adapter: HeroAdapter
+    private lateinit var viewModel: QuizViewModel
 
 
     private lateinit var layla : Button
@@ -34,42 +35,30 @@ class ChooseHero: DialogFragment () {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.choose_hero_fragment,container,false)
-        layla = view.findViewById(R.id.layla) as Button
-        zask = view.findViewById(R.id.zask) as Button
-        vanvan = view.findViewById(R.id.vanvan) as Button
-        valir = view.findViewById(R.id.valir) as Button
-        back = view.findViewById(R.id.back) as Button
-        return view
+        binding = ChooseHeroFragmentBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initRcView()
+    }
+
+    private fun initRcView() = with(binding){
+        rcView.layoutManager = LinearLayoutManager(activity)
+        adapter = HeroAdapter()
+        rcView.adapter = adapter
     }
 
     override fun onStart() {
         super.onStart()
 
 
-        layla.setOnClickListener{
+       /* layla.setOnClickListener{
             mCallBack.clickHero(0)
             onDestroyView()
         }
-
-        zask.setOnClickListener{
-            mCallBack.clickHero(1)
-            onDestroyView()
-        }
-
-        vanvan.setOnClickListener{
-            mCallBack.clickHero(2)
-            onDestroyView()
-        }
-
-        valir.setOnClickListener{
-            mCallBack.clickHero(3)
-            onDestroyView()
-        }
-
-        back.setOnClickListener{
-            onDestroyView()
-        }
+        */
     }
 
     override fun getTheme(): Int {
