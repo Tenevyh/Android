@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/question"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/lelaor">
@@ -42,14 +43,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#3F51B5"
-            android:text="@string/false_button"/>
+            android:text="@string/false_button" />
 
         <Button
             android:id="@+id/true_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#3F51B5"
-            android:text="@string/true_button"/>
+            android:text="@string/true_button" />
     </LinearLayout>
 
     <LinearLayout
@@ -64,12 +65,12 @@
         android:layout_height="100dp"
         android:layout_gravity="bottom|right">
 
-    <Button
-        android:id="@+id/cheat_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:backgroundTint="#3F51B5"
-        android:text="@string/cheat_button"/>
-</LinearLayout>
+        <Button
+            android:id="@+id/cheat_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="#3F51B5"
+            android:text="@string/cheat_button" />
+    </LinearLayout>
 </FrameLayout>

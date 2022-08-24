@@ -1,9 +1,13 @@
-package com.project.android.Quiz
+package com.project.android.legend
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class QuizViewModel : ViewModel(){
+
+    val liveHero = MutableLiveData<List<Hero>>()
+
 
     private var questionBank = listOf(
         Question("Противниками Лейлы стали ученые из лабы 1718.",true),
@@ -49,6 +53,19 @@ class QuizViewModel : ViewModel(){
         Question("Тело Валира было всё в ожогах.",true),
         Question("Сражение с Валиром разбудило вулкан.",true)
     )
+
+    private val valir  = Hero("Valir", questionBankValir, "3")
+    private val layla = Hero("Layla", questionBankLayla, "0")
+    private val zask = Hero("Zask", questionBankZask, "1")
+    private var idHero = "0"
+
+    fun getHeroes() {
+        var heroArray = ArrayList<Hero>()
+        heroArray.add(valir)
+        heroArray.add(layla)
+        heroArray.add(zask)
+        liveHero.value = heroArray
+    }
 
     var currentIndex = 0
     var questionIndex = -1
@@ -105,5 +122,9 @@ class QuizViewModel : ViewModel(){
         for (question in questionBank){
             question.completed=false
         }
+    }
+
+    fun chooseHero(id: String){
+        idHero = id
     }
 }

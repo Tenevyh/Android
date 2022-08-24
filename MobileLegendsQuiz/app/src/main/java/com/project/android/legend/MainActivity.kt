@@ -1,4 +1,4 @@
-package com.project.android.Quiz
+package com.project.android.legend
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -10,9 +10,7 @@ import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.bignerdranch.android.geomain.R
 
 private const val TAG = "MainActivity"
@@ -29,7 +27,7 @@ class MainActivity : AppCompatActivity(), SelectedHero {
     private lateinit var cheatButton: Button
 
     private val quizViewModel: QuizViewModel by lazy {
-        ViewModelProvider(this).get(QuizViewModel::class.java)
+        ViewModelProvider(this)[QuizViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -242,7 +240,7 @@ class MainActivity : AppCompatActivity(), SelectedHero {
         trueButton.isEnabled = false
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.hero_list, menu)
         return true
@@ -253,16 +251,16 @@ class MainActivity : AppCompatActivity(), SelectedHero {
         return true
     }
 
-    override fun clickHero(hero: Int) {
-        val rootLayout: LinearLayout = findViewById(R.id.heroPic)
+    override fun clickHero(hero: String) {
+        val rootLayout: LinearLayout = findViewById(R.id.question)
         when (hero){
-            0 -> {quizViewModel.setQuestionBank(quizViewModel.questionBankLayla)
+            "0" -> {quizViewModel.setQuestionBank(quizViewModel.questionBankLayla)
                 rootLayout.setBackgroundResource(R.drawable.lela)}
-            1 -> {quizViewModel.setQuestionBank(quizViewModel.questionBankZask)
+            "1" -> {quizViewModel.setQuestionBank(quizViewModel.questionBankZask)
                 rootLayout.setBackgroundResource(R.drawable.zhask)}
-            2 -> {quizViewModel.setQuestionBank(quizViewModel.questionBankVanVan)
+            "2" -> {quizViewModel.setQuestionBank(quizViewModel.questionBankVanVan)
                 rootLayout.setBackgroundResource(R.drawable.vanvan)}
-            3 -> {quizViewModel.setQuestionBank(quizViewModel.questionBankValir)
+            "3" -> {quizViewModel.setQuestionBank(quizViewModel.questionBankValir)
                 rootLayout.setBackgroundResource(R.drawable.valir)}
         }
         quizViewModel.cleareResult()
