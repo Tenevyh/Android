@@ -6,14 +6,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bignerdranch.android.geomain.R
 import com.bignerdranch.android.geomain.databinding.ChooseHeroFragmentBinding
 
-class ChooseHero: DialogFragment () {
+class ChooseHero: DialogFragment (), HeroAdapter.Listener {
 
     private lateinit var binding: ChooseHeroFragmentBinding
     private lateinit var adapter: HeroAdapter
@@ -32,7 +31,7 @@ class ChooseHero: DialogFragment () {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = ChooseHeroFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -47,20 +46,13 @@ class ChooseHero: DialogFragment () {
     }
 
     private fun initRcView() = with(binding) {
+        adapter = HeroAdapter(this@ChooseHero)
         rcView.layoutManager = LinearLayoutManager(activity)
-        adapter = HeroAdapter()
         rcView.adapter = adapter
     }
 
     override fun onStart() {
         super.onStart()
-
-
-        /* layla.setOnClickListener{
-            mCallBack.clickHero(0)
-            onDestroyView()
-        }
-        */
 
         binding.back.setOnClickListener {
             onDestroyView()
@@ -69,5 +61,11 @@ class ChooseHero: DialogFragment () {
 
     override fun getTheme(): Int {
         return R.style.Theme_GeoQuiz_Fullscreen
+    }
+
+    override fun onClick(item: Hero) {
+        mCallBack.clickHero(item.id)
+        Log.d("MyLog", "Hero question: ${item.question}")
+        onDestroyView()
     }
 }
