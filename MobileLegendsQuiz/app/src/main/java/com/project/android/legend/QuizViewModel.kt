@@ -1,6 +1,5 @@
 package com.project.android.legend
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
@@ -54,16 +53,18 @@ class QuizViewModel : ViewModel(){
         Question("Сражение с Валиром разбудило вулкан.",true)
     )
 
-    private val valir  = Hero("Valir", questionBankValir, "3")
     private val layla = Hero("Layla", questionBankLayla, "0")
     private val zask = Hero("Zask", questionBankZask, "1")
-    private var idHero = "0"
+    private val vanVan  = Hero("VanVan", questionBankVanVan, "2")
+    private val valir  = Hero("Valir", questionBankValir, "3")
+
 
     fun getHeroes() {
-        var heroArray = ArrayList<Hero>()
-        heroArray.add(valir)
+        val heroArray = ArrayList<Hero>()
         heroArray.add(layla)
         heroArray.add(zask)
+        heroArray.add(vanVan)
+        heroArray.add(valir)
         liveHero.value = heroArray
     }
 
@@ -112,7 +113,7 @@ class QuizViewModel : ViewModel(){
         return questionBank[currentIndex].cheat
     }
 
-    fun cleareResult(){
+    fun clearResult(){
          currentIndex = 0
          questionIndex = -1
          correctIndex = 0
@@ -122,9 +123,5 @@ class QuizViewModel : ViewModel(){
         for (question in questionBank){
             question.completed=false
         }
-    }
-
-    fun chooseHero(id: String){
-        idHero = id
     }
 }

@@ -263,7 +263,7 @@ class MainActivity : AppCompatActivity(), SelectedHero {
             "3" -> {quizViewModel.setQuestionBank(quizViewModel.questionBankValir)
                 rootLayout.setBackgroundResource(R.drawable.valir)}
         }
-        quizViewModel.cleareResult()
+        quizViewModel.clearResult()
         updateQuestion()
     }
 }
