@@ -175,16 +175,14 @@ class MainActivity : AppCompatActivity(), SelectedHero {
     }
 
     private fun showResult(){
-        if(quizViewModel.getQuestionBank().size > 3) {
-            var builder = AlertDialog.Builder(MainActivity())
-            builder.setTitle("Результат!")
-                .setMessage(
-                    " Верно: ${quizViewModel.correctIndex}\n Неверно: ${quizViewModel.inCorrectIndex}\n" +
-                            " Чит: ${quizViewModel.cheatIndex}"
+        if (quizViewModel.questionIndex == quizViewModel.getQuestionBank().size - 1) {
+        var builder = AlertDialog.Builder(this)
+            builder.setTitle("Результат!").setMessage(
+                " Верно: ${quizViewModel.correctIndex}\n " +
+                        "Неверно: ${quizViewModel.inCorrectIndex}\n" +
+                        " Чит: ${quizViewModel.cheatIndex}"
                 )
-            if (quizViewModel.questionIndex == quizViewModel.getQuestionBank().size - 1) {
                 builder.show()
-            }
         }
     }
 
@@ -251,6 +249,41 @@ class MainActivity : AppCompatActivity(), SelectedHero {
                 rootLayout.setBackgroundResource(R.drawable.valir)}
             "4" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[4].question)
                 rootLayout.setBackgroundResource(R.drawable.beatris)}
+            "5" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[4].question)
+                rootLayout.setBackgroundResource(R.drawable.beatris)}
+            "6" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[4].question)
+                rootLayout.setBackgroundResource(R.drawable.beatris)}
+            "7" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[4].question)
+                rootLayout.setBackgroundResource(R.drawable.beatris)}
+            "8" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[4].question)
+                rootLayout.setBackgroundResource(R.drawable.beatris)}
+            "9" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[4].question)
+                rootLayout.setBackgroundResource(R.drawable.beatris)}
+            "10" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[4].question)
+                rootLayout.setBackgroundResource(R.drawable.beatris)}
+            "11" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[4].question)
+                rootLayout.setBackgroundResource(R.drawable.beatris)}
+            "12" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[4].question)
+                rootLayout.setBackgroundResource(R.drawable.beatris)}
+            "13" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[4].question)
+                rootLayout.setBackgroundResource(R.drawable.beatris)}
+            "14" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[4].question)
+                rootLayout.setBackgroundResource(R.drawable.beatris)}
+            "15" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[4].question)
+                rootLayout.setBackgroundResource(R.drawable.beatris)}
+            "16" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[4].question)
+                rootLayout.setBackgroundResource(R.drawable.beatris)}
+            "17" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[4].question)
+                rootLayout.setBackgroundResource(R.drawable.beatris)}
+            "18" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[4].question)
+                rootLayout.setBackgroundResource(R.drawable.beatris)}
+            "19" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[4].question)
+                rootLayout.setBackgroundResource(R.drawable.beatris)}
+            "20" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[4].question)
+                rootLayout.setBackgroundResource(R.drawable.beatris)}
+            "21" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[4].question)
+                rootLayout.setBackgroundResource(R.drawable.beatris)}
+
         }
         quizViewModel.clearResult()
         updateQuestion()

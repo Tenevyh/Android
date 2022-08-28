@@ -12,7 +12,26 @@ class QuizViewModel : ViewModel(){
         Hero("Заск", heroQuestions.questionsZask, "1"),
         Hero("Ван Ван", heroQuestions.questionsVanVan, "2"),
         Hero("Валир", heroQuestions.questionsValir, "3"),
-        Hero("Беатрис", heroQuestions.questionsBeatris, "4")
+        Hero("Беатрис", heroQuestions.questionsBeatris, "4"),
+        Hero("Терзила", heroQuestions.questionsBeatris, "5"),
+        Hero("Руби", heroQuestions.questionsBeatris, "6"),
+        Hero("Тигрил", heroQuestions.questionsBeatris, "7"),
+        Hero("Вейл", heroQuestions.questionsBeatris, "8"),
+        Hero("Лилия", heroQuestions.questionsBeatris, "9"),
+        Hero("Москов", heroQuestions.questionsBeatris, "10"),
+        Hero("Мия", heroQuestions.questionsBeatris, "10"),
+        Hero("Горд", heroQuestions.questionsBeatris, "11"),
+        Hero("Клауд", heroQuestions.questionsBeatris, "12"),
+        Hero("Тамуз", heroQuestions.questionsBeatris, "13"),
+        Hero("Роджер", heroQuestions.questionsBeatris, "14"),
+        Hero("Наташа", heroQuestions.questionsBeatris, "15"),
+        Hero("Карина", heroQuestions.questionsBeatris, "16"),
+        Hero("Госсен", heroQuestions.questionsBeatris, "17"),
+        Hero("Бальмонд", heroQuestions.questionsBeatris, "18"),
+        Hero("Атлас", heroQuestions.questionsBeatris, "19"),
+        Hero("Франко", heroQuestions.questionsBeatris, "20"),
+        Hero("Эймон", heroQuestions.questionsBeatris, "21"),
+
         )
 
 
