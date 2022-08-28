@@ -47,15 +47,19 @@ class MainActivity : AppCompatActivity(), SelectedHero {
         textSwitcher = findViewById(R.id.textSwitcher)
         cheatButton = findViewById(R.id.cheat_button)
 
-        showResult()
-
         if(quizViewModel.cheatIndex==3){
-            cheatButton.setEnabled(false)
+            cheatButton.isEnabled = false
         }
 
         if (quizViewModel.isCompleted()) {
             offButton()
         } else onButton()
+
+        if (quizViewModel.getQuestionBank().size < 3){
+            offButton()
+            prevButton.isEnabled  = false
+            textSwitcher.isEnabled = false
+        }
 
 
 
@@ -158,36 +162,40 @@ class MainActivity : AppCompatActivity(), SelectedHero {
     }
 
     override fun onStart() {
-        val fragment = ChooseHero().show(supportFragmentManager, "ChooseHero")
+        if(quizViewModel.getQuestionBank().size < 3) {
+            val fragment = ChooseHero().show(supportFragmentManager, "ChooseHero")
+        }
         super.onStart()
-        Log.d(TAG, "onStart() called")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d(TAG, "onResume() called")
-    }
-
-    override fun onPause(){
-        super.onPause()
-        Log.d(TAG, "onPause() called")
     }
 
     override fun onSaveInstanceState(savedInstanceState:  Bundle) {
         super.onSaveInstanceState(savedInstanceState)
-        Log.i(TAG, "onSaveInstanceState")
         savedInstanceState.putInt(KEY_INDEX, quizViewModel.currentIndex)
         savedInstanceState.putInt(Q_INDEX, quizViewModel.questionIndex)
     }
 
-    override fun onStop(){
-        super.onStop()
-        Log.d(TAG, "onStop() called")
+    private fun showResult(){
+        if(quizViewModel.getQuestionBank().size > 3) {
+            var builder = AlertDialog.Builder(MainActivity())
+            builder.setTitle("Результат!")
+                .setMessage(
+                    " Верно: ${quizViewModel.correctIndex}\n Неверно: ${quizViewModel.inCorrectIndex}\n" +
+                            " Чит: ${quizViewModel.cheatIndex}"
+                )
+            if (quizViewModel.questionIndex == quizViewModel.getQuestionBank().size - 1) {
+                builder.show()
+            }
+        }
     }
 
-    override fun onDestroy(){
-        super.onDestroy()
-        Log.d(TAG, "onDestroy() called")
+    private fun onButton(){
+        trueButton.isEnabled = true
+        falseButton.isEnabled = true
+    }
+
+    private fun offButton(){
+        falseButton.isEnabled = false
+        trueButton.isEnabled = false
     }
 
     private fun updateQuestion(){
@@ -199,17 +207,6 @@ class MainActivity : AppCompatActivity(), SelectedHero {
         if (quizViewModel.isCompleted()) {
             offButton()
         } else onButton()
-    }
-
-    private fun showResult(){
-        var builder = AlertDialog.Builder(this)
-        builder.setTitle("Результат!")
-            .setMessage(" Верно: ${quizViewModel.correctIndex}\n Неверно: ${quizViewModel.inCorrectIndex}\n" +
-                    " Чит: ${quizViewModel.cheatIndex}")
-        if(quizViewModel.questionIndex == quizViewModel.getQuestionBank().size-1){
-            builder.show()
-
-        }
     }
 
     private fun checkAnswer(userAnswer: Boolean) {
@@ -230,16 +227,6 @@ class MainActivity : AppCompatActivity(), SelectedHero {
         Toast.makeText(this,messageResId, Toast.LENGTH_SHORT).show()
     }
 
-    private fun onButton(){
-        trueButton.isEnabled = true
-        falseButton.isEnabled = true
-    }
-
-    private fun offButton(){
-        falseButton.isEnabled = false
-        trueButton.isEnabled = false
-    }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.hero_list, menu)
@@ -254,14 +241,16 @@ class MainActivity : AppCompatActivity(), SelectedHero {
     override fun clickHero(hero: String) {
         val rootLayout: LinearLayout = findViewById(R.id.question)
         when (hero){
-            "0" -> {quizViewModel.setQuestionBank(quizViewModel.questionBankLayla)
+            "0" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[0].question)
                 rootLayout.setBackgroundResource(R.drawable.lela)}
-            "1" -> {quizViewModel.setQuestionBank(quizViewModel.questionBankZask)
+            "1" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[1].question)
                 rootLayout.setBackgroundResource(R.drawable.zhask)}
-            "2" -> {quizViewModel.setQuestionBank(quizViewModel.questionBankVanVan)
+            "2" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[2].question)
                 rootLayout.setBackgroundResource(R.drawable.vanvan)}
-            "3" -> {quizViewModel.setQuestionBank(quizViewModel.questionBankValir)
+            "3" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[3].question)
                 rootLayout.setBackgroundResource(R.drawable.valir)}
+            "4" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[4].question)
+                rootLayout.setBackgroundResource(R.drawable.beatris)}
         }
         quizViewModel.clearResult()
         updateQuestion()

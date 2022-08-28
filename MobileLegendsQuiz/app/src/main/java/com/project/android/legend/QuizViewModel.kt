@@ -6,66 +6,23 @@ import androidx.lifecycle.ViewModel
 class QuizViewModel : ViewModel(){
 
     val liveHero = MutableLiveData<List<Hero>>()
+    private val heroQuestions = HeroQuestions()
+    private val listHeroes = arrayListOf(
+        Hero("Лейла", heroQuestions.questionsLayla, "0"),
+        Hero("Заск", heroQuestions.questionsZask, "1"),
+        Hero("Ван Ван", heroQuestions.questionsVanVan, "2"),
+        Hero("Валир", heroQuestions.questionsValir, "3"),
+        Hero("Беатрис", heroQuestions.questionsBeatris, "4")
+        )
 
 
     private var questionBank = listOf(
-        Question("Противниками Лейлы стали ученые из лабы 1718.",true),
-        Question("Отец Лейлы один из членов ученых лабы 1718.",true),
-        Question("Губительную пушку Лейле подарил её дед.",false),
-        Question("Лейлу схватили учёные из лабы 1718, потому что она меткий стрелок.",false),
-        Question("В похищении Лейлы виновата Губительная Пушка.",true),
-        Question("Истинные причины поступка отца, Лейле рассказал дед.",true)
+        Question("Для начала викторины необходимо выбрать героя",true),
+        Question("", true)
     )
 
-    val questionBankLayla = listOf(
-        Question("Противниками Лейлы стали ученые из лабы 1718.",true),
-        Question("Отец Лейлы один из членов ученых лабы 1718.",true),
-        Question("Губительную пушку Лейле подарил её дед.",false),
-        Question("Лейлу схватили учёные из лабы 1718, потому что она меткий стрелок.",false),
-        Question("В похищении Лейлы виновата Губительная Пушка.",true),
-        Question("Истинные причины поступка отца, Лейле рассказал дед.",true)
-    )
-
-    val questionBankZask = listOf(
-        Question("Заск король Роя Кастии.",true),
-        Question("Заклятый враг Роя Кастии - Митлора.",true),
-        Question("Охотник из Митлоры уничтожил Рой Кастии.",false),
-        Question("Кастия уцелела после нападения охотника из Милторы.",false),
-        Question("Своё вторжения в Земли Рассвета, Заск начал с северной долины.",true),
-        Question("Именно Авроре удалось сильно ранить Заска.",true)
-    )
-
-    val questionBankVanVan = listOf(
-        Question("Иглы Ван Ван это наследие Людей Тана.",true),
-        Question("Судьбу Ван Ван навсегда изменил Чёрный Дракон.",true),
-        Question("Чёрный дракон долго и упорно обучал Ван Ван.",false),
-        Question("Чёрный дракон учил Ван Ван в лесу.",false),
-        Question("Ван Ван использует арбалет Тана только во время ультимейта.",true),
-        Question("Пассивка Ван Ван это Шаг тигра.",true)
-    )
-
-    val questionBankValir = listOf(
-        Question("Валир пять лет жил на вулкане.",true),
-        Question("Горд был тем, кто остановил битву Валира и Вейла.",true),
-        Question("Вейл хотел убить Валира.",false),
-        Question("Горд помог Вейлу в бою с Валиром.",false),
-        Question("Тело Валира было всё в ожогах.",true),
-        Question("Сражение с Валиром разбудило вулкан.",true)
-    )
-
-    private val layla = Hero("Layla", questionBankLayla, "0")
-    private val zask = Hero("Zask", questionBankZask, "1")
-    private val vanVan  = Hero("VanVan", questionBankVanVan, "2")
-    private val valir  = Hero("Valir", questionBankValir, "3")
-
-
-    fun getHeroes() {
-        val heroArray = ArrayList<Hero>()
-        heroArray.add(layla)
-        heroArray.add(zask)
-        heroArray.add(vanVan)
-        heroArray.add(valir)
-        liveHero.value = heroArray
+    fun getHero(): ArrayList<Hero> {
+        return listHeroes
     }
 
     var currentIndex = 0

@@ -39,7 +39,7 @@ class ChooseHero: DialogFragment (), HeroAdapter.Listener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRcView()
-        model.getHeroes()
+        model.liveHero.value = model.getHero()
         model.liveHero.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
@@ -53,7 +53,6 @@ class ChooseHero: DialogFragment (), HeroAdapter.Listener {
 
     override fun onStart() {
         super.onStart()
-
         binding.back.setOnClickListener {
             onDestroyView()
         }
