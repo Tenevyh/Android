@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "99241497214",
+    "firebase_url": "https://chatno-3e3a8-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "chatno-3e3a8",
+    "storage_bucket": "chatno-3e3a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:99241497214:android:616faa41506c6da6d87e2f",
+        "android_client_info": {
+          "package_name": "com.tenevyh.android.chatno"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "99241497214-emb561r7mb20tt331o058okcirodvo8o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjcSntBvAxCD7VG6YTm1h4XusIn3elvzQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "99241497214-emb561r7mb20tt331o058okcirodvo8o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
