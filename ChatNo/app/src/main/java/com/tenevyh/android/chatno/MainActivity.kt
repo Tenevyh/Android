@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
         binding.bSend.setOnClickListener {
             myRef.child(myRef.push().key ?: "bla-bla")
                 .setValue(User(auth.currentUser?.displayName, binding.editMessege.text.toString()))
+            binding.editMessege.text = null
+
         }
 
         messageListener(myRef)
@@ -81,15 +83,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setActionBar(){
-        val actionBar = supportActionBar
-        Thread{
-            val bitMap = Picasso.get().load(auth.currentUser?.photoUrl).get()
-            val drawable = BitmapDrawable(resources, bitMap)
-            runOnUiThread {
-                actionBar?.setDisplayHomeAsUpEnabled(true)
-                actionBar?.setHomeAsUpIndicator(drawable)
-                actionBar?.title = auth.currentUser?.displayName
-            }
-        }.start()
+        if (auth.currentUser?.photoUrl == null) {
+        } else {
+            val actionBar = supportActionBar
+            Thread {
+                val bitMap = Picasso.get().load(auth.currentUser?.photoUrl).get()
+                val drawable = BitmapDrawable(resources, bitMap)
+                runOnUiThread {
+                    actionBar?.setDisplayHomeAsUpEnabled(true)
+                    actionBar?.setHomeAsUpIndicator(drawable)
+                    actionBar?.title = auth.currentUser?.displayName
+                }
+            }.start()
+        }
     }
 }
