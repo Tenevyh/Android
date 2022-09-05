@@ -66,13 +66,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun messageListener(dRef: DatabaseReference){
         dRef.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
+            override fun onDataChange(snapshot: DataSnapshot): Unit = with(binding) {
                 val list = ArrayList<User>()
                 for(s in snapshot.children){
                     val user = s.getValue(User::class.java)
                     if (user != null) list.add(user)
                 }
                 adapter.submitList(list)
+                rcView.smoothScrollToPosition(list.size-1)
             }
 
             override fun onCancelled(error: DatabaseError) {
