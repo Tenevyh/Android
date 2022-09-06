@@ -1,8 +1,10 @@
 package com.tenevyh.android.chatno
 
+import android.annotation.SuppressLint
 import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +24,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var auth: FirebaseAuth
     lateinit var adapter: UserAdapter
+    private lateinit var lastIdMessage: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +37,11 @@ class MainActivity : AppCompatActivity() {
 
         val database = Firebase.database
         val myRef = database.getReference("message")
+
+            /*  val workRequest = OneTimeWorkRequest.Builder(Worker::class.java).build()
+              WorkManager.getInstance().enqueue(workRequest)
+
+             */
 
         binding.bSend.setOnClickListener {
             myRef.child(myRef.push().key ?: "bla-bla")
@@ -73,7 +82,10 @@ class MainActivity : AppCompatActivity() {
                     if (user != null) list.add(user)
                 }
                 adapter.submitList(list)
-                rcView.smoothScrollToPosition(list.size-1)
+                if(list.size > 0) {
+                    rcView.smoothScrollToPosition(list.size - 1)
+                    lastIdMessage = snapshot.children.elementAt(list.size - 1)?.key.toString()
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
