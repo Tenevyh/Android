@@ -8,6 +8,8 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -38,10 +40,9 @@ class MainActivity : AppCompatActivity() {
         val database = Firebase.database
         val myRef = database.getReference("message")
 
-            /*  val workRequest = OneTimeWorkRequest.Builder(Worker::class.java).build()
+        val workRequest = OneTimeWorkRequest.Builder(Worker::class.java).build()
               WorkManager.getInstance().enqueue(workRequest)
 
-             */
 
         binding.bSend.setOnClickListener {
             myRef.child(myRef.push().key ?: "bla-bla")
