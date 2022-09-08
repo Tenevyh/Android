@@ -1,7 +1,11 @@
 package com.tenevyh.android.weatherforyou.fragments
 
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,18 +21,17 @@ import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.squareup.picasso.Picasso
+import com.tenevyh.android.weatherforyou.Dialog.DialogManager
 import com.tenevyh.android.weatherforyou.WeatherApi.MainViewModel
 import com.tenevyh.android.weatherforyou.adapters.VpAdapter
 import com.tenevyh.android.weatherforyou.adapters.WeatherModel
 import com.tenevyh.android.weatherforyou.databinding.FragmentMainBinding
 import org.json.JSONObject
-import java.util.jar.Manifest
 
 const val API_KEY = "50f71dad560d430aae0182221223008"
 
@@ -54,7 +57,11 @@ class MainFragment : Fragment() {
         checkPermission()
         init()
         updateCurrentCard()
-        getLocation()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkLocation()
     }
 
     private fun init() = with(binding){
@@ -66,8 +73,26 @@ class MainFragment : Fragment() {
         }.attach()
         ibSync.setOnClickListener{
             tabLayout.selectTab(tabLayout.getTabAt(0))
-            getLocation()
+            checkLocation()
         }
+    }
+
+    private fun checkLocation(){
+        if (isLocationEnabled()){
+            getLocation()
+        } else {
+            DialogManager.locationSettingDialog(requireContext(), object : DialogManager.Listener{
+                override fun onClick() {
+                    startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+                }
+
+            })
+        }
+    }
+
+    private fun isLocationEnabled(): Boolean{
+        val location = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return location.isProviderEnabled(LocationManager.GPS_PROVIDER)
     }
 
     private fun getLocation(){
@@ -83,7 +108,7 @@ class MainFragment : Fragment() {
             return
         }
         fLocationClient
-            .getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, ct.token)
+            .getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, ct.token)
             .addOnCompleteListener{
                 requestWeatherData("${it.result.latitude},${it.result.longitude}")
             }
