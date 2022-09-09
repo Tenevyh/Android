@@ -7,7 +7,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import com.google.firebase.auth.FirebaseAuth
@@ -26,7 +28,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var auth: FirebaseAuth
     lateinit var adapter: UserAdapter
-    private lateinit var lastIdMessage: String
+    private val userViewModel: UserViewModel by lazy {
+        ViewModelProvider(this)[UserViewModel::class.java]
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         val database = Firebase.database
         val myRef = database.getReference("message")
+        val myDatabase = Database.instance
 
         val workRequest = OneTimeWorkRequest.Builder(Worker::class.java).build()
               WorkManager.getInstance().enqueue(workRequest)
@@ -51,8 +56,8 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        messageListener(myRef)
         initRcView()
+        myDatabase.messageListener(myRef, adapter, binding, binding.rcView)
     }
 
     private fun initRcView() = with(binding){
@@ -72,28 +77,6 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun messageListener(dRef: DatabaseReference){
-        dRef.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot): Unit = with(binding) {
-                val list = ArrayList<User>()
-                for(s in snapshot.children){
-                    val user = s.getValue(User::class.java)
-                    if (user != null) list.add(user)
-                }
-                adapter.submitList(list)
-                if(list.size > 0) {
-                    rcView.smoothScrollToPosition(list.size - 1)
-                    lastIdMessage = snapshot.children.elementAt(list.size - 1)?.key.toString()
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
     }
 
     private fun setActionBar(){

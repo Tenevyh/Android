@@ -5,6 +5,9 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 
 class Worker(val context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
+
+    private val myDatabase = Database.instance
+
     override fun doWork(): Result {
         return Result.success()
     }
