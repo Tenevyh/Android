@@ -1,6 +1,5 @@
 package com.tenevyh.android.photogallery
 
-import android.app.Notification
 import android.app.PendingIntent
 import android.content.Context
 import android.util.Log
@@ -9,7 +8,6 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import kotlinx.coroutines.flow.first
-import okhttp3.internal.notify
 import java.lang.Exception
 
 private const val TAG = "PollWorker"

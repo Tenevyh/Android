@@ -1,6 +1,8 @@
 package com.tenevyh.android.chatno
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -28,9 +30,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var auth: FirebaseAuth
     lateinit var adapter: UserAdapter
-    private val userViewModel: UserViewModel by lazy {
-        ViewModelProvider(this)[UserViewModel::class.java]
-    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -94,4 +93,10 @@ class MainActivity : AppCompatActivity() {
             }.start()
         }
     }
+    companion object{
+        fun newIntent(context: Context) : Intent {
+            return Intent(context, MainActivity::class.java)
+        }
+    }
+
 }
