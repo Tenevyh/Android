@@ -11,15 +11,6 @@ import java.lang.IllegalStateException
 
 class UserRepository(private val dataStore: DataStore<Preferences>) {
 
-    val storedQuery: Flow<String> = dataStore.data.map {
-        it[SEARCH_QUERY_KEY] ?: ""
-    }.distinctUntilChanged()
-
-    suspend fun setStoredQuery(query: String){
-        dataStore.edit {
-            it[SEARCH_QUERY_KEY] = query
-        }
-    }
 
     val lastResultId: Flow<String> = dataStore.data.map {
         it[PREF_LAST_ID_MESSAGE] ?: ""
@@ -42,7 +33,6 @@ class UserRepository(private val dataStore: DataStore<Preferences>) {
     }
 
     companion object{
-        private val SEARCH_QUERY_KEY = stringPreferencesKey("search_query")
         private val PREF_LAST_ID_MESSAGE = stringPreferencesKey("lastIdMessage")
         private val PREF_IS_POLLING = booleanPreferencesKey("isPolling")
         private var INSTANCE: UserRepository? = null

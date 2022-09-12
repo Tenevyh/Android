@@ -16,30 +16,20 @@ class Worker(private val context: Context,
              workerParameters: WorkerParameters) : CoroutineWorker(context, workerParameters) {
 
     override suspend fun doWork(): Result {
-        val preferencesRepository  = UserRepository.get()
-        val myDatabase = Database.instance
+        val userRepository  = UserRepository.get()
+        val database = Database()
 
-        val query = preferencesRepository.storedQuery.first()
-        val lastId = preferencesRepository.lastResultId.first()
-
-        if (query.isEmpty()) {
-            Log.i(TAG, "No saved query, finishing early.")
-            return Result.success()
-        }
+        val lastId = userRepository.lastResultId.first()
 
         return try{
-            val items = myDatabase.getListUser()
-
-            if (items.isNotEmpty()) {
-                val newResultId = myDatabase.getLastIdMessage().first().toString()
+                val newResultId = database.getLastId()
                 if (newResultId == lastId) {
                     Log.i(TAG, "Still have the same result: $newResultId")
                 } else {
                     Log.i(TAG, "Got a new result: $newResultId")
-                    preferencesRepository.setLastResultId(newResultId)
+                    userRepository.setLastResultId(newResultId)
                     notifyUser()
                 }
-            }
             Result.success()
         } catch (ex: Exception) {
             Log.e(TAG, "Background update failed", ex)
