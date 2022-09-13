@@ -1,38 +1,26 @@
 package com.tenevyh.android.chatno
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.work.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import com.tenevyh.android.chatno.databinding.ActivityMainBinding
-import java.util.concurrent.TimeUnit
 
-private const val WORK = "WORKER"
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
     lateinit var auth: FirebaseAuth
     lateinit var adapter: UserAdapter
-    lateinit var lastIdMessage: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,18 +46,7 @@ class MainActivity : AppCompatActivity() {
         initRcView()
 
         database.messageListener(myRef, adapter, binding, binding.rcView)
-
-
-        val periodicRequest =
-            PeriodicWorkRequestBuilder<Worker>(1, TimeUnit.MINUTES)
-                .build()
-        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
-            WORK,
-            ExistingPeriodicWorkPolicy.KEEP,
-            periodicRequest
-        )
     }
-
 
     private fun initRcView() = with(binding){
         adapter = UserAdapter()
