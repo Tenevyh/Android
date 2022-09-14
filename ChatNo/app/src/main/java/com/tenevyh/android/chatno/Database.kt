@@ -20,10 +20,10 @@ class Database {
     fun messageListener(dRef: DatabaseReference, adapter: UserAdapter,
                         binding: ActivityMainBinding, rcView: RecyclerView){
         dRef.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot): Unit  {
+            override fun onDataChange(snapshot: DataSnapshot) {
                 val list = ArrayList<User>()
                 for(s in snapshot.children){
-                    val user = s.getValue(com.tenevyh.android.chatno.User::class.java)
+                    val user = s.getValue(User::class.java)
                     if (user != null) list.add(user)
                 }
                 adapter.submitList(list)

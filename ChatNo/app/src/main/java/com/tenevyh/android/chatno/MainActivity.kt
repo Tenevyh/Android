@@ -1,7 +1,5 @@
 package com.tenevyh.android.chatno
 
-import android.content.Context
-import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,9 +16,9 @@ import com.tenevyh.android.chatno.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityMainBinding
-    lateinit var auth: FirebaseAuth
-    lateinit var adapter: UserAdapter
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var auth: FirebaseAuth
+    private lateinit var adapter: UserAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,8 +66,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setActionBar(){
-        if (auth.currentUser?.photoUrl == null) {
-        } else {
+        if (auth.currentUser?.photoUrl != null){
             val actionBar = supportActionBar
             Thread {
                 val bitMap = Picasso.get().load(auth.currentUser?.photoUrl).get()
@@ -80,11 +77,6 @@ class MainActivity : AppCompatActivity() {
                     actionBar?.title = auth.currentUser?.displayName
                 }
             }.start()
-        }
-    }
-    companion object{
-        fun newIntent(context: Context) : Intent {
-            return Intent(context, MainActivity::class.java)
         }
     }
 }
