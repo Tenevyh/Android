@@ -1,14 +1,12 @@
 package com.tenevyh.android.weatherforyou.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.tenevyh.android.weatherforyou.R
 import com.tenevyh.android.weatherforyou.WeatherApi.MainViewModel
 import com.tenevyh.android.weatherforyou.adapters.WeatherAdapter
 import com.tenevyh.android.weatherforyou.adapters.WeatherModel
@@ -25,7 +23,7 @@ class HoursFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHoursBinding.inflate(inflater, container, false)
         return binding.root
     }

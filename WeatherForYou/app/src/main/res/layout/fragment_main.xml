@@ -16,7 +16,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -43,7 +44,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/aubrey"
-                android:text="20/07/2022 13:00"
+                android:text=""
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -54,14 +55,15 @@
                 android:layout_height="40dp"
                 android:src="@drawable/ic_launcher_foreground"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/tvCity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/aubrey"
-                android:text="Moscow"
+                android:text="@string/moscow"
                 android:textColor="#FFFFFF"
                 android:textSize="34sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -73,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/aubrey"
-                android:text="20 C"
+                android:text="@string/_20_c"
                 android:textColor="#FFFFFF"
                 android:textSize="70sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -85,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/aubrey"
-                android:text="Sunny"
+                android:text="@string/sunny"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -97,7 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/aubrey"
-                android:text="34 C / 15 С"
+                android:text=""
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -114,7 +116,8 @@
                 android:src="@drawable/search"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvCondition" />
+                app:layout_constraintTop_toBottomOf="@+id/tvCondition"
+                tools:ignore="ContentDescription" />
 
             <ImageButton
                 android:id="@+id/ibSync"
@@ -124,7 +127,8 @@
                 android:background="@null"
                 android:src="@drawable/cloud_sync"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/ibSearch" />
+                app:layout_constraintTop_toTopOf="@+id/ibSearch"
+                tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -142,12 +146,12 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="HOURS" />
+            android:text="" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DAYS" />
+            android:text="" />
 
     </com.google.android.material.tabs.TabLayout>
 

@@ -2,7 +2,6 @@ package com.tenevyh.android.weatherforyou
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.tenevyh.android.weatherforyou.databinding.ActivityMainBinding
 import com.tenevyh.android.weatherforyou.fragments.MainFragment
 
 

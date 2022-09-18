@@ -22,7 +22,7 @@ class DaysFragment : Fragment(), WeatherAdapter.Listener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentDaysBinding.inflate(inflater, container, false)
         return binding.root
     }
