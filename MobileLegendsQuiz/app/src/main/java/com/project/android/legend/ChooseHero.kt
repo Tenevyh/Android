@@ -1,6 +1,5 @@
 package com.project.android.legend
 
-import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,17 +21,13 @@ class ChooseHero: DialogFragment (), HeroAdapter.Listener {
 
     private lateinit var mCallBack: SelectedHero
 
-    override fun onAttach(activity: Activity) {
-        super.onAttach(activity)
-        mCallBack = activity as SelectedHero
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = ChooseHeroFragmentBinding.inflate(inflater, container, false)
+        mCallBack = activity as SelectedHero
         return binding.root
     }
 

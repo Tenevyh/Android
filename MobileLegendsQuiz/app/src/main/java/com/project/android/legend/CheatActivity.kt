@@ -1,6 +1,5 @@
 package com.project.android.legend
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -8,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.bignerdranch.android.geomain.R
 
 const val EXTRA_ANSWER_SHOWN="com.bignerdranch.android.geomain.answer_shown"
@@ -22,7 +21,7 @@ class CheatActivity : AppCompatActivity() {
     private lateinit var textView : TextView
 
     private val quizViewModel: QuizViewModel by lazy {
-        ViewModelProviders.of(this).get(QuizViewModel::class.java)
+        ViewModelProvider(this)[QuizViewModel::class.java]
     }
 
     private var answerIsTrue = false
@@ -35,20 +34,20 @@ class CheatActivity : AppCompatActivity() {
         answerTextView=findViewById(R.id.answer_text_view)
         showAnswerButton=findViewById(R.id.show_answer_button)
 
-        var level = Build.VERSION.SDK_INT
-        var levelApi = "API Level $level"
+        val level = Build.VERSION.SDK_INT
+        val levelApi = "API Level $level"
 
         textView = findViewById(R.id.levelText)
-        textView.setText(levelApi)
+        textView.text = levelApi
 
-        if(quizViewModel.showAnswer==true){
+        if(quizViewModel.showAnswer){
             val answerText = when{
                 answerIsTrue -> R.string.true_button
                 else -> R.string.false_button
             }
             answerTextView.setText(answerText)
-            setAnswerShownResult(true)
-            showAnswerButton.setEnabled(false)
+            true.setAnswerShownResult()
+            showAnswerButton.isEnabled = false
         }
 
         showAnswerButton.setOnClickListener{
@@ -57,17 +56,17 @@ class CheatActivity : AppCompatActivity() {
                 else -> R.string.false_button
             }
             answerTextView.setText(answerText)
-            setAnswerShownResult(true)
-            showAnswerButton.setEnabled(false)
+            true.setAnswerShownResult()
+            showAnswerButton.isEnabled = false
             quizViewModel.showAnswer=true
         }
     }
 
-    private fun setAnswerShownResult(isAnswerShown: Boolean){
+    private fun Boolean.setAnswerShownResult() {
         val data = Intent().apply {
-            putExtra(EXTRA_ANSWER_SHOWN, isAnswerShown)
+            putExtra(EXTRA_ANSWER_SHOWN, this@setAnswerShownResult)
         }
-        setResult(Activity.RESULT_OK, data)
+        setResult(RESULT_OK, data)
     }
 
     companion object {

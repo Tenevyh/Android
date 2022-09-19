@@ -96,9 +96,8 @@ class MainActivity : AppCompatActivity(), SelectedHero {
 
 
         ////////////////////////////////////////////////////
-        textSwitcher.setOnClickListener { view: View ->
-            if (quizViewModel.currentIndex == quizViewModel.getQuestionBank().size - 1) {
-            } else {
+        textSwitcher.setOnClickListener {
+            if (quizViewModel.currentIndex != quizViewModel.getQuestionBank().size - 1) {
                 quizViewModel.currentIndex =
                     (quizViewModel.currentIndex + 1) % quizViewModel.getQuestionBank().size
                 updateQuestion()
@@ -109,8 +108,8 @@ class MainActivity : AppCompatActivity(), SelectedHero {
             checkAnswer(true)
             quizViewModel.completed()
             offButton()
-            if(quizViewModel.questionIndex==quizViewModel.getQuestionBank().size-1){}
-            else{quizViewModel.questionIndex++}
+            if (quizViewModel.questionIndex != quizViewModel
+                    .getQuestionBank().size-1) {quizViewModel.questionIndex++}
             showResult()
             Thread.sleep(250)
             quizViewModel.moveToNext()
@@ -121,8 +120,8 @@ class MainActivity : AppCompatActivity(), SelectedHero {
             checkAnswer(false)
             quizViewModel.completed()
             offButton()
-            if(quizViewModel.questionIndex==quizViewModel.getQuestionBank().size-1){}
-            else{quizViewModel.questionIndex++}
+            if (quizViewModel.questionIndex != quizViewModel
+                    .getQuestionBank().size-1) {quizViewModel.questionIndex++}
             showResult()
             Thread.sleep(1000)
             quizViewModel.moveToNext()
@@ -132,8 +131,7 @@ class MainActivity : AppCompatActivity(), SelectedHero {
         prevButton.setOnClickListener {
             textSwitcher.inAnimation = prevTextIn
             textSwitcher.outAnimation = prevTextOut
-            if (quizViewModel.currentIndex == 0) {
-            } else {
+            if (quizViewModel.currentIndex != 0) {
                 quizViewModel.moveToPrev()
                 updateQuestion()
             }
@@ -176,7 +174,7 @@ class MainActivity : AppCompatActivity(), SelectedHero {
 
     private fun showResult(){
         if (quizViewModel.questionIndex == quizViewModel.getQuestionBank().size - 1) {
-        var builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this)
             builder.setTitle("Результат!").setMessage(
                 " Верно: ${quizViewModel.correctIndex}\n " +
                         "Неверно: ${quizViewModel.inCorrectIndex}\n" +
