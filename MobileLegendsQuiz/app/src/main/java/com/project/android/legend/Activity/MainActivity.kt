@@ -1,4 +1,4 @@
-package com.project.android.legend
+package com.project.android.legend.Activity
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -12,6 +12,8 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bignerdranch.android.geomain.R
+import com.project.android.legend.Fragment.ChooseHero
+import com.project.android.legend.Model.QuizViewModel
 
 private const val TAG = "MainActivity"
 private const val KEY_INDEX = "index"

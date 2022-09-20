@@ -1,4 +1,4 @@
-package com.project.android.legend
+package com.project.android.legend.Activity
 
 import android.content.Context
 import android.content.Intent
@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.bignerdranch.android.geomain.R
+import com.project.android.legend.Model.QuizViewModel
 
 const val EXTRA_ANSWER_SHOWN="com.bignerdranch.android.geomain.answer_shown"
 private const val EXTRA_ANSWER_IS_TRUE="com.bignerdranch.android.geomain.answer_is_true"

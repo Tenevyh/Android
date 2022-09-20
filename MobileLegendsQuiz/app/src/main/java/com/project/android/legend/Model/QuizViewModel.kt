@@ -1,7 +1,9 @@
-package com.project.android.legend
+package com.project.android.legend.Model
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.project.android.legend.DataClass.Hero
+import com.project.android.legend.DataClass.Question
 
 class QuizViewModel : ViewModel(){
 

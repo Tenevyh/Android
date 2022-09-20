@@ -1,4 +1,4 @@
-package com.project.android.legend
+package com.project.android.legend.Fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bignerdranch.android.geomain.R
 import com.bignerdranch.android.geomain.databinding.ChooseHeroFragmentBinding
+import com.project.android.legend.DataClass.Hero
+import com.project.android.legend.Adapter.HeroAdapter
+import com.project.android.legend.Model.QuizViewModel
+import com.project.android.legend.Interface.SelectedHero
 
 class ChooseHero: DialogFragment (), HeroAdapter.Listener {
 
