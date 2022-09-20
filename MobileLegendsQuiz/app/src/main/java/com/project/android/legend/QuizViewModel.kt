@@ -100,7 +100,7 @@ class QuizViewModel : ViewModel(){
             question.completed=false
         }
     }
-    class HeroQuestions(
+    private class HeroQuestions(
 
         val questionsLayla: List<Question> = listOf(
             Question("Противниками Лейлы стали ученые из лабы 1718.", true),

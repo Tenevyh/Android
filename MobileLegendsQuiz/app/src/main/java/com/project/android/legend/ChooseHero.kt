@@ -16,7 +16,7 @@ class ChooseHero: DialogFragment (), HeroAdapter.Listener {
     private lateinit var binding: ChooseHeroFragmentBinding
     private lateinit var adapter: HeroAdapter
     private val model: QuizViewModel by lazy {
-        ViewModelProvider(this)[QuizViewModel::class.java]
+        ViewModelProvider(requireActivity())[QuizViewModel::class.java]
     }
 
     private lateinit var mCallBack: SelectedHero
@@ -38,6 +38,7 @@ class ChooseHero: DialogFragment (), HeroAdapter.Listener {
         model.liveHero.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
+        if(model.getQuestionBank().size<3) binding.back.isEnabled = false
     }
 
     private fun initRcView() = with(binding) {
