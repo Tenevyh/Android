@@ -10,13 +10,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GeoQuiz.Fullscreen">
         <activity
+            android:name="com.project.android.legend.Activity.SplashActivity"
+            android:theme="@style/SplashTheme"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name="com.project.android.legend.Activity.CheatActivity"
             android:exported="false" />
         <activity
             android:name="com.project.android.legend.Activity.MainActivity"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
