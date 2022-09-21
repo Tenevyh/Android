@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bignerdranch.android.geomain.R
 import com.project.android.legend.Fragment.ChooseHero
+import com.project.android.legend.Interface.SelectedHero
 import com.project.android.legend.Model.QuizViewModel
 
 private const val TAG = "MainActivity"
@@ -37,6 +38,10 @@ class MainActivity : AppCompatActivity(), SelectedHero {
 
         Log.d(TAG, "onCreate(Bundle?) called")
         setContentView(R.layout.activity_main)
+
+        if(quizViewModel.getQuestionBank().size < 3) {
+            val fragment = ChooseHero().show(supportFragmentManager, "ChooseHero")
+        }
 
         val currentIndex = savedInstanceState?.getInt(KEY_INDEX, 0) ?: 0
         quizViewModel.currentIndex = currentIndex
@@ -159,13 +164,6 @@ class MainActivity : AppCompatActivity(), SelectedHero {
         if (requestCode == REQUEST_CODE_CHEAT){
             quizViewModel.cheatQuestion()
         }
-    }
-
-    override fun onStart() {
-        if(quizViewModel.getQuestionBank().size < 3) {
-            val fragment = ChooseHero().show(supportFragmentManager, "ChooseHero")
-        }
-        super.onStart()
     }
 
     override fun onSaveInstanceState(savedInstanceState:  Bundle) {
