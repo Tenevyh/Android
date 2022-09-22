@@ -15,25 +15,17 @@ class QuizViewModel : ViewModel(){
         Hero("Ван Ван", heroQuestions.questionsVanVan, "2"),
         Hero("Валир", heroQuestions.questionsValir, "3"),
         Hero("Беатрис", heroQuestions.questionsBeatris, "4"),
-        Hero("Терзила", heroQuestions.questionsBeatris, "5"),
-        Hero("Руби", heroQuestions.questionsBeatris, "6"),
-        Hero("Тигрил", heroQuestions.questionsBeatris, "7"),
-        Hero("Вейл", heroQuestions.questionsBeatris, "8"),
-        Hero("Лилия", heroQuestions.questionsBeatris, "9"),
-        Hero("Москов", heroQuestions.questionsBeatris, "10"),
-        Hero("Мия", heroQuestions.questionsBeatris, "10"),
-        Hero("Горд", heroQuestions.questionsBeatris, "11"),
-        Hero("Клауд", heroQuestions.questionsBeatris, "12"),
-        Hero("Тамуз", heroQuestions.questionsBeatris, "13"),
-        Hero("Роджер", heroQuestions.questionsBeatris, "14"),
-        Hero("Наташа", heroQuestions.questionsBeatris, "15"),
-        Hero("Карина", heroQuestions.questionsBeatris, "16"),
-        Hero("Госсен", heroQuestions.questionsBeatris, "17"),
-        Hero("Бальмонд", heroQuestions.questionsBeatris, "18"),
-        Hero("Атлас", heroQuestions.questionsBeatris, "19"),
-        Hero("Франко", heroQuestions.questionsBeatris, "20"),
-        Hero("Эймон", heroQuestions.questionsBeatris, "21"),
-
+        Hero("Терзила", heroQuestions.questionsTerzila, "5"),
+        Hero("Руби", heroQuestions.questionsRuby, "6"),
+        Hero("Тигрил", heroQuestions.questionsTigril, "7"),
+        Hero("Вейл", heroQuestions.questionsVail, "8"),
+        Hero("Лилия", heroQuestions.questionsLiliya, "9"),
+        Hero("Москов", heroQuestions.questionsMoscov, "10"),
+        Hero("Мия", heroQuestions.questionsMiya, "11"),
+        Hero("Горд", heroQuestions.questionsGord, "12"),
+        Hero("Клауд", heroQuestions.questionsKlaud, "13"),
+        Hero("Тамуз", heroQuestions.questionsTamuz, "14"),
+        Hero("Роджер", heroQuestions.questionsRodjer, "15"),
         )
 
 
@@ -147,6 +139,105 @@ class QuizViewModel : ViewModel(){
             Question("Ученым из лабы 1718 не удалось взломать проект.", false),
             Question("Беатрис забрала контроль на серверами у сумасшедшего биохимика Октавиуса.", true),
             Question("Беатрис подарила свою терминальную систему «Выживание: Нексус» Союзу ученых.", true)
+        ),
+
+        val questionsTerzila: List<Question> = listOf(
+            Question("Теризла был владельцев кузни.", true),
+            Question("В крахе Теризлы виновата Империя.", true),
+            Question("Над Теризлой проводили испытания ядами.", false),
+            Question("Первые слова услышаные после освобождения «Сопротивляйся. " +
+                    "Пусть ненависть распространиться и взорвёт всё на этой земле.", false),
+            Question("Первый к кто заговорил с Теризлой была красивая девушка.", true),
+            Question("Красивая девушка была ведьмой.", true)
+        ),
+
+        val questionsRuby: List<Question> = listOf(
+            Question("Валир пять лет жил на вулкане.", true),
+            Question("Горд был тем, кто остановил битву Валира и Вейла.", true),
+            Question("Вейл хотел убить Валира.", false),
+            Question("Горд помог Вейлу в бою с Валиром.", false),
+            Question("Тело Валира было всё в ожогах.", true),
+            Question("Сражение с Валиром разбудило вулкан.", true)
+        ),
+
+        val questionsTigril: List<Question> = listOf(
+            Question("Валир пять лет жил на вулкане.", true),
+            Question("Горд был тем, кто остановил битву Валира и Вейла.", true),
+            Question("Вейл хотел убить Валира.", false),
+            Question("Горд помог Вейлу в бою с Валиром.", false),
+            Question("Тело Валира было всё в ожогах.", true),
+            Question("Сражение с Валиром разбудило вулкан.", true)
+        ),
+
+        val questionsVail: List<Question> = listOf(
+            Question("Валир пять лет жил на вулкане.", true),
+            Question("Горд был тем, кто остановил битву Валира и Вейла.", true),
+            Question("Вейл хотел убить Валира.", false),
+            Question("Горд помог Вейлу в бою с Валиром.", false),
+            Question("Тело Валира было всё в ожогах.", true),
+            Question("Сражение с Валиром разбудило вулкан.", true)
+        ),
+
+        val questionsLiliya: List<Question> = listOf(
+            Question("Валир пять лет жил на вулкане.", true),
+            Question("Горд был тем, кто остановил битву Валира и Вейла.", true),
+            Question("Вейл хотел убить Валира.", false),
+            Question("Горд помог Вейлу в бою с Валиром.", false),
+            Question("Тело Валира было всё в ожогах.", true),
+            Question("Сражение с Валиром разбудило вулкан.", true)
+        ),
+
+        val questionsMoscov: List<Question> = listOf(
+            Question("Валир пять лет жил на вулкане.", true),
+            Question("Горд был тем, кто остановил битву Валира и Вейла.", true),
+            Question("Вейл хотел убить Валира.", false),
+            Question("Горд помог Вейлу в бою с Валиром.", false),
+            Question("Тело Валира было всё в ожогах.", true),
+            Question("Сражение с Валиром разбудило вулкан.", true)
+        ),
+
+        val questionsMiya: List<Question> = listOf(
+            Question("Валир пять лет жил на вулкане.", true),
+            Question("Горд был тем, кто остановил битву Валира и Вейла.", true),
+            Question("Вейл хотел убить Валира.", false),
+            Question("Горд помог Вейлу в бою с Валиром.", false),
+            Question("Тело Валира было всё в ожогах.", true),
+            Question("Сражение с Валиром разбудило вулкан.", true)
+    ),
+        val questionsGord: List<Question> = listOf(
+            Question("Валир пять лет жил на вулкане.", true),
+            Question("Горд был тем, кто остановил битву Валира и Вейла.", true),
+            Question("Вейл хотел убить Валира.", false),
+            Question("Горд помог Вейлу в бою с Валиром.", false),
+            Question("Тело Валира было всё в ожогах.", true),
+            Question("Сражение с Валиром разбудило вулкан.", true)
+        ),
+
+        val questionsKlaud: List<Question> = listOf(
+            Question("Валир пять лет жил на вулкане.", true),
+            Question("Горд был тем, кто остановил битву Валира и Вейла.", true),
+            Question("Вейл хотел убить Валира.", false),
+            Question("Горд помог Вейлу в бою с Валиром.", false),
+            Question("Тело Валира было всё в ожогах.", true),
+            Question("Сражение с Валиром разбудило вулкан.", true)
+        ),
+
+        val questionsTamuz: List<Question> = listOf(
+            Question("Валир пять лет жил на вулкане.", true),
+            Question("Горд был тем, кто остановил битву Валира и Вейла.", true),
+            Question("Вейл хотел убить Валира.", false),
+            Question("Горд помог Вейлу в бою с Валиром.", false),
+            Question("Тело Валира было всё в ожогах.", true),
+            Question("Сражение с Валиром разбудило вулкан.", true)
+        ),
+
+        val questionsRodjer: List<Question> = listOf(
+            Question("Валир пять лет жил на вулкане.", true),
+            Question("Горд был тем, кто остановил битву Валира и Вейла.", true),
+            Question("Вейл хотел убить Валира.", false),
+            Question("Горд помог Вейлу в бою с Валиром.", false),
+            Question("Тело Валира было всё в ожогах.", true),
+            Question("Сражение с Валиром разбудило вулкан.", true)
         )
     )
 }
