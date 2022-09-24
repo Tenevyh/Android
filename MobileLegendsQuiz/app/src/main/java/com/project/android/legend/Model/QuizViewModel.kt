@@ -152,12 +152,12 @@ class QuizViewModel : ViewModel(){
         ),
 
         val questionsRuby: List<Question> = listOf(
-            Question("Валир пять лет жил на вулкане.", true),
-            Question("Горд был тем, кто остановил битву Валира и Вейла.", true),
-            Question("Вейл хотел убить Валира.", false),
-            Question("Горд помог Вейлу в бою с Валиром.", false),
-            Question("Тело Валира было всё в ожогах.", true),
-            Question("Сражение с Валиром разбудило вулкан.", true)
+            Question("Деревня девочки находилась глубоко в лесу.", true),
+            Question("Когда волки пришли, Руби стояла на коленях на кровати.", true),
+            Question("Она просила бога об отступлении волков.", false),
+            Question("Волк по имени Рык убил бабушку и дедушку.", false),
+            Question("Руба выжила прячась под трупами родных.", true),
+            Question("Она в одиночку перебила всех волков косой, в живых остался только вожак.", true)
         ),
 
         val questionsTigril: List<Question> = listOf(

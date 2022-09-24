@@ -250,7 +250,7 @@ class MainActivity : AppCompatActivity(), SelectedHero {
             "5" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[5].question)
                 rootLayout.setBackgroundResource(R.drawable.terizla)}
             "6" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[6].question)
-                rootLayout.setBackgroundResource(R.drawable.beatris)}
+                rootLayout.setBackgroundResource(R.drawable.ruby)}
             "7" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[7].question)
                 rootLayout.setBackgroundResource(R.drawable.beatris)}
             "8" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[8].question)
