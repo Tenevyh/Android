@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/choose"
-        android:icon="@android:drawable/ic_menu_manage"
-        android:title="@string/choose_hero"
-        app:showAsAction="ifRoom|withText" />
+        android:title="@string/Choose"
+        app:showAsAction="always" />
 </menu>

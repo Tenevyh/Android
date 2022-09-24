@@ -23,4 +23,5 @@
     <string name="valir">Валир</string>
     <string name="back">Назад</string>
     <string name="hero">Выберите героя!</string>
+    <string name="Choose">Выбрать героя</string>
 </resources>
