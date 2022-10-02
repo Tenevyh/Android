@@ -258,7 +258,7 @@ class MainActivity : AppCompatActivity(), SelectedHero {
             "9" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[9].question)
                 rootLayout.setBackgroundResource(R.drawable.liliya)}
             "10" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[10].question)
-                rootLayout.setBackgroundResource(R.drawable.beatris)}
+                rootLayout.setBackgroundResource(R.drawable.moscov)}
             "11" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[11].question)
                 rootLayout.setBackgroundResource(R.drawable.beatris)}
             "12" -> {quizViewModel.setQuestionBank(quizViewModel.getHero()[12].question)
