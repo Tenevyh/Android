@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import com.tenevyh.android.dusk.ui.login.ChatAuthStateListener
+import com.tenevyh.android.dusk.ui.login.LoginFragment
 import com.tenevyh.android.dusk.ui.utils.replaceFragment
 
 class MainActivity : AppCompatActivity(), ChatAuthStateListener {
