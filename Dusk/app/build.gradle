@@ -38,7 +38,7 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -47,14 +47,11 @@ dependencies {
 
     // FirebaseUI for Firebase Authentication
     implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
-    // FirebaseUI for Real-time database
-    implementation 'com.firebaseui:firebase-ui-database:6.2.0'
     // Firebase Realtime Database KTX
     implementation 'com.google.firebase:firebase-database-ktx:20.0.6'
     // Firebase cloud Storage
     implementation 'com.google.firebase:firebase-storage-ktx:20.0.2'
 
-    implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.github.marlonlom:timeago:4.0.3'
 
     testImplementation 'junit:junit:4.13.2'

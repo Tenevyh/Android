@@ -10,7 +10,6 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
 import com.tenevyh.android.dusk.R
 import com.tenevyh.android.dusk.ui.repository.UserRepository
 import com.tenevyh.android.dusk.ui.utils.mapFromFirebaseUser
