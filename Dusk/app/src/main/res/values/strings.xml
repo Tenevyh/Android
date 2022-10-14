@@ -7,4 +7,5 @@
     <string name="login_error_msg">B Messaging</string>
     <string name="exit">Exit</string>
     <string name="retry">Retry</string>
+    <string name="this_feature_is_not_implemented_yet">This feature is not implemented yet.</string>
 </resources>
