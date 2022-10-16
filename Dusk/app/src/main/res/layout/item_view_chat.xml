@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/message_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:paddingVertical="5dp">
 
     <LinearLayout
@@ -12,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="28dp"
+        android:background="@drawable/shape_incoming_msg"
         android:orientation="vertical"
         android:padding="10dp"
         tools:ignore="UselessParent">
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:textIsSelectable="true"
             android:textSize="16sp"
-            tools:text="This is message text"/>
+            tools:text="This is message text" />
 
         <TextView
             android:id="@+id/timeTv"
@@ -35,6 +35,7 @@
             android:textIsSelectable="true"
             android:textSize="11sp"
             tools:text="5 min ago" />
+
     </LinearLayout>
 
 </FrameLayout>

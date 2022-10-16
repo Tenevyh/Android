@@ -17,7 +17,7 @@ class ChatScreenAdapter(
             .inflate(R.layout.item_view_chat, parent, false))
 
         holder.itemView.setOnClickListener{
-            onItemClickListener?.onItemClick(options.snapshots[holder.absoluteAdapterPosition])
+            onItemClickListener?.onItemClick(options.snapshots[holder.adapterPosition])
         }
         return holder
     }

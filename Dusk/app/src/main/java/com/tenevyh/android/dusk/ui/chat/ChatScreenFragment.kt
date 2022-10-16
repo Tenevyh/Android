@@ -27,10 +27,6 @@ class ChatScreenFragment : DialogFragment(R.layout.fragment_chat){
 
     private lateinit var chatQuery: Query
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
