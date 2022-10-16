@@ -13,9 +13,9 @@ import com.tenevyh.android.dusk.databinding.FragmentContactsBinding
 import com.tenevyh.android.dusk.ui.chat.ChatScreenFragment
 import com.tenevyh.android.dusk.ui.repository.ChatUser
 import com.tenevyh.android.dusk.ui.utils.mapFromFirebaseUser
+import kotlinx.android.synthetic.main.fragment_contacts.*
 
 class ContactsFragment : Fragment(R.layout.fragment_contacts){
-    private lateinit var binding : FragmentContactsBinding
     private val userQuery = FirebaseDatabase.getInstance().getReference("users")
         .limitToFirst(50)
 
@@ -23,7 +23,6 @@ class ContactsFragment : Fragment(R.layout.fragment_contacts){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = FragmentContactsBinding.inflate(layoutInflater)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,7 +30,7 @@ class ContactsFragment : Fragment(R.layout.fragment_contacts){
         prepareRecyclerView()
     }
 
-    private fun prepareRecyclerView() = with(binding){
+    private fun prepareRecyclerView() {
         val options = FirebaseRecyclerOptions.Builder<ChatUser>()
             .setLifecycleOwner(this@ContactsFragment)
             .setQuery(userQuery, ChatUser::class.java)

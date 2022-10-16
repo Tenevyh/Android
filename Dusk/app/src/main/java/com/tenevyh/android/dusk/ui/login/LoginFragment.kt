@@ -23,8 +23,8 @@ class LoginFragment : Fragment() {
         AuthUI.IdpConfig.GoogleBuilder().build(),
     )
     private val signLauncher = registerForActivityResult(
-        FirebaseAuthUIActivityResultContract()){
-        res -> this.onSignInResult(res)
+        FirebaseAuthUIActivityResultContract()){ res ->
+        this.onSignInResult(res)
     }
 
     override fun onAttach(context: Context) {

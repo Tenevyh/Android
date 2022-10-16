@@ -34,10 +34,10 @@ class ChatViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         msgItemView.background = ContextCompat.getDrawable(msgItemView.context,
             if (isSender) {
-            1
+            com.firebase.ui.auth.R.drawable.fui_ic_anonymous_white_24dp
             //R.drawable.outgoing
         } else {
-            2
+            com.firebase.ui.auth.R.drawable.fui_ic_anonymous_white_24dp
             //R.drawable.incoming
         })
     }

@@ -28,4 +28,12 @@ class MainActivity : AppCompatActivity(), ChatAuthStateListener {
             replaceFragment(R.id.fragmentContainer, ChatLandingFragment())
         }
     }
+    
+    override fun onBackPressed() {
+        if(supportFragmentManager.backStackEntryCount == 0) {
+            finish()
+        } else {
+            super.onBackPressed()
+        }
+    }
 }

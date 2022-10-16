@@ -18,6 +18,7 @@ import com.tenevyh.android.dusk.R
 import com.tenevyh.android.dusk.databinding.FragmentChatBinding
 import com.tenevyh.android.dusk.ui.repository.ChatUser
 import com.tenevyh.android.dusk.ui.utils.getChatRoot
+import kotlinx.android.synthetic.main.fragment_chat.*
 
 class ChatScreenFragment : DialogFragment(R.layout.fragment_chat){
     private lateinit var currentUser: ChatUser
@@ -25,11 +26,9 @@ class ChatScreenFragment : DialogFragment(R.layout.fragment_chat){
     private val chatsHeadRef = FirebaseDatabase.getInstance().reference.child("chats_pk")
 
     private lateinit var chatQuery: Query
-    private lateinit var binding: FragmentChatBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = FragmentChatBinding.inflate(layoutInflater)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,7 +44,7 @@ class ChatScreenFragment : DialogFragment(R.layout.fragment_chat){
         attachRecyclerViewAdapter()
     }
 
-    private fun setupToolbar() = with(binding){
+    private fun setupToolbar() {
         toolbar.setNavigationOnClickListener { dismiss() }
         userName.text = chatWith.displayName
         if(!chatWith.photoUrl.isNullOrEmpty()){
@@ -57,17 +56,17 @@ class ChatScreenFragment : DialogFragment(R.layout.fragment_chat){
 
     @SuppressLint("RestrictedApi")
     private fun setupSendMsgView(){
-        ImeHelper.setImeOnDoneListener(binding.msgEditText) { onSendMsgClick()}
-        binding.msgTextInputLayout.setEndIconOnClickListener { onSendMsgClick() }
+        ImeHelper.setImeOnDoneListener(msgEditText) { onSendMsgClick()}
+        msgTextInputLayout.setEndIconOnClickListener { onSendMsgClick() }
     }
 
     private fun onSendMsgClick() {
         onAddMessage(
             ChatModel(senderUid = currentUser.uid,
                 receiverUid = chatWith.uid,
-                message = binding.msgEditText.text.toString(),
+                message = msgEditText.text.toString(),
                 timestamp = System.currentTimeMillis()))
-        binding.msgEditText.setText("")
+        msgEditText.setText("")
     }
 
     private fun readArguments(){
@@ -97,10 +96,10 @@ class ChatScreenFragment : DialogFragment(R.layout.fragment_chat){
 
         adapter.registerAdapterDataObserver(object : AdapterDataObserver(){
             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-                binding.messageRecyclerView.smoothScrollToPosition(adapter.itemCount)
+                messageRecyclerView.smoothScrollToPosition(adapter.itemCount)
             }
         })
-        binding.messageRecyclerView.adapter = adapter
+        messageRecyclerView.adapter = adapter
     }
 
     override fun getTheme(): Int {
