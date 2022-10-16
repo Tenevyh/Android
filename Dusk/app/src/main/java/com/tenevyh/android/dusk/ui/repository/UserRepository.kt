@@ -8,16 +8,11 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
 import com.tenevyh.android.dusk.ui.utils.FetchChatUserListener
 import com.tenevyh.android.dusk.ui.utils.mapFromFirebaseUser
 
-private const val CHAT_USER_TABLE = "users"
 
 class UserRepository{
-
-    private val rootRef = FirebaseStorage.getInstance().reference
-    private val feedbackRef = rootRef.child("user_feedback")
 
     fun createOrUpdateUser(user: ChatUser) {
         val database = Firebase.database

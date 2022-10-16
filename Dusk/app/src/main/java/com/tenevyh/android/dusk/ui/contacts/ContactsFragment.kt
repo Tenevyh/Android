@@ -16,14 +16,10 @@ import com.tenevyh.android.dusk.ui.utils.mapFromFirebaseUser
 import kotlinx.android.synthetic.main.fragment_contacts.*
 
 class ContactsFragment : Fragment(R.layout.fragment_contacts){
-    private val userQuery = FirebaseDatabase.getInstance().getReference("users")
+    private val userQuery = FirebaseDatabase.getInstance().getReference("users_2")
         .limitToFirst(50)
 
     private lateinit var adapter: ContactsAdapter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
