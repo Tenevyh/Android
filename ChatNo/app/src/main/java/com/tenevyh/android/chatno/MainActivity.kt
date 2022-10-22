@@ -12,9 +12,10 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import com.tenevyh.android.chatno.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
@@ -24,8 +25,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
         auth = Firebase.auth
         setActionBar()
 
@@ -34,19 +33,19 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        binding.bSend.setOnClickListener {
+        bSend.setOnClickListener {
             myRef.child(myRef.push().key ?: "bla-bla")
-                .setValue(User(auth.currentUser?.displayName, binding.editMessege.text.toString()))
-            binding.editMessege.text = null
+                .setValue(User(auth.currentUser?.displayName, editMessege.text.toString()))
+            editMessege.text = null
 
         }
 
         initRcView()
 
-        database.messageListener(myRef, adapter, binding, binding.rcView)
+        database.messageListener(myRef, adapter, binding, rcView)
     }
 
-    private fun initRcView() = with(binding){
+    private fun initRcView() {
         adapter = UserAdapter()
         rcView.layoutManager = LinearLayoutManager(this@MainActivity)
         rcView.adapter = adapter
