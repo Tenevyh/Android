@@ -11,14 +11,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="28dp"
-        android:background="@drawable/shape_incoming_msg"
+        android:background="@color/material_gray_500"
         android:orientation="vertical"
         android:padding="10dp"
         tools:ignore="UselessParent">
 
         <TextView
             android:id="@+id/messageTv"
-            style="@style/TextAppearance.MaterialComponents.Subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textIsSelectable="true"
@@ -27,7 +26,6 @@
 
         <TextView
             android:id="@+id/timeTv"
-            style="@style/TextAppearance.MaterialComponents.Subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"

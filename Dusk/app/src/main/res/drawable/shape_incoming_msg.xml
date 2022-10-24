@@ -8,6 +8,6 @@
         android:topLeftRadius="@dimen/message_bubble_corners_radius"
         android:topRightRadius="@dimen/message_bubble_corners_radius" />
 
-    <solid android:color="@color/chat_bubble_bg" />
+    <solid android:color="@color/material_red_a200" />
 
 </shape>

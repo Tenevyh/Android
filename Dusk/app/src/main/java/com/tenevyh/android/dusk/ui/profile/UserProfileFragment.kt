@@ -23,6 +23,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
+import com.tenevyh.android.dusk.ui.login.LoginFragment
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class UserProfileFragment : Fragment(R.layout.fragment_profile){
@@ -82,7 +83,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_profile){
         chatUser.photoUrl?.let { _photoUrl ->
             if (_photoUrl.isNotEmpty()) {
                 Picasso.get().load(_photoUrl)
-                    .placeholder(com.firebase.ui.auth.R.drawable.fui_ic_anonymous_white_24dp)
+                    .placeholder(R.drawable.ic_anon_user_48dp)
             }
         }
         etEmail.setText(firebaseUser.email)

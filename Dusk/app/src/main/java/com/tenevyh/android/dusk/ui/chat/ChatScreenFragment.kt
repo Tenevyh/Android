@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import com.firebase.ui.auth.util.ui.ImeHelper
 import com.firebase.ui.database.FirebaseRecyclerOptions
@@ -15,7 +14,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import com.squareup.picasso.Picasso
 import com.tenevyh.android.dusk.R
-import com.tenevyh.android.dusk.databinding.FragmentChatBinding
 import com.tenevyh.android.dusk.ui.repository.ChatUser
 import com.tenevyh.android.dusk.ui.utils.getChatRoot
 import kotlinx.android.synthetic.main.fragment_chat.*
@@ -45,7 +43,7 @@ class ChatScreenFragment : DialogFragment(R.layout.fragment_chat){
         userName.text = chatWith.displayName
         if(!chatWith.photoUrl.isNullOrEmpty()){
             Picasso.get().load(chatWith.photoUrl)
-                .placeholder(com.firebase.ui.auth.R.drawable.fui_ic_anonymous_white_24dp)
+                .placeholder(R.drawable.ic_anon_user_48dp)
                 .into(contactPic)
         }
     }

@@ -25,10 +25,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#979797"
             android:gravity="center"
-            android:textColor="@color/black"
             android:text="@string/this_feature_is_not_implemented_yet"
-            android:textSize="20sp"/>
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
     </com.google.android.material.card.MaterialCardView>
 
