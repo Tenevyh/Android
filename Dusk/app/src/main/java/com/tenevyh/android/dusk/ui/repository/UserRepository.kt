@@ -16,14 +16,14 @@ class UserRepository{
 
     fun createOrUpdateUser(user: ChatUser) {
         val database = Firebase.database
-        val userRef = database.getReference("user_2")
+        val userRef = database.getReference("users")
         val userNodeRef = userRef.child(user.uid)
         userNodeRef.setValue(user)
     }
 
     fun getCurrentUserByUid(firebaseUser: FirebaseUser, listener: FetchChatUserListener) {
         val database = Firebase.database
-        val userDbRef = database.getReference("users_2")
+        val userDbRef = database.getReference("users")
         userDbRef.child(firebaseUser.uid).addListenerForSingleValueEvent(
             object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {

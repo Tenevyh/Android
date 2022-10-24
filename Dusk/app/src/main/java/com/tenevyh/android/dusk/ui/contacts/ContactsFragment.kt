@@ -16,7 +16,7 @@ import com.tenevyh.android.dusk.ui.utils.mapFromFirebaseUser
 import kotlinx.android.synthetic.main.fragment_contacts.*
 
 class ContactsFragment : Fragment(R.layout.fragment_contacts){
-    private val userQuery = FirebaseDatabase.getInstance().getReference("users_2")
+    private val userQuery = FirebaseDatabase.getInstance().getReference("users")
         .limitToFirst(50)
 
     private lateinit var adapter: ContactsAdapter
