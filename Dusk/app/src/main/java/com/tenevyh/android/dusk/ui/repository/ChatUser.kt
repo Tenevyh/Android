@@ -7,4 +7,4 @@ import kotlinx.android.parcel.Parcelize
 data class ChatUser(val uid: String ="",
                     val displayName: String ="",
                     val lastSeen: Long = System.currentTimeMillis(),
-                    val photoUrl: String? ="") : Parcelable
+                    var photoUrl: String? ="") : Parcelable

@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import com.tenevyh.android.dusk.R
 import com.tenevyh.android.dusk.ui.repository.ChatUser
@@ -16,12 +17,17 @@ class ContactsViewHolder(
     private val pic: ImageView = itemView.findViewById(R.id.ivUserImage)
 
     fun bind(user: ChatUser) {
-        name.text = user.displayName
+        if (FirebaseAuth.getInstance().currentUser!!.uid==user.uid) {
+            name.text = "Личный дневник"
+            Picasso.get().load(R.drawable.self).into(pic)
+        } else {
+            name.text = user.displayName
         user.photoUrl?.let { _photoUrl ->
             if (_photoUrl.isNotEmpty()) {
                 Picasso.get().load(_photoUrl)
                     .placeholder(R.drawable.ic_anon_user_48dp)
                     .into(pic)
+            }
             }
         }
     }

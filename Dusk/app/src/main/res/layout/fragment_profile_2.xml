@@ -30,7 +30,7 @@
             android:id="@+id/btnUpdateImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Update Image" />
+            android:text="@string/update_img" />
 
         <EditText
             android:id="@+id/etName"
@@ -41,7 +41,7 @@
             android:id="@+id/btnUpdateName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Update Name" />
+            android:text="@string/update_name" />
 
         <EditText
             android:id="@+id/etEmail"
@@ -54,7 +54,7 @@
             android:id="@+id/btnUpdateEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Update Email" />
+            android:text="@string/update_email" />
 
         <EditText
             android:id="@+id/etPhone"
@@ -67,7 +67,7 @@
             android:id="@+id/btnUpdatePhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Update Phone" />
+            android:text="@string/update_phone" />
 
         <EditText
             android:id="@+id/etPassword"
@@ -79,7 +79,7 @@
             android:id="@+id/btnUpdatePwd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Update Password" />
+            android:text="@string/update_pass" />
 
     </LinearLayout>
 </ScrollView>

@@ -2,7 +2,6 @@ package com.tenevyh.android.dusk.ui.contacts
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.tenevyh.android.dusk.R
@@ -27,8 +26,8 @@ class ContactsAdapter(private val options: FirebaseRecyclerOptions<ChatUser>,
         return holder
     }
 
-    override fun onBindViewHolder(holder: ContactsViewHolder, position: Int, model: ChatUser) {
-        holder.bind(model)
+    override fun onBindViewHolder(holder: ContactsViewHolder, position: Int, user: ChatUser) {
+            holder.bind(user)
     }
 
     override fun onDataChanged() {
