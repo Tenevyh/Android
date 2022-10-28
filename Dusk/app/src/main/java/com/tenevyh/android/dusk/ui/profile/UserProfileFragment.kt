@@ -72,9 +72,10 @@ class UserProfileFragment : Fragment(R.layout.fragment_profile){
             FirebaseAuth.getInstance().currentUser?.updatePassword(etPassword.text.toString())
         }
         logout.setOnClickListener {
-            AuthUI.getInstance().signOut(requireContext())
-            startActivity(Intent(context, MainActivity::class.java))
-            activity?.finish()
+                AuthUI.getInstance().signOut(requireContext())
+                Thread.sleep(500)
+                startActivity(Intent(context, MainActivity::class.java))
+                activity?.finish()
         }
     }
 

@@ -8,6 +8,8 @@ import com.tenevyh.android.dusk.ui.login.LoginFragment
 import com.tenevyh.android.dusk.ui.main.ChatLandingFragment
 import com.tenevyh.android.dusk.ui.utils.replaceFragment
 
+private const val TAG = "CurrentUser"
+
 class MainActivity : AppCompatActivity(), ChatAuthStateListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

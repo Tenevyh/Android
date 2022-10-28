@@ -17,7 +17,8 @@ class ContactsViewHolder(
     private val pic: ImageView = itemView.findViewById(R.id.ivUserImage)
 
     fun bind(user: ChatUser) {
-        if (FirebaseAuth.getInstance().currentUser!!.uid==user.uid) {
+        if (FirebaseAuth.getInstance().currentUser == null){}
+         else if (FirebaseAuth.getInstance().currentUser!!.uid==user.uid) {
             name.text = "Личный дневник"
             Picasso.get().load(R.drawable.self).into(pic)
         } else {
