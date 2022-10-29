@@ -1,4 +1,4 @@
-package com.project.android.criminalintent
+package com.project.android.remarks
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

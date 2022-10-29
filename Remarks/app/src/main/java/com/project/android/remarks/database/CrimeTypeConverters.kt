@@ -1,4 +1,4 @@
-package com.project.android.criminalintent.database
+package com.project.android.remarks.database
 
 import androidx.room.TypeConverter
 import java.util.*

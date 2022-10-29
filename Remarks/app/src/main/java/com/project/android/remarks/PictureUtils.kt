@@ -1,11 +1,9 @@
-package com.project.android.criminalintent
+package com.project.android.remarks
 
 import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Point
-import kotlin.math.roundToInt
-import kotlin.random.Random
 
 fun getScaledBitmap(path: String, destWidth: Int, destHeight: Int): Bitmap {
     // Чтение размеров изображения на диске

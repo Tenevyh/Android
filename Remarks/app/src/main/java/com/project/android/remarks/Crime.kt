@@ -1,4 +1,4 @@
-package com.project.android.criminalintent
+package com.project.android.remarks
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

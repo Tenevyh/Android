@@ -1,11 +1,11 @@
-package com.project.android.criminalintent.database
+package com.project.android.remarks.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.project.android.criminalintent.Crime
+import com.project.android.remarks.Crime
 import java.util.*
 
 @Dao

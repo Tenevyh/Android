@@ -1,10 +1,10 @@
-package com.project.android.criminalintent
+package com.project.android.remarks
 
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.Room
-import com.project.android.criminalintent.database.CrimeDataBase
-import com.project.android.criminalintent.database.migration_2_3
+import com.project.android.remarks.database.CrimeDataBase
+import com.project.android.remarks.database.migration_2_3
 import java.io.File
 import java.util.*
 import java.util.concurrent.Executors
