@@ -2,7 +2,6 @@ package com.project.android.remarks
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.project.android.criminalintent.R
 import java.util.*
 
 private const val TAG = "MainActivity"

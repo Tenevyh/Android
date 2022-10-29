@@ -1,4 +1,4 @@
-package com.project.android.criminalintent
+package com.project.android.remark
 
 import org.junit.Test
 

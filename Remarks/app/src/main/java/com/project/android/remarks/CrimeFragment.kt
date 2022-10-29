@@ -22,7 +22,6 @@ import android.widget.*
 import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.project.android.criminalintent.R
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*

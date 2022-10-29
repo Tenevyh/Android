@@ -9,7 +9,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.bignerdranch.android.criminalintent"
+        applicationId "com.bignerdranch.android.remark"
         minSdk 21
         targetSdk 33
         versionCode 1
