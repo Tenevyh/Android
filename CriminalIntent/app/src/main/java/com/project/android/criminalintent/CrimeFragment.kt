@@ -102,7 +102,7 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks, TimePickerFragmen
                     this.crime = crime
                     photoFile = crimeDetailViewModel.getPhotoFile(crime)
                     photoUri = FileProvider.getUriForFile(requireActivity(),
-                        "com.bignerdranch.android.criminalintent.fileprovider",
+                        "com.project.android.criminalintent.fileprovider",
                         photoFile)
                     updateUI()
                 }

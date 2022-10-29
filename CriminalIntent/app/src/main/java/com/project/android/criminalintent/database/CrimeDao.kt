@@ -1,6 +1,5 @@
 package com.project.android.criminalintent.database
 
-import android.database.CrossProcessCursor
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
