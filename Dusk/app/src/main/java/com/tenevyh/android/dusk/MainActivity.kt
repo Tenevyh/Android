@@ -3,6 +3,9 @@ package com.tenevyh.android.dusk
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.tenevyh.android.dusk.ui.login.ChatAuthStateListener
 import com.tenevyh.android.dusk.ui.login.LoginFragment
 import com.tenevyh.android.dusk.ui.main.ChatLandingFragment
@@ -17,6 +20,13 @@ class MainActivity : AppCompatActivity(), ChatAuthStateListener {
         showFragment()
     }
 
+    override fun onStop() {
+        super.onStop()
+        val uidUser = FirebaseAuth.getInstance().currentUser!!.uid
+        Firebase.database.getReference("users").child(uidUser).child("online")
+            .setValue(false)
+    }
+
     override fun onAuthStateChanged() {
         if (FirebaseAuth.getInstance().currentUser != null) {
             showFragment()
@@ -27,6 +37,9 @@ class MainActivity : AppCompatActivity(), ChatAuthStateListener {
         if (FirebaseAuth.getInstance().currentUser == null){
             replaceFragment(R.id.fragmentContainer, LoginFragment())
         } else {
+            val uidUser = FirebaseAuth.getInstance().currentUser!!.uid
+            Firebase.database.getReference("users").child(uidUser).child("online")
+                .setValue(true)
             replaceFragment(R.id.fragmentContainer, ChatLandingFragment())
         }
     }

@@ -73,7 +73,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_profile){
         }
         logout.setOnClickListener {
                 AuthUI.getInstance().signOut(requireContext())
-                Thread.sleep(500)
+                    Thread.sleep(1000)
                 startActivity(Intent(context, MainActivity::class.java))
                 activity?.finish()
         }
