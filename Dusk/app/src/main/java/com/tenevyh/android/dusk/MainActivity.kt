@@ -22,9 +22,11 @@ class MainActivity : AppCompatActivity(), ChatAuthStateListener {
 
     override fun onStop() {
         super.onStop()
-        val uidUser = FirebaseAuth.getInstance().currentUser!!.uid
-        Firebase.database.getReference("users").child(uidUser).child("online")
-            .setValue(false)
+        if( FirebaseAuth.getInstance().currentUser != null) {
+            val uidUser = FirebaseAuth.getInstance().currentUser!!.uid
+            Firebase.database.getReference("users").child(uidUser).child("online")
+                .setValue(false)
+        }
     }
 
     override fun onAuthStateChanged() {

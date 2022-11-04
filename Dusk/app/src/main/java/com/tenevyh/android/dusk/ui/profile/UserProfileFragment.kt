@@ -19,12 +19,14 @@ import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 import com.tenevyh.android.dusk.ui.login.LoginFragment
 import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.coroutines.tasks.await
 
 class UserProfileFragment : Fragment(R.layout.fragment_profile){
 
@@ -73,7 +75,12 @@ class UserProfileFragment : Fragment(R.layout.fragment_profile){
         }
         logout.setOnClickListener {
                 AuthUI.getInstance().signOut(requireContext())
-                    Thread.sleep(1000)
+            Thread.sleep(1500)
+            if( FirebaseAuth.getInstance().currentUser != null) {
+                val uidUser = FirebaseAuth.getInstance().currentUser!!.uid
+                Firebase.database.getReference("users").child(uidUser).child("online")
+                    .setValue(false)
+            }
                 startActivity(Intent(context, MainActivity::class.java))
                 activity?.finish()
         }

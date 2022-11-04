@@ -8,4 +8,4 @@ data class ChatUser(val uid: String ="",
                     val displayName: String ="",
                     val lastSeen: Long = System.currentTimeMillis(),
                     var photoUrl: String? ="",
-                    var isOnline: Boolean = false) : Parcelable
+                    var online: Boolean = false) : Parcelable

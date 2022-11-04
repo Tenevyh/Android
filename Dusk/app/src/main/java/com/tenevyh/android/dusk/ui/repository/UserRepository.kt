@@ -1,5 +1,6 @@
 package com.tenevyh.android.dusk.ui.repository
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -10,6 +11,8 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.tenevyh.android.dusk.ui.utils.FetchChatUserListener
 import com.tenevyh.android.dusk.ui.utils.mapFromFirebaseUser
+import kotlinx.coroutines.joinAll
+import kotlinx.coroutines.tasks.await
 
 
 class UserRepository{
@@ -39,4 +42,33 @@ class UserRepository{
             }
         )
     }
+
+
+      suspend fun getOnline(user: String): Boolean {
+        var onlineUser: Boolean
+          return try {
+              val data = Firebase.database.getReference("users").child(user).get().await()
+              onlineUser = data.children.elementAt(2).value.toString().toBoolean()
+              onlineUser
+          } catch (exception: Exception) {
+              exception.printStackTrace()
+              false
+          }
+    }
+
+  /*  suspend fun getUserList(): ArrayList<String>{
+        val userList = ArrayList<String>()
+        return try {
+            val data = Firebase.database.getReference("users").get().await()
+            for (x in 0..data.childrenCount) {
+                userList.add(data.children.elementAt(x.toInt()).key.toString())
+            }
+            userList
+        } catch (exception: Exception) {
+            exception.printStackTrace()
+            userList
+        }
+    }
+
+   */
 }
