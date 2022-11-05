@@ -10,10 +10,7 @@ import com.tenevyh.android.dusk.databinding.ItemViewContactsBinding
 import com.tenevyh.android.dusk.ui.repository.ChatUser
 import com.tenevyh.android.dusk.ui.repository.UserRepository
 import kotlinx.android.synthetic.main.item_view_contacts.view.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 
 class ContactsAdapter(private val options: FirebaseRecyclerOptions<ChatUser>,
@@ -34,6 +31,7 @@ class ContactsAdapter(private val options: FirebaseRecyclerOptions<ChatUser>,
         return holder
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onBindViewHolder(holder: ContactsViewHolder, position: Int, user: ChatUser) {
         holder.bind(user)
         GlobalScope.launch(Dispatchers.Main) {
