@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.tenevyh.android.dusk.R
 import com.tenevyh.android.dusk.databinding.ItemViewContactsBinding
 import com.tenevyh.android.dusk.ui.repository.ChatUser

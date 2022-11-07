@@ -45,7 +45,7 @@ class UserRepository{
 
 
       suspend fun getOnline(user: String): Boolean {
-        var onlineUser: Boolean
+        var onlineUser: Boolean = false
           return try {
               val data = Firebase.database.getReference("users").child(user).get().await()
               onlineUser = data.children.elementAt(2).value.toString().toBoolean()
