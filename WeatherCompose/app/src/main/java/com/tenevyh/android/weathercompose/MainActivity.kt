@@ -19,6 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.android.volley.Request
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.tenevyh.android.weathercompose.ui.theme.WeatherComposeTheme
 
 private const val API_KEY = "c25591a34f314753aa9184448220412"
@@ -33,7 +36,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    Greeting("London", this)
                 }
             }
         }
@@ -41,7 +44,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
+fun Greeting(name: String, context: Context) {
     val state = remember{
         mutableStateOf("Unknown")
     }
@@ -55,7 +58,7 @@ fun Greeting(name: String) {
         contentAlignment = Alignment.BottomCenter
         ) {
             Button(onClick = {
-                getResult()
+                getResult(name, state, context)
             }, modifier = Modifier.padding(5.dp).fillMaxWidth()
             ) {
                 Text(text = "Refresh")
@@ -70,4 +73,19 @@ private fun getResult(city: String, state: MutableState<String>, context: Contex
             "?key=$API_KEY&" +
             "q=$city" +
             "&api=no"
+
+    val queue = Volley.newRequestQueue(context)
+    val stringRequest = StringRequest(
+    Request.Method.GET,
+        url,
+        {
+            response ->
+            state.value = response
+        },
+        {
+            error ->
+            
+        }
+    )
+    queue.add(stringRequest)
 }
