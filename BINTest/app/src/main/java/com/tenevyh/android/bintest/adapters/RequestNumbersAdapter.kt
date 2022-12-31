@@ -10,7 +10,7 @@ import com.tenevyh.android.bintest.R
 import com.tenevyh.android.bintest.RequestNumber
 import com.tenevyh.android.bintest.databinding.HistoryItemBinding
 
-class RequestNumbersAdapter(cardNumbers: List<RequestNumber>): ListAdapter<RequestNumber,
+class RequestNumbersAdapter(val cardNumbers: List<RequestNumber>): ListAdapter<RequestNumber,
         RequestNumbersAdapter.Holder>(Comparator()) {
 
     class Holder(view: View) : RecyclerView.ViewHolder(view){
@@ -42,6 +42,9 @@ class RequestNumbersAdapter(cardNumbers: List<RequestNumber>): ListAdapter<Reque
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.bind(getItem(position))
+        val number = cardNumbers[position]
+        holder.bind(number)
     }
+
+    override fun getItemCount() = cardNumbers.size
 }
