@@ -1,10 +1,8 @@
 package com.tenevyh.android.bintest.fragments
 
-import android.os.Bundle
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.android.volley.Request
@@ -13,10 +11,12 @@ import com.android.volley.toolbox.Volley
 import com.tenevyh.android.bintest.CardNumberListVM
 import com.tenevyh.android.bintest.R
 import com.tenevyh.android.bintest.RequestNumber
+import kotlinx.android.synthetic.main.fragment_history.*
 import kotlinx.android.synthetic.main.fragment_request.*
 import org.json.JSONObject
 import java.text.SimpleDateFormat
-import java.util.Date
+import java.util.*
+
 
 class RequestFragment: Fragment(R.layout.fragment_request) {
 
@@ -32,6 +32,23 @@ class RequestFragment: Fragment(R.layout.fragment_request) {
             if(number.length==8 && number[0] != ' ') {
                 addNumber()
                 numberRequest(number)
+            }
+        }
+        urlTV.setOnClickListener {
+            if (urlTV.text.isNotEmpty()) {
+                val browserIntent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("http://${urlTV.text}")
+                )
+                startActivity(browserIntent)
+            }
+        }
+        phoneTV.setOnClickListener {
+            if(phoneTV.text.isNotEmpty()){
+                val phoneIntent = Intent(
+                    Intent.ACTION_DIAL,
+                    Uri.parse("tel:${phoneTV.text}"))
+                startActivity(phoneIntent)
             }
         }
     }
@@ -52,24 +69,24 @@ class RequestFragment: Fragment(R.layout.fragment_request) {
     }
 
     private fun updateInfoCard(mainObj: JSONObject){
-        schemeTV.text = mainObj.getString("scheme")
-        brandTV.text = mainObj.getString("brand")
-        lengthTV.text = mainObj.getJSONObject("number").getString("length")
-        if(mainObj.getJSONObject("number").getString("luhn").toBoolean()){
+        schemeTV.text = mainObj.optString("scheme")
+        brandTV.text = mainObj.optString("brand")
+        lengthTV.text = mainObj.getJSONObject("number").optString("length")
+        if(mainObj.getJSONObject("number").optString("luhn").toBoolean()){
             luhnTV.text = "Yes"
         } else {
             luhnTV.text = "No"
         }
-        typeTV.text = mainObj.getString("type")
-        prepaidTV.text = mainObj.getString("prepaid")
-        alpha2TV.text = mainObj.getJSONObject("country").getString("alpha2")
-        countryNameTV.text = mainObj.getJSONObject("country").getString("name")
-        latitudeTV.text = mainObj.getJSONObject("country").getString("latitude")
-        longitudeTV.text = mainObj.getJSONObject("country").getString("longitude")
-        bankNameTV.text = mainObj.getJSONObject("bank").getString("name")
-        cityTV.text = mainObj.getJSONObject("bank").getString("city")
-        urlTV.text = mainObj.getJSONObject("bank").getString("url")
-        phoneTV.text = mainObj.getJSONObject("bank").getString("phone")
+        typeTV.text = mainObj.optString("type")
+        prepaidTV.text = mainObj.optString("prepaid")
+        alpha2TV.text = mainObj.getJSONObject("country").optString("alpha2")
+        countryNameTV.text = mainObj.getJSONObject("country").optString("name")
+        latitudeTV.text = mainObj.getJSONObject("country").optString("latitude")
+        longitudeTV.text = mainObj.getJSONObject("country").optString("longitude")
+        bankNameTV.text = mainObj.getJSONObject("bank").optString("name")
+        cityTV.text = mainObj.getJSONObject("bank").optString("city")
+        urlTV.text = mainObj.getJSONObject("bank").optString("url")
+        phoneTV.text = mainObj.getJSONObject("bank").optString("phone")
     }
 
     private fun addNumber(){

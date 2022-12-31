@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.Room
 import com.tenevyh.android.bintest.RequestNumber
-import java.util.UUID
 import java.util.concurrent.Executors
 
 private const val DATABASE_NAME = "NumberCard repository"

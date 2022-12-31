@@ -2,16 +2,11 @@ package com.tenevyh.android.bintest.fragments
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.tenevyh.android.bintest.CardNumberListVM
 import com.tenevyh.android.bintest.R
 import com.tenevyh.android.bintest.RequestNumber
@@ -42,6 +37,9 @@ class HistoryFragment: Fragment(R.layout.fragment_history) {
     private fun updateUI(cardNumbers: List<RequestNumber>){
         adapter = RequestNumbersAdapter(cardNumbers)
         historyRV.adapter = adapter
+        if(historyRV.adapter?.itemCount!! < 0) {
+            historyRV.smoothScrollToPosition(historyRV.adapter?.itemCount!! - 1);
+        }
     }
 
 
