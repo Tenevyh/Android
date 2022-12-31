@@ -192,7 +192,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/brandTV" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/country"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
@@ -315,8 +315,8 @@
                 android:layout_marginTop="8dp"
                 android:textColor="#000000"
                 android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/textView6"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                app:layout_constraintStart_toStartOf="@+id/country"
+                app:layout_constraintTop_toBottomOf="@+id/country" />
 
             <TextView
                 android:id="@+id/latitudeTV"

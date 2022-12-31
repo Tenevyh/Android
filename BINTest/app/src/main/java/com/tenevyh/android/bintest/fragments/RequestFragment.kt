@@ -11,7 +11,6 @@ import com.android.volley.toolbox.Volley
 import com.tenevyh.android.bintest.CardNumberListVM
 import com.tenevyh.android.bintest.R
 import com.tenevyh.android.bintest.RequestNumber
-import kotlinx.android.synthetic.main.fragment_history.*
 import kotlinx.android.synthetic.main.fragment_request.*
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -49,6 +48,15 @@ class RequestFragment: Fragment(R.layout.fragment_request) {
                     Intent.ACTION_DIAL,
                     Uri.parse("tel:${phoneTV.text}"))
                 startActivity(phoneIntent)
+            }
+        }
+
+        countryNameTV.setOnClickListener {
+            if (latitudeTV.text.isNotEmpty()){
+                val mapIntent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("geo:${latitudeTV.text}, ${longitudeTV.text}"))
+                startActivity(mapIntent)
             }
         }
     }
