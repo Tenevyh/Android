@@ -28,7 +28,7 @@ class RequestFragment: Fragment(R.layout.fragment_request) {
         super.onStart()
         bSearch.setOnClickListener {
             val number = numberCardTV.text.toString()
-            if(number.length==8 && number[0] != ' ') {
+            if(number.length>=8 && number[0] != ' ') {
                 addNumber()
                 numberRequest(number)
             }

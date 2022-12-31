@@ -37,7 +37,7 @@ class HistoryFragment: Fragment(R.layout.fragment_history) {
     private fun updateUI(cardNumbers: List<RequestNumber>){
         adapter = RequestNumbersAdapter(cardNumbers)
         historyRV.adapter = adapter
-        if(historyRV.adapter?.itemCount!! < 0) {
+        if(historyRV.adapter?.itemCount!! > 0) {
             historyRV.smoothScrollToPosition(historyRV.adapter?.itemCount!! - 1);
         }
     }
