@@ -12,9 +12,6 @@ interface NumberCardDao {
     @Query("SELECT * FROM requestnumber")
     fun getRequestsNumbers(): LiveData<List<RequestNumber>>
 
-    @Query("SELECT * FROM requestnumber WHERE id=(:id)")
-    fun getRequestNumber(id: UUID): LiveData<RequestNumber?>
-
     @Insert
     fun addRequestNumber(requestnumber: RequestNumber)
 }

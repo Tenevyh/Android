@@ -7,4 +7,4 @@ import java.util.*
 @Entity
 data class RequestNumber (@PrimaryKey val id: UUID = UUID.randomUUID(),
                   var number: String ="",
-                  var date: Date = Date())
+                  var date: String ="")
