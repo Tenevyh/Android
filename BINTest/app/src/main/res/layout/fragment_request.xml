@@ -104,7 +104,7 @@
                 android:layout_marginTop="8dp"
                 android:text="longitude:"
                 android:textColor="#000000"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/textView22"
                 app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
@@ -271,7 +271,7 @@
                 android:layout_marginTop="8dp"
                 android:text="latitude:"
                 android:textColor="#000000"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/alpha2TV"
                 app:layout_constraintTop_toBottomOf="@+id/alpha2TV" />
 
@@ -295,6 +295,7 @@
                 android:textColor="#000000"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.15"
                 app:layout_constraintStart_toEndOf="@+id/textView"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -314,7 +315,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textColor="#000000"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/country"
                 app:layout_constraintTop_toBottomOf="@+id/country" />
 
