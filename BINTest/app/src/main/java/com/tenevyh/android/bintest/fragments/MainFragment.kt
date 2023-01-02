@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
-    private val tList = listOf("Запрос", "История")
+    private val tList = listOf("Request", "History")
     private val fList = listOf(RequestFragment.newInstance(),HistoryFragment.newInstance())
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
