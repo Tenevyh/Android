@@ -33,7 +33,7 @@ import com.tenevyh.android.weatherforyou.adapters.WeatherModel
 import com.tenevyh.android.weatherforyou.databinding.FragmentMainBinding
 import org.json.JSONObject
 
-const val API_KEY = "9bfedd63c7f442ef94d162236220511"
+const val API_KEY = "9af67c37ebe944d2b48152405231501"
 
 class MainFragment : Fragment() {
 

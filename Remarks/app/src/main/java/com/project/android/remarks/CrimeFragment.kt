@@ -334,7 +334,7 @@ class CrimeFragment: Fragment(), DatePickerFragment.Callbacks, TimePickerFragmen
                 if(allNumbers.size > 1) {
                     alert.show()
                 }
-                else if (allNumbers.size == 1 && allNumbers[0].length != 0) {
+                else if (allNumbers.size == 1 && allNumbers[0].isNotEmpty()) {
                     selectedNumber = allNumbers[0].toString().replace("_","")
                     crime.phone = selectedNumber
                     callSuspect.text = crime.phone
