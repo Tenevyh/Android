@@ -28,7 +28,7 @@ class NumberCardRepository private constructor(context: Context){
     companion object{
         private var INSTANCE : NumberCardRepository? =  null
 
-        fun initialize(context: Context){
+        fun  initialize(context: Context){
             if (INSTANCE == null){
                 INSTANCE = NumberCardRepository(context)
             }
