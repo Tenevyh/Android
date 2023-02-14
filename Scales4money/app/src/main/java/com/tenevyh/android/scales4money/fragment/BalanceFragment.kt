@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import com.tenevyh.android.scales4money.BalanceViewModel
 import com.tenevyh.android.scales4money.R
 import kotlinx.android.synthetic.main.balance_fragment.*
@@ -16,7 +15,7 @@ class BalanceFragment: Fragment(R.layout.balance_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         balanceViewModel.currentBalance.observe(viewLifecycleOwner){
-            tvBalance.text=it
+            itemBalance.text=it
         }
     }
 
