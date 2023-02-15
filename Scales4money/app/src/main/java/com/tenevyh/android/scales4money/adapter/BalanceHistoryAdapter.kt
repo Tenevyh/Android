@@ -20,6 +20,7 @@ class BalanceHistoryAdapter(val balanceSheets: List<Balance>)
 
         fun bind(item: Balance) = with (binding){
             itemBalance.text = item.number
+            tvDate.text = item.date
         }
     }
 

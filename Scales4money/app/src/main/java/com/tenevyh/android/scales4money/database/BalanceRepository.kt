@@ -1,6 +1,7 @@
 package com.tenevyh.android.scales4money.database
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.room.Room
 import com.tenevyh.android.scales4money.Balance
 import java.util.concurrent.Executors
@@ -15,7 +16,9 @@ class BalanceRepository private constructor(context: Context){
     private val balanceDao = database.BalanceDao()
     private val executor = Executors.newSingleThreadExecutor()  //coroutine?
 
-    fun getRequestBalance(balance: Balance){
+    fun getBalanceSheets() : LiveData<List<Balance>> = balanceDao.getBalance()
+
+    fun addRequestBalance(balance: Balance){
         executor.execute{
             balanceDao.addBalance(balance)
         }
