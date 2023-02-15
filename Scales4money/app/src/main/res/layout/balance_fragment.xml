@@ -54,6 +54,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/historyRV"
         android:layout_width="394dp"
         android:layout_height="440dp"
         android:layout_marginStart="40dp"
