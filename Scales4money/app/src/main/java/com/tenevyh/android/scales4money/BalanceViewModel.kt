@@ -2,16 +2,13 @@ package com.tenevyh.android.scales4money
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.tenevyh.android.scales4money.database.BalanceRepository
 
 class BalanceViewModel: ViewModel() {
-    var currentBalance = MutableLiveData<String>()
+    private val balanceRepository = BalanceRepository.get()
+    val balanceSheetsLD = balanceRepository.getBalanceSheets()
 
-    /*fun getCurBalance(): String{
-        return currentBalance.toString()
+    fun addBalance(balance: Balance){
+        balanceRepository.addRequestBalance(balance)
     }
-
-    fun setCurBalance(balance: MutableLiveData<String>){
-        currentBalance = balance
-    }
-     */
 }
