@@ -46,6 +46,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.fragment:fragment-ktx:1.5.5'
     implementation 'androidx.room:room-runtime:2.5.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
     kapt 'androidx.room:room-compiler:2.5.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

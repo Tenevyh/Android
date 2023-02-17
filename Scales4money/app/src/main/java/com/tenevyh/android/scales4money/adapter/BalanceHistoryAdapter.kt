@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.tenevyh.android.scales4money.Balance
 import com.tenevyh.android.scales4money.R
 import com.tenevyh.android.scales4money.databinding.HistoryItemBinding
@@ -21,6 +22,7 @@ class BalanceHistoryAdapter(val balanceSheets: List<Balance>)
         fun bind(item: Balance) = with (binding){
             itemBalance.text = item.number
             tvDate.text = item.date
+            Picasso.get().load(item.img).into(upOrDownIV)
         }
     }
 

@@ -24,7 +24,7 @@ class BalanceFragment: Fragment(R.layout.balance_fragment) {
             viewLifecycleOwner,
             Observer { history ->
                 history?.let {
-                    itemBalance.text = history.last().number
+                    if(history.isNotEmpty()) itemBalance.text = history.last().number+" руб."
                     updateUI(history)
                 }
             }
