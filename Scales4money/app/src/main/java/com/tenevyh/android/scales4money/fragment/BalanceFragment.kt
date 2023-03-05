@@ -7,13 +7,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tenevyh.android.scales4money.Balance
-import com.tenevyh.android.scales4money.BalanceViewModel
+import com.tenevyh.android.scales4money.viewmodel.BalanceViewModel
 import com.tenevyh.android.scales4money.R
 import com.tenevyh.android.scales4money.adapter.BalanceHistoryAdapter
 import kotlinx.android.synthetic.main.balance_fragment.*
+import java.text.SimpleDateFormat
 
 class BalanceFragment: Fragment(R.layout.balance_fragment) {
 
+    private val dateFormat = SimpleDateFormat("d MMM yyyy, HH:mm")
     private var adapter: BalanceHistoryAdapter? = BalanceHistoryAdapter(emptyList())
     private val balanceViewModel: BalanceViewModel by activityViewModels()
 
@@ -34,7 +36,7 @@ class BalanceFragment: Fragment(R.layout.balance_fragment) {
     override fun onStart() {
         super.onStart()
         buttonAdd.setOnClickListener {
-            val fragment = SelectionFragment().show(parentFragmentManager, "Selection fragment")
+            SelectionFragment().show(parentFragmentManager, "Selection fragment")
         }
     }
 
