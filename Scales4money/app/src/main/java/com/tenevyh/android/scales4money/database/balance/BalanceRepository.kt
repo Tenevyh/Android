@@ -12,10 +12,10 @@ private const val DATABASE_NAME = "Balances repository"
 class BalanceRepository private constructor(context: Context){
     private val database: RequestBalanceDatabase = Room.databaseBuilder(
         context.applicationContext, RequestBalanceDatabase::class.java, DATABASE_NAME
-    )
-        .addMigrations(migration_0_1).build()
+    ).fallbackToDestructiveMigration().build()
 
-    private val balanceDao = database.BalanceDao()
+    private val balanceDao = database.balanceDao()
+    private val limitDao = database.limitDao()
     private val executor = Executors.newSingleThreadExecutor()  //worker?
 
     fun getBalanceSheets() : LiveData<List<Balance>> = balanceDao.getBalance()
@@ -26,11 +26,11 @@ class BalanceRepository private constructor(context: Context){
         }
     }
 
-    fun getLimits() : LiveData<List<Limit>> = balanceDao.getLimit()
+    fun getLimits() : LiveData<List<Limit>> = limitDao.getLimit()
 
     fun addRequestLimit(limit: Limit){
         executor.execute{
-            balanceDao.addLimit(limit)
+            limitDao.addLimit(limit)
         }
     }
 
