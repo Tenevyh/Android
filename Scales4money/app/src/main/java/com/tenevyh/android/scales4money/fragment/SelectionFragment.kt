@@ -24,7 +24,9 @@ class SelectionFragment: DialogFragment(R.layout.selection_fragment) {
         bCancel.setOnClickListener {
             onDestroyView()
         }
-
+        btDate.setOnClickListener {
+            DatePickerFragment().show()
+        }
     }
 
     private fun addBalance(): Balance{

@@ -14,3 +14,4 @@ abstract class RequestBalanceDatabase : RoomDatabase(){
     abstract fun balanceDao(): BalanceDao
     abstract fun limitDao(): LimitDao
 }
+

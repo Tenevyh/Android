@@ -5,7 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.tenevyh.android.scales4money.Balance
-import com.tenevyh.android.scales4money.Limit
+
 
 @Dao
 interface BalanceDao {
