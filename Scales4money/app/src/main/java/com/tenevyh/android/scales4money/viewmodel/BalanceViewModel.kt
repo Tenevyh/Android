@@ -17,4 +17,8 @@ class BalanceViewModel: ViewModel() {
     fun addLimit(limit: Limit){
         balanceRepository.addRequestLimit(limit)
     }
+
+    fun deleteBalance(balance: Balance){
+        balanceRepository.deleteBalance(balance)
+    }
 }

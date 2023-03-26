@@ -26,6 +26,12 @@ class BalanceRepository private constructor(context: Context){
         }
     }
 
+    fun deleteBalance(balance: Balance){
+        executor.execute {
+            balanceDao.deleteBalance(balance)
+        }
+    }
+
     fun getLimits() : LiveData<List<Limit>> = limitDao.getLimit()
 
     fun addRequestLimit(limit: Limit){

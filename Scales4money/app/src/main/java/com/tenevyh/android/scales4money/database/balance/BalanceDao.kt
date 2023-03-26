@@ -2,6 +2,7 @@ package com.tenevyh.android.scales4money.database.balance
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.tenevyh.android.scales4money.Balance
@@ -15,4 +16,7 @@ interface BalanceDao {
 
     @Insert
     fun addBalance(balance: Balance)
+
+    @Delete
+    fun deleteBalance(balance: Balance)
 }
