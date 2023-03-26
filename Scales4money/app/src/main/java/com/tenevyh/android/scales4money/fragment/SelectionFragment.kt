@@ -1,5 +1,7 @@
 package com.tenevyh.android.scales4money.fragment
 
+import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.tenevyh.android.scales4money.Balance
@@ -9,9 +11,20 @@ import kotlinx.android.synthetic.main.selection_fragment.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class SelectionFragment: DialogFragment(R.layout.selection_fragment) {
+private const val DIALOG_DATE = "DialogDate"
+private const val REQUEST_DATE = 0
+
+class SelectionFragment: DialogFragment(R.layout.selection_fragment), DatePickerFragment.Callbacks {
+
+    private lateinit var balance: Balance
 
     private val balanceViewModel: BalanceViewModel by activityViewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        balance = Balance()
+    }
+
 
     override fun onStart() {
         super.onStart()
@@ -25,12 +38,14 @@ class SelectionFragment: DialogFragment(R.layout.selection_fragment) {
             onDestroyView()
         }
         btDate.setOnClickListener {
-            DatePickerFragment().show()
+            DatePickerFragment.newInstance(balance.date).apply {
+                setTargetFragment(this@SelectionFragment, REQUEST_DATE)
+                show(this@SelectionFragment.parentFragmentManager, DIALOG_DATE)
+            }
         }
     }
 
     private fun addBalance(): Balance{
-        val balance = Balance()
         balance.number = editBalance.text.toString()
         balanceViewModel.addBalance(balance)
         return balance
@@ -45,5 +60,9 @@ class SelectionFragment: DialogFragment(R.layout.selection_fragment) {
         } else {
             balance.img = R.drawable.up_balance
         }
+    }
+
+    override fun onDateSelected(date: Date) {
+        balance.date = date
     }
 }

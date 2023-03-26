@@ -6,6 +6,6 @@ import java.util.*
 
 
 @Entity(tableName = "balances")
-data class Balance (@PrimaryKey val date: Date = Date(),
+data class Balance (@PrimaryKey var date: Date = Date(),
                     var number: String = "0",
                     var img: Int = R.drawable.ic_launcher_foreground)
