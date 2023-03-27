@@ -1,9 +1,12 @@
 package com.tenevyh.android.scales4money.fragment
 
 
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.github.mikephil.charting.components.XAxis
