@@ -60,7 +60,7 @@ class BalanceFragment: Fragment(R.layout.balance_fragment) {
 
         val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.ACTION_STATE_IDLE,
-            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+            ItemTouchHelper.RIGHT
         ) {
             override fun onMove(
                 recyclerView: RecyclerView,
@@ -72,12 +72,13 @@ class BalanceFragment: Fragment(R.layout.balance_fragment) {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                balanceViewModel.deleteBalance(adapter!!.balanceSheets!!.get(position)!! )
+                balanceViewModel.deleteBalance(adapter!!.balanceSheets!![position])
             }
         })
 
         itemTouchHelper.attachToRecyclerView(historyRV)
     }
+
 
     private fun updateUI(balanceSheets: List<Balance>){
         adapter = BalanceHistoryAdapter(balanceSheets)
