@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.general_fragment.*
 class MainFragment: Fragment(R.layout.general_fragment) {
 
     private val tList = listOf("Баланс", "График","Валюта")
-    private val fList = listOf(BalanceFragment.newInstance(),GraphFragment.newInstance())
+    private val fList = listOf(BalanceFragment.newInstance(),GraphFragment.newInstance(), CurrencyFragment.newInstance())
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
