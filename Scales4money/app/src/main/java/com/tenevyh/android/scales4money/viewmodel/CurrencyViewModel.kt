@@ -10,12 +10,16 @@ import com.tenevyh.android.scales4money.api.ValCurs
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.Date
 
 
 class CurrencyViewModel : ViewModel() {
 
     private val _currencyList = MutableLiveData<Map<String, Valute>?>()
     val currencyList: LiveData<Map<String, Valute>?> = _currencyList
+
+    private var _date = Date()
+    val date = _date
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -34,6 +38,7 @@ class CurrencyViewModel : ViewModel() {
                 _isLoading.value = false
                 if (response.isSuccessful) {
                     val currencyMap = response.body()?.valute
+                    _date = response.body()!!.date
                     if (!currencyMap.isNullOrEmpty()) {
                         val currencyList = currencyMap.values.toList()
                         _currencyList.value = currencyMap
