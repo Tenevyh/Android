@@ -72,7 +72,7 @@ class BalanceFragment: Fragment(R.layout.balance_fragment) {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                balanceViewModel.deleteBalance(adapter!!.balanceSheets!![position])
+                balanceViewModel.deleteBalance(adapter!!.balanceSheets[position])
             }
         })
 
