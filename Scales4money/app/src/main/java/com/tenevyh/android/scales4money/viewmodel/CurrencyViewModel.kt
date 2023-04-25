@@ -4,35 +4,56 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.tenevyh.android.scales4money.API.Currency
-import com.tenevyh.android.scales4money.API.CurrencyService
-import com.tenevyh.android.scales4money.API.ValCurs
+import com.tenevyh.android.scales4money.api.Valute
+import com.tenevyh.android.scales4money.api.CurrencyService
+import com.tenevyh.android.scales4money.api.ValCurs
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class CurrencyViewModel: ViewModel() {
-    private var _currencyList = MutableLiveData<List<Currency>>()
-    val currencyList: LiveData<List<Currency>> = _currencyList
+class CurrencyViewModel : ViewModel() {
 
-    fun getDollarNominal(): Int? {
-        return currencyList.value?.find { it.CharCode == "USD" }?.Nominal
+    private val _currencyList = MutableLiveData<Map<String, Valute>?>()
+    val currencyList: LiveData<Map<String, Valute>?> = _currencyList
+
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String> = _errorMessage
+
+    init {
+        fetchCurrencyList()
     }
 
-    fun fetchCurrencyList() {
+    private fun fetchCurrencyList() {
+        _isLoading.value = true
         CurrencyService.api.getCurrencyList().enqueue(object : Callback<ValCurs> {
             override fun onResponse(call: Call<ValCurs>, response: Response<ValCurs>) {
+                _isLoading.value = false
                 if (response.isSuccessful) {
-                    _currencyList.value = response.body()?.Valute?.values?.toList()
+                    val currencyMap = response.body()?.valute
+                    if (!currencyMap.isNullOrEmpty()) {
+                        val currencyList = currencyMap.values.toList()
+                        _currencyList.value = currencyMap
+                    } else {
+                        _errorMessage.value = "Список валют пуст"
+                    }
                 } else {
-                    Log.d("Ошибка", "Ошибка получения списка валют")
+                    val errorBody = response.errorBody()?.string()
+                    _errorMessage.value = "Ошибка при получении данных: ${response.code()} ${errorBody ?: ""}"
                 }
             }
 
             override fun onFailure(call: Call<ValCurs>, t: Throwable) {
-                Log.d("Ошибка", "Ошибка получения списка валют", t)
+                _isLoading.value = false
+                _errorMessage.value = "Ошибка при получении данных: ${t.message}"
             }
         })
+    }
+
+    fun refreshCurrencyList() {
+        fetchCurrencyList()
     }
 }

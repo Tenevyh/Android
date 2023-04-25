@@ -1,4 +1,4 @@
-package com.tenevyh.android.scales4money.API
+package com.tenevyh.android.scales4money.api
 
 import retrofit2.Call
 import retrofit2.http.GET

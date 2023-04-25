@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/currency_fon">
@@ -33,6 +32,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Доллар"
                 android:textColor="#FFFFFF"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,6 +43,7 @@
                 android:layout_marginTop="24dp"
                 android:text="Евро"
                 android:textColor="#FFFFFF"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/textView7"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -55,10 +56,11 @@
                 android:layout_marginEnd="169dp"
                 android:text="У вас:"
                 android:textColor="#FFFFFF"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rateYaneTV" />
+                app:layout_constraintTop_toBottomOf="@+id/rateYuanTV" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -67,6 +69,7 @@
                 android:layout_marginTop="24dp"
                 android:text="Июнь"
                 android:textColor="#FFFFFF"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/textView9"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -96,7 +99,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textView9" />
 
             <TextView
-                android:id="@+id/rateYaneTV"
+                android:id="@+id/rateYuanTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="94dp"
@@ -108,13 +111,14 @@
                 app:layout_constraintTop_toTopOf="@+id/textView14" />
 
             <TextView
-                android:id="@+id/EurTV"
+                android:id="@+id/eurTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="93dp"
                 android:layout_marginEnd="150dp"
                 android:text="TextView"
                 android:textColor="#FFFFFF"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/textView12"
@@ -129,6 +133,7 @@
                 android:layout_marginEnd="60dp"
                 android:text="Долларов"
                 android:textColor="#FFFFFF"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/dollarTV"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
@@ -140,6 +145,7 @@
                 android:layout_marginTop="24dp"
                 android:text="Евро"
                 android:textColor="#FFFFFF"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/textView11"
                 app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
@@ -150,6 +156,7 @@
                 android:layout_marginEnd="150dp"
                 android:text="TextView"
                 android:textColor="#FFFFFF"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textView11" />
 
@@ -160,17 +167,19 @@
                 android:layout_marginTop="24dp"
                 android:text="Июаней"
                 android:textColor="#FFFFFF"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/textView12"
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
             <TextView
-                android:id="@+id/yaneTV"
+                android:id="@+id/yuanTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="72dp"
                 android:layout_marginEnd="150dp"
                 android:text="TextView"
                 android:textColor="#FFFFFF"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/textView13"
@@ -200,8 +209,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="руб."
-                app:layout_constraintStart_toEndOf="@+id/rateYaneTV"
-                app:layout_constraintTop_toTopOf="@+id/rateYaneTV" />
+                app:layout_constraintStart_toEndOf="@+id/rateYuanTV"
+                app:layout_constraintTop_toTopOf="@+id/rateYuanTV" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
