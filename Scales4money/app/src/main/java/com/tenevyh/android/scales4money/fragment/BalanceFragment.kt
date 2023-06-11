@@ -3,34 +3,41 @@ package com.tenevyh.android.scales4money.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.tabs.TabLayoutMediator
 import com.tenevyh.android.scales4money.Balance
 import com.tenevyh.android.scales4money.Limit
 import com.tenevyh.android.scales4money.viewmodel.BalanceViewModel
 import com.tenevyh.android.scales4money.R
 import com.tenevyh.android.scales4money.adapter.BalanceHistoryAdapter
+import com.tenevyh.android.scales4money.adapter.VpAdapterTwo
 import kotlinx.android.synthetic.main.balance_fragment.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 
 class BalanceFragment: Fragment(R.layout.balance_fragment) {
 
     private val dateFormat = SimpleDateFormat("d MMM yyyy, HH:mm")
-    private var adapter: BalanceHistoryAdapter? = BalanceHistoryAdapter(emptyList())
     private val balanceViewModel: BalanceViewModel by activityViewModels()
+    private val tList = listOf("Remainder","Spending")
+    private val fList = listOf(RemainderFragment.newInstance(),SpendingFragment.newInstance())
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        historyRV.layoutManager = LinearLayoutManager(context)
+        init()
         balanceViewModel.balanceSheetsLD.observe(
             viewLifecycleOwner,
             Observer { history ->
                 history?.let {
                     if(history.isNotEmpty()) itemBalance.text = history.last().number+" руб."
-                    updateUI(history)
                 }
             }
         )
@@ -57,36 +64,16 @@ class BalanceFragment: Fragment(R.layout.balance_fragment) {
             editLimit.isFocusable = false
             editLimit.text.clear()
         }
-
-        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
-            ItemTouchHelper.ACTION_STATE_IDLE,
-            ItemTouchHelper.RIGHT
-        ) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.adapterPosition
-                balanceViewModel.deleteBalance(adapter!!.balanceSheets!![position])
-            }
-        })
-
-        itemTouchHelper.attachToRecyclerView(historyRV)
     }
 
-
-    private fun updateUI(balanceSheets: List<Balance>){
-        adapter = BalanceHistoryAdapter(balanceSheets)
-        historyRV.adapter = adapter
-        if(historyRV.adapter?.itemCount!! > 0) {
-            historyRV.smoothScrollToPosition(historyRV.adapter?.itemCount!! - 1)
-        }
+    private fun init(){
+        val adapter = VpAdapterTwo(activity as FragmentActivity, fList)
+        vp.adapter = adapter
+        TabLayoutMediator(tabLayout2, vp){
+                tab, pos -> tab.text = tList[pos]
+        }.attach()
     }
+
 
     companion object {
         @JvmStatic

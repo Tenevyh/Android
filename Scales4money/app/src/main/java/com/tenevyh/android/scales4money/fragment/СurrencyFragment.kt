@@ -11,16 +11,20 @@ import com.tenevyh.android.scales4money.api.Valute
 import com.tenevyh.android.scales4money.viewmodel.BalanceViewModel
 import com.tenevyh.android.scales4money.viewmodel.CurrencyViewModel
 import kotlinx.android.synthetic.main.currency_fragment.*
+import java.text.SimpleDateFormat
+import java.util.Date
 import kotlin.math.round
 
 
 class CurrencyFragment: Fragment(R.layout.currency_fragment) {
     private val currencyViewModel: CurrencyViewModel by activityViewModels()
     private val balanceViewModel: BalanceViewModel by activityViewModels()
+    private val dateFormat = SimpleDateFormat("d MMM yyyy")
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        dateTV.text = dateFormat.format(Date())
         currencyViewModel.currencyList.observe(viewLifecycleOwner, Observer { currencyList ->
             val dollarValue = currencyList?.getValue("USD")
             val euroValue = currencyList?.getValue("EUR")
