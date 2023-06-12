@@ -64,6 +64,26 @@ class BalanceFragment: Fragment(R.layout.balance_fragment) {
             editLimit.isFocusable = false
             editLimit.text.clear()
         }
+
+        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+            ItemTouchHelper.ACTION_STATE_IDLE,
+            ItemTouchHelper.RIGHT
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                balanceViewModel.deleteBalance(adapter!!.balanceSheets[position])
+            }
+        })
+
+        itemTouchHelper.attachToRecyclerView(historyRV)
     }
 
     private fun init(){

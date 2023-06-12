@@ -11,8 +11,9 @@ import com.tenevyh.android.scales4money.api.Valute
 import com.tenevyh.android.scales4money.viewmodel.BalanceViewModel
 import com.tenevyh.android.scales4money.viewmodel.CurrencyViewModel
 import kotlinx.android.synthetic.main.currency_fragment.*
-import java.text.SimpleDateFormat
 import java.util.Date
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import kotlin.math.round
 
 
@@ -33,6 +34,9 @@ class CurrencyFragment: Fragment(R.layout.currency_fragment) {
             rateDollarTV.text = dollarValue?.value?.toString()
             rateEuroTV.text = euroValue?.value?.toString()
             rateYuanTV.text = yuanValue?.value?.toString()
+            dateTV.text = dateFormat.format(currencyViewModel.date)
+
+
             balanceViewModel.balanceSheetsLD.observe(viewLifecycleOwner) { history ->
                 val balance = history.last().number.toDouble()
 
