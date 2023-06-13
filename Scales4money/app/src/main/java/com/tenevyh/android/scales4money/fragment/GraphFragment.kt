@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.github.mikephil.charting.components.XAxis
@@ -15,6 +16,8 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.tenevyh.android.scales4money.R
 import com.tenevyh.android.scales4money.viewmodel.BalanceViewModel
 import kotlinx.android.synthetic.main.graph_fragment.*
@@ -86,6 +89,23 @@ class GraphFragment: Fragment(R.layout.graph_fragment) {
             chart.data = lineData
             chart.invalidate()
         }
+
+        chart.setOnChartValueSelectedListener(object : OnChartValueSelectedListener {
+            override fun onValueSelected(e: Entry?, h: Highlight?) {
+                e?.let {
+                    val selectedDate = Date(e.x.toLong())
+                    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                    val formattedDate = dateFormat.format(selectedDate)
+
+                    Toast.makeText(requireContext(), "Selected date: $formattedDate",
+                        Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onNothingSelected() {
+                // Обработка события, когда ничего не выбрано
+            }
+        })
     }
 
     companion object {
