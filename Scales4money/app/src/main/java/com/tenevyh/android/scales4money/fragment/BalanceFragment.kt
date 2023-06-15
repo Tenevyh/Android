@@ -55,7 +55,7 @@ class BalanceFragment: Fragment(R.layout.balance_fragment) {
         buttonAdd.setOnClickListener {
             SelectionFragment().show(parentFragmentManager, "Selection fragment")
         }
-        limitSaveButton.setOnClickListener {
+            /*   limitSaveButton.setOnClickListener {
             if (editLimit.text.isNotEmpty()) {
                 val limit = Limit()
                 limit.number = editLimit.text.toString()
@@ -64,6 +64,8 @@ class BalanceFragment: Fragment(R.layout.balance_fragment) {
             editLimit.isFocusable = false
             editLimit.text.clear()
         }
+
+             */
     }
 
     private fun init(){

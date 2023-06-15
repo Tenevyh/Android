@@ -22,7 +22,7 @@ val MIGRATION_1_2: Migration = object : Migration(1, 2) {
         // SQL-запрос для создания таблицы `spending`
         database.execSQL(
             "CREATE TABLE IF NOT EXISTS `spending` " +
-                    "(`date` TEXT PRIMARY KEY NOT NULL, " +
+                    "(`date` INTEGER PRIMARY KEY NOT NULL, " +
                     "`number` INTEGER NOT NULL, " +
                     "`preDate` INTEGER NOT NULL)"
         )
