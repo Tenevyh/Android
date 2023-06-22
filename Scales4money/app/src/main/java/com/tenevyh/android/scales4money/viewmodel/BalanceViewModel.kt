@@ -40,10 +40,8 @@ class BalanceViewModel : ViewModel() {
             for (i in 0 until balanceList.size - 1) {
                 val currentBalance = balanceList[i]
                 val nextBalance = balanceList[i + 1]
-                Log.d("Spending", "${dateFormat.format(nextBalance.date).reversed()}  > ${dateFormat.format(lastSpendingDate).reversed()}")
-                if (dateFormat.format(nextBalance.date).reversed()
-                        .toInt() > dateFormat.format(lastSpendingDate).reversed().toInt()
-                ) {
+                Log.d("Spending", "${dateFormat.format(nextBalance.date)}  > ${dateFormat.format(lastSpendingDate)}")
+                if (nextBalance.date.after(lastSpendingDate)) {
                     Log.d("Spending", "${balanceList.size} add new resp")
                     val spending = Spending(
                         date = nextBalance.date,
