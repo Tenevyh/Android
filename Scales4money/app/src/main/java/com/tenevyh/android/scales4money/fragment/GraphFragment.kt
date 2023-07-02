@@ -55,12 +55,12 @@ class GraphFragment: Fragment(R.layout.graph_fragment) {
 
             // Создание объекта LineDataSet с вашими данными
             val dataSet = LineDataSet(balances, "Balance").apply {
-                color = Color.BLUE
-                setCircleColor(Color.BLUE)
+                color = Color.RED
+                setCircleColor(Color.RED)
                 lineWidth = 2f
                 circleRadius = 4f
                 setDrawCircleHole(false)
-                valueTextColor = Color.BLUE
+                valueTextColor = Color.RED
                 valueTextSize = 12f
             }
 
